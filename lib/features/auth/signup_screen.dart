@@ -1,11 +1,10 @@
-import 'package:awaj/login/otp_screen.dart';
+import 'package:awaj/features/auth/otp_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shadcn_flutter/shadcn_flutter.dart' as shadcnui;
 import 'package:awaj/components/base_url.dart';
 import 'package:awaj/components/custom_modal.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import 'package:moon_design/moon_design.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -91,11 +90,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     final article = {
       'fullname': _fullnameController.text,
-      'address':
-          _addressController.text.isEmpty ? '-' : _addressController.text,
-      'phonenumber': _phonenumberController.text.isEmpty
-          ? '-'
-          : _phonenumberController.text,
+      'address': _addressController.text.isEmpty ? '-' : _addressController.text,
+      'phonenumber': _phonenumberController.text.isEmpty ? '-' : _phonenumberController.text,
       'email': _emailController.text,
       'password': _passwordController.text,
       'voterid': _voterIdController.text,
@@ -152,45 +148,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: Column(
                 children: [
-                  const Text('Sign up to create an account',
-                      style: TextStyle(fontSize: 16)),
+                  const Text('Sign up to create an account', style: TextStyle(fontSize: 16)),
                   const SizedBox(height: 20),
+                  _buildInputField(controller: _fullnameController, hintText: 'Full Name', keyboardType: TextInputType.name, maxLength: 50),
                   _buildInputField(
-                      controller: _fullnameController,
-                      hintText: 'Full Name',
-                      keyboardType: TextInputType.name,
-                      maxLength: 50),
-                  _buildInputField(
-                      controller: _phonenumberController,
-                      hintText: 'Phone Number',
-                      keyboardType: TextInputType.phone,
-                      maxLength: 10),
-                  _buildInputField(
-                      controller: _addressController, hintText: 'Address'),
-                  _buildInputField(
-                      controller: _emailController,
-                      hintText: 'Email',
-                      keyboardType: TextInputType.emailAddress),
-                  _buildInputField(
-                      controller: _voterIdController, hintText: 'Voter ID'),
+                      controller: _phonenumberController, hintText: 'Phone Number', keyboardType: TextInputType.phone, maxLength: 10),
+                  _buildInputField(controller: _addressController, hintText: 'Address'),
+                  _buildInputField(controller: _emailController, hintText: 'Email', keyboardType: TextInputType.emailAddress),
+                  _buildInputField(controller: _voterIdController, hintText: 'Voter ID'),
                   _buildPasswordField(
                       controller: _passwordController,
                       hintText: 'Password',
                       obscureText: _eyeStatus,
-                      toggleVisibility: () =>
-                          setState(() => _eyeStatus = !_eyeStatus)),
+                      toggleVisibility: () => setState(() => _eyeStatus = !_eyeStatus)),
                   _buildPasswordField(
                       controller: _cpasswordController,
                       hintText: 'Confirm Password',
                       obscureText: _eyeStatusConfirm,
-                      toggleVisibility: () => setState(
-                          () => _eyeStatusConfirm = !_eyeStatusConfirm)),
+                      toggleVisibility: () => setState(() => _eyeStatusConfirm = !_eyeStatusConfirm)),
                   const SizedBox(height: 20),
-                  MoonFilledButton(
-                    onTap: signupDetails,
-                    label: const Text('Sign Up',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.w500)),
+                  shadcnui.OutlineButton(
+                    onPressed: signupDetails,
+                    child: const Text('Sign Up', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
                   ),
                 ],
               ),
@@ -201,36 +180,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: CircularProgressIndicator(),
             ),
           if (_modalVisible)
-            CustomModal(
-                visible: _modalVisible,
-                modalText: _modalText,
-                onClose: () => setState(() => _modalVisible = false)),
+            CustomModal(visible: _modalVisible, modalText: _modalText, onClose: () => setState(() => _modalVisible = false)),
         ],
       ),
     );
   }
 
   Widget _buildInputField(
-      {required TextEditingController controller,
-      String? hintText,
-      TextInputType? keyboardType,
-      Widget? leading,
-      int? maxLength}) {
+      {required TextEditingController controller, String? hintText, TextInputType? keyboardType, Widget? leading, int? maxLength}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: MoonFormTextInput(
+      child: shadcnui.TextField(
         controller: controller,
-        validator: (String? value) => value != null && value.length < 5
-            ? "The text should be longer than 5 characters."
-            : null,
+        // validator: (String? value) => value != null && value.length < 5 ? "The text should be longer than 5 characters." : null,
         onTap: () => controller.clear(),
         leading: leading,
         trailing: GestureDetector(
-          child: const Icon(MoonIcons.controls_close_small_24_light),
+          child: const Icon(Icons.close),
         ),
         keyboardType: keyboardType,
         maxLength: maxLength,
-        hintText: hintText,
+        placeholder: hintText,
       ),
     );
   }
@@ -244,11 +214,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: MoonFormTextInput(
+      child: shadcnui.TextField(
         controller: controller,
-        validator: (String? value) => value != null && value.length < 5
-            ? "The text should be longer than 5 characters."
-            : null,
+        // validator: (String? value) => value != null && value.length < 5 ? "The text should be longer than 5 characters." : null,
         onTap: () => controller.clear(),
         leading: leading,
         trailing: IconButton(
@@ -256,7 +224,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           onPressed: toggleVisibility, // This is now compatible
         ),
         obscureText: obscureText,
-        hintText: hintText,
+        placeholder: hintText,
       ),
     );
   }

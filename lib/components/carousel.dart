@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:moon_design/moon_design.dart';
+import 'package:shadcn_flutter/shadcn_flutter.dart' as shadcnui;
+
+final shadcnui.CarouselController controller = shadcnui.CarouselController();
 
 class Carousel extends StatefulWidget {
   const Carousel({super.key});
@@ -13,51 +15,61 @@ class _CarouselState extends State<Carousel> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: MoonCarousel(
-            gap: 32,
-            itemCount: 5,
-            itemExtent: MediaQuery.of(context).size.width - 32,
-            physics: const PageScrollPhysics(),
-            onIndexChanged: (int index) => setState(() => selectedDot = index),
-            itemBuilder: (BuildContext context, int itemIndex, int _) =>
-                Container(
-              decoration: ShapeDecoration(
-                color: context.moonColors!.goku,
-                shape: MoonSquircleBorder(
-                  borderRadius:
-                      BorderRadius.circular(12).squircleBorderRadius(context),
-                ),
-              ),
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                      child: Center(
-                    child: Image.asset("assets/images/pradippaudel.jpeg",fit: BoxFit.cover,),
-                  )),
-                  Positioned(
-                      bottom: 12,
-                      right: 0,
-                      left: 0,
-                      child: Card(
-                        color: Colors.white.withOpacity(0.75),
+    return SizedBox(
+      width: 800,
+      child: Row(
+        children: [
+          shadcnui.OutlineButton(
+              shape: shadcnui.ButtonShape.circle,
+              onPressed: () {
+                controller.animatePrevious(const Duration(milliseconds: 500));
+              },
+              child: const Icon(Icons.arrow_back)),
+          const shadcnui.Gap(24),
+          Expanded(
+            child: SizedBox(
+              height: 200,
+              child: shadcnui.Carousel(
+                // frameTransform: Carousel.fadingTransform,
+                controller: controller,
+                autoplaySpeed: const Duration(seconds: 2),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.asset(
+                        "assets/images/pradippaudel.jpeg",
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        left: 0,
+                        child: Material(
+                          color: Colors.white.withOpacity(0.75),
                           child: const Padding(
-                        padding: EdgeInsets.all(22.0),
-                        child:
-                            Center(child: Text("This is information on app")),
-                      ),),)
-                ],
+                            padding: EdgeInsets.all(22.0),
+                            child: Center(child: Text("This is information on app")),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+                duration: const Duration(seconds: 1),
               ),
             ),
           ),
-        ),
-        MoonDotIndicator(
-          selectedDot: selectedDot,
-          dotCount: 5,
-        ),
-      ],
+          const shadcnui.Gap(24),
+          shadcnui.OutlineButton(
+              shape: shadcnui.ButtonShape.circle,
+              onPressed: () {
+                controller.animateNext(const Duration(milliseconds: 500));
+              },
+              child: const Icon(Icons.arrow_forward)),
+        ],
+      ),
     );
   }
 }

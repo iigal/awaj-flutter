@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "752012306490",
+    "project_id": "aawaj-ed235",
+    "storage_bucket": "aawaj-ed235.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752012306490:android:aef212a69636e7093c6d03",
+        "android_client_info": {
+          "package_name": "com.aawaj.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkbA491eXZ2TNE9bakpWL8bWSSfGEshbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752012306490:android:10a9c2d67b8a084d3c6d03",
+        "android_client_info": {
+          "package_name": "com.aawaj.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkbA491eXZ2TNE9bakpWL8bWSSfGEshbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

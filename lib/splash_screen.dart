@@ -1,6 +1,4 @@
-import 'package:awaj/components/carousel.dart';
-import 'package:flutter/material.dart';
-import 'package:moon_design/moon_design.dart';
+import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -8,12 +6,12 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Expanded(
+          Expanded(
             flex: 2,
-            child: Carousel(),
+            child: Container(),
           ),
           const SizedBox(
             height: 18,
@@ -23,12 +21,11 @@ class SplashScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  MoonFilledButton(
-                    buttonSize: MoonButtonSize.sm,
-                    onTap: () {
+                  OutlineButton(
+                    onPressed: () {
                       Navigator.of(context).pushNamed("/signup");
                     },
-                    label: const Text("Get Started"),
+                    child: const Text("Get Started"),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

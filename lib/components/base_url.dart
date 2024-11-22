@@ -5,9 +5,9 @@ class BaseUrl {
   static const String baseUrl = AppSecret.baseURL;
 
   // Define endpoints as needed
-  static const String verify = "${baseUrl}verify";
-  static const String signup = "${baseUrl}signup";
-  static const String login = "${baseUrl}login";
+  static const String verify = "${baseUrl}/user/verify";
+  static const String signup = "${baseUrl}/user/signup";
+  static const String login = "${baseUrl}/login";
   // Add other endpoints here as needed
 
   // Optional: A method to construct full URLs
