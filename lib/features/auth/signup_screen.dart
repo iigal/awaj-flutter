@@ -200,7 +200,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         keyboardType: keyboardType,
         maxLength: maxLength,
-        placeholder: hintText,
+        placeholder: Text(hintText ?? ""),
       ),
     );
   }
@@ -224,7 +224,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           onPressed: toggleVisibility, // This is now compatible
         ),
         obscureText: obscureText,
-        placeholder: hintText,
+        placeholder: Text(hintText ?? ""),
       ),
     );
   }

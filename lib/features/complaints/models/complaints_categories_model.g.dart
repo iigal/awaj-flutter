@@ -28,6 +28,18 @@ Map<String, dynamic> _$$CategoriesImplToJson(_$CategoriesImpl instance) =>
       'sorting': instance.sorting,
     };
 
+_$ComplaintsCountImpl _$$ComplaintsCountImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ComplaintsCountImpl(
+      count: (json['count'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$ComplaintsCountImplToJson(
+        _$ComplaintsCountImpl instance) =>
+    <String, dynamic>{
+      'count': instance.count,
+    };
+
 _$ComplaintsImpl _$$ComplaintsImplFromJson(Map<String, dynamic> json) =>
     _$ComplaintsImpl(
       id: (json['id'] as num).toInt(),
@@ -39,6 +51,7 @@ _$ComplaintsImpl _$$ComplaintsImplFromJson(Map<String, dynamic> json) =>
           [],
       userId: (json['user_id'] as num).toInt(),
       status: json['status'] as String,
+      progress: (json['progress'] as num).toInt(),
       isPublished: (json['is_published'] as num?)?.toInt(),
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
@@ -58,6 +71,7 @@ Map<String, dynamic> _$$ComplaintsImplToJson(_$ComplaintsImpl instance) =>
       'images': instance.images,
       'user_id': instance.userId,
       'status': instance.status,
+      'progress': instance.progress,
       'is_published': instance.isPublished,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
@@ -92,4 +106,22 @@ Map<String, dynamic> _$$ComplaintsRequestImplToJson(
       'is_published': instance.isPublished,
       'category_id': instance.categoryId,
       'sub_category_id': instance.subCategoryId,
+    };
+
+_$ComplaintCommentRequestImpl _$$ComplaintCommentRequestImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ComplaintCommentRequestImpl(
+      message: json['message'] as String,
+      userId: (json['user_id'] as num?)?.toInt(),
+      parentId: (json['parent_id'] as num?)?.toInt(),
+      issueId: (json['issue_id'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$ComplaintCommentRequestImplToJson(
+        _$ComplaintCommentRequestImpl instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'user_id': instance.userId,
+      'parent_id': instance.parentId,
+      'issue_id': instance.issueId,
     };

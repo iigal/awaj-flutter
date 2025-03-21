@@ -57,7 +57,7 @@ class _CarouselState extends State<Carousel> {
                     ],
                   );
                 },
-                duration: const Duration(seconds: 1),
+                duration: const Duration(seconds: 1), transition: shadcnui.CarouselTransition.sliding(),
               ),
             ),
           ),

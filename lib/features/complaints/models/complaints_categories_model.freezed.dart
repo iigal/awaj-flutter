@@ -313,6 +313,158 @@ abstract class _Categories implements Categories {
       throw _privateConstructorUsedError;
 }
 
+ComplaintsCount _$ComplaintsCountFromJson(Map<String, dynamic> json) {
+  return _ComplaintsCount.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ComplaintsCount {
+  int get count => throw _privateConstructorUsedError;
+
+  /// Serializes this ComplaintsCount to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of ComplaintsCount
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ComplaintsCountCopyWith<ComplaintsCount> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ComplaintsCountCopyWith<$Res> {
+  factory $ComplaintsCountCopyWith(
+          ComplaintsCount value, $Res Function(ComplaintsCount) then) =
+      _$ComplaintsCountCopyWithImpl<$Res, ComplaintsCount>;
+  @useResult
+  $Res call({int count});
+}
+
+/// @nodoc
+class _$ComplaintsCountCopyWithImpl<$Res, $Val extends ComplaintsCount>
+    implements $ComplaintsCountCopyWith<$Res> {
+  _$ComplaintsCountCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ComplaintsCount
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+  }) {
+    return _then(_value.copyWith(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ComplaintsCountImplCopyWith<$Res>
+    implements $ComplaintsCountCopyWith<$Res> {
+  factory _$$ComplaintsCountImplCopyWith(_$ComplaintsCountImpl value,
+          $Res Function(_$ComplaintsCountImpl) then) =
+      __$$ComplaintsCountImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int count});
+}
+
+/// @nodoc
+class __$$ComplaintsCountImplCopyWithImpl<$Res>
+    extends _$ComplaintsCountCopyWithImpl<$Res, _$ComplaintsCountImpl>
+    implements _$$ComplaintsCountImplCopyWith<$Res> {
+  __$$ComplaintsCountImplCopyWithImpl(
+      _$ComplaintsCountImpl _value, $Res Function(_$ComplaintsCountImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ComplaintsCount
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+  }) {
+    return _then(_$ComplaintsCountImpl(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$ComplaintsCountImpl implements _ComplaintsCount {
+  const _$ComplaintsCountImpl({required this.count});
+
+  factory _$ComplaintsCountImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComplaintsCountImplFromJson(json);
+
+  @override
+  final int count;
+
+  @override
+  String toString() {
+    return 'ComplaintsCount(count: $count)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ComplaintsCountImpl &&
+            (identical(other.count, count) || other.count == count));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, count);
+
+  /// Create a copy of ComplaintsCount
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ComplaintsCountImplCopyWith<_$ComplaintsCountImpl> get copyWith =>
+      __$$ComplaintsCountImplCopyWithImpl<_$ComplaintsCountImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ComplaintsCountImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ComplaintsCount implements ComplaintsCount {
+  const factory _ComplaintsCount({required final int count}) =
+      _$ComplaintsCountImpl;
+
+  factory _ComplaintsCount.fromJson(Map<String, dynamic> json) =
+      _$ComplaintsCountImpl.fromJson;
+
+  @override
+  int get count;
+
+  /// Create a copy of ComplaintsCount
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ComplaintsCountImplCopyWith<_$ComplaintsCountImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 Complaints _$ComplaintsFromJson(Map<String, dynamic> json) {
   return _Complaints.fromJson(json);
 }
@@ -326,6 +478,7 @@ mixin _$Complaints {
   List<String>? get images => throw _privateConstructorUsedError;
   int get userId => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
+  int get progress => throw _privateConstructorUsedError;
   int? get isPublished => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
@@ -355,6 +508,7 @@ abstract class $ComplaintsCopyWith<$Res> {
       @JsonKey(defaultValue: []) List<String>? images,
       int userId,
       String status,
+      int progress,
       int? isPublished,
       DateTime createdAt,
       DateTime updatedAt,
@@ -383,6 +537,7 @@ class _$ComplaintsCopyWithImpl<$Res, $Val extends Complaints>
     Object? images = freezed,
     Object? userId = null,
     Object? status = null,
+    Object? progress = null,
     Object? isPublished = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -414,6 +569,10 @@ class _$ComplaintsCopyWithImpl<$Res, $Val extends Complaints>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as int,
       isPublished: freezed == isPublished
           ? _value.isPublished
           : isPublished // ignore: cast_nullable_to_non_nullable
@@ -453,6 +612,7 @@ abstract class _$$ComplaintsImplCopyWith<$Res>
       @JsonKey(defaultValue: []) List<String>? images,
       int userId,
       String status,
+      int progress,
       int? isPublished,
       DateTime createdAt,
       DateTime updatedAt,
@@ -479,6 +639,7 @@ class __$$ComplaintsImplCopyWithImpl<$Res>
     Object? images = freezed,
     Object? userId = null,
     Object? status = null,
+    Object? progress = null,
     Object? isPublished = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -510,6 +671,10 @@ class __$$ComplaintsImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
+      progress: null == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as int,
       isPublished: freezed == isPublished
           ? _value.isPublished
           : isPublished // ignore: cast_nullable_to_non_nullable
@@ -545,6 +710,7 @@ class _$ComplaintsImpl implements _Complaints {
       @JsonKey(defaultValue: []) final List<String>? images,
       required this.userId,
       required this.status,
+      required this.progress,
       this.isPublished,
       required this.createdAt,
       required this.updatedAt,
@@ -579,6 +745,8 @@ class _$ComplaintsImpl implements _Complaints {
   @override
   final String status;
   @override
+  final int progress;
+  @override
   final int? isPublished;
   @override
   final DateTime createdAt;
@@ -604,7 +772,7 @@ class _$ComplaintsImpl implements _Complaints {
 
   @override
   String toString() {
-    return 'Complaints(id: $id, title: $title, description: $description, images: $images, userId: $userId, status: $status, isPublished: $isPublished, createdAt: $createdAt, updatedAt: $updatedAt, categories: $categories, subcategories: $subcategories)';
+    return 'Complaints(id: $id, title: $title, description: $description, images: $images, userId: $userId, status: $status, progress: $progress, isPublished: $isPublished, createdAt: $createdAt, updatedAt: $updatedAt, categories: $categories, subcategories: $subcategories)';
   }
 
   @override
@@ -619,6 +787,8 @@ class _$ComplaintsImpl implements _Complaints {
             const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.progress, progress) ||
+                other.progress == progress) &&
             (identical(other.isPublished, isPublished) ||
                 other.isPublished == isPublished) &&
             (identical(other.createdAt, createdAt) ||
@@ -641,6 +811,7 @@ class _$ComplaintsImpl implements _Complaints {
       const DeepCollectionEquality().hash(_images),
       userId,
       status,
+      progress,
       isPublished,
       createdAt,
       updatedAt,
@@ -671,6 +842,7 @@ abstract class _Complaints implements Complaints {
       @JsonKey(defaultValue: []) final List<String>? images,
       required final int userId,
       required final String status,
+      required final int progress,
       final int? isPublished,
       required final DateTime createdAt,
       required final DateTime updatedAt,
@@ -693,6 +865,8 @@ abstract class _Complaints implements Complaints {
   int get userId;
   @override
   String get status;
+  @override
+  int get progress;
   @override
   int? get isPublished;
   @override
@@ -1036,4 +1210,218 @@ abstract class _ComplaintsRequest implements ComplaintsRequest {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ComplaintsRequestImplCopyWith<_$ComplaintsRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+ComplaintCommentRequest _$ComplaintCommentRequestFromJson(
+    Map<String, dynamic> json) {
+  return _ComplaintCommentRequest.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ComplaintCommentRequest {
+  String get message => throw _privateConstructorUsedError;
+  int? get userId => throw _privateConstructorUsedError;
+  int? get parentId => throw _privateConstructorUsedError;
+  int get issueId => throw _privateConstructorUsedError;
+
+  /// Serializes this ComplaintCommentRequest to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of ComplaintCommentRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ComplaintCommentRequestCopyWith<ComplaintCommentRequest> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ComplaintCommentRequestCopyWith<$Res> {
+  factory $ComplaintCommentRequestCopyWith(ComplaintCommentRequest value,
+          $Res Function(ComplaintCommentRequest) then) =
+      _$ComplaintCommentRequestCopyWithImpl<$Res, ComplaintCommentRequest>;
+  @useResult
+  $Res call({String message, int? userId, int? parentId, int issueId});
+}
+
+/// @nodoc
+class _$ComplaintCommentRequestCopyWithImpl<$Res,
+        $Val extends ComplaintCommentRequest>
+    implements $ComplaintCommentRequestCopyWith<$Res> {
+  _$ComplaintCommentRequestCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ComplaintCommentRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+    Object? userId = freezed,
+    Object? parentId = freezed,
+    Object? issueId = null,
+  }) {
+    return _then(_value.copyWith(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      parentId: freezed == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      issueId: null == issueId
+          ? _value.issueId
+          : issueId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ComplaintCommentRequestImplCopyWith<$Res>
+    implements $ComplaintCommentRequestCopyWith<$Res> {
+  factory _$$ComplaintCommentRequestImplCopyWith(
+          _$ComplaintCommentRequestImpl value,
+          $Res Function(_$ComplaintCommentRequestImpl) then) =
+      __$$ComplaintCommentRequestImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message, int? userId, int? parentId, int issueId});
+}
+
+/// @nodoc
+class __$$ComplaintCommentRequestImplCopyWithImpl<$Res>
+    extends _$ComplaintCommentRequestCopyWithImpl<$Res,
+        _$ComplaintCommentRequestImpl>
+    implements _$$ComplaintCommentRequestImplCopyWith<$Res> {
+  __$$ComplaintCommentRequestImplCopyWithImpl(
+      _$ComplaintCommentRequestImpl _value,
+      $Res Function(_$ComplaintCommentRequestImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ComplaintCommentRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+    Object? userId = freezed,
+    Object? parentId = freezed,
+    Object? issueId = null,
+  }) {
+    return _then(_$ComplaintCommentRequestImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      parentId: freezed == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      issueId: null == issueId
+          ? _value.issueId
+          : issueId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$ComplaintCommentRequestImpl implements _ComplaintCommentRequest {
+  const _$ComplaintCommentRequestImpl(
+      {required this.message,
+      required this.userId,
+      this.parentId,
+      required this.issueId});
+
+  factory _$ComplaintCommentRequestImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComplaintCommentRequestImplFromJson(json);
+
+  @override
+  final String message;
+  @override
+  final int? userId;
+  @override
+  final int? parentId;
+  @override
+  final int issueId;
+
+  @override
+  String toString() {
+    return 'ComplaintCommentRequest(message: $message, userId: $userId, parentId: $parentId, issueId: $issueId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ComplaintCommentRequestImpl &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
+            (identical(other.issueId, issueId) || other.issueId == issueId));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, message, userId, parentId, issueId);
+
+  /// Create a copy of ComplaintCommentRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ComplaintCommentRequestImplCopyWith<_$ComplaintCommentRequestImpl>
+      get copyWith => __$$ComplaintCommentRequestImplCopyWithImpl<
+          _$ComplaintCommentRequestImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ComplaintCommentRequestImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ComplaintCommentRequest implements ComplaintCommentRequest {
+  const factory _ComplaintCommentRequest(
+      {required final String message,
+      required final int? userId,
+      final int? parentId,
+      required final int issueId}) = _$ComplaintCommentRequestImpl;
+
+  factory _ComplaintCommentRequest.fromJson(Map<String, dynamic> json) =
+      _$ComplaintCommentRequestImpl.fromJson;
+
+  @override
+  String get message;
+  @override
+  int? get userId;
+  @override
+  int? get parentId;
+  @override
+  int get issueId;
+
+  /// Create a copy of ComplaintCommentRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ComplaintCommentRequestImplCopyWith<_$ComplaintCommentRequestImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

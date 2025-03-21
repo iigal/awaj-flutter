@@ -1,18 +1,22 @@
 import 'package:awaj/components/base_url.dart';
+import 'package:awaj/features/auth/models/auth.dart';
+import 'package:awaj/features/auth/providers/auth_provider.dart';
 import 'package:awaj/features/shared_components/labelled_form.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:shadcn_flutter/shadcn_flutter.dart';
+import 'package:go_router/go_router.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
@@ -29,33 +33,34 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = true;
     });
 
-    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
-      _showAlertDialog('Please provide all the fields.');
-      setState(() {
-        _isLoading = false;
-      });
-      return;
-    }
-
-    if (!_isValidEmail(_emailController.text)) {
-      _showAlertDialog('Please provide a valid email.');
-      setState(() {
-        _isLoading = false;
-      });
-      return;
-    }
-
-    final response = await _sendLoginRequest(_emailController.text, _passwordController.text);
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      if (data['status'] == 200) {
-        Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        _showAlertDialog(data['message']);
+    try {
+      if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+        _showAlertDialog('Please provide all the fields.');
+        setState(() {
+          _isLoading = false;
+        });
+        return;
       }
-    } else {
-      _showAlertDialog('Something went wrong. Please check your Internet Connection!');
+
+      if (!_isValidEmail(_emailController.text)) {
+        _showAlertDialog('Please provide a valid email.');
+        setState(() {
+          _isLoading = false;
+        });
+        return;
+      }
+
+      final response = await _sendLoginRequest(_emailController.text, _passwordController.text);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        ref.read(authProviderProvider.notifier).saveToken(AuthUser.fromJson(data));
+        context.go('/home');
+      } else {
+        _showAlertDialog('Something went wrong. Please check your Internet Connection!');
+      }
+    } catch (err) {
+      _showAlertDialog(err.toString());
     }
 
     setState(() {
@@ -71,9 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<http.Response> _sendLoginRequest(String email, String password) {
     return http.post(
       Uri.parse(BaseUrl.login),
-      headers: <String, String>{
+      headers: {
+        'Content-Type': 'application/json', // Ensure the correct content type
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
       },
       body: jsonEncode(<String, String>{
         'email': email,
@@ -112,9 +117,12 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Welcome!'),
-            Text('Login to your account'),
-            const SizedBox(height: 22),
+            const Text('Welcome!').x2Large().bold(),
+            const Gap(
+              8,
+            ),
+            const Text('Login to your account').semiBold(),
+            const Gap(22),
             LabelledFormWidget(
               label: "Email Address",
               child: TextField(
@@ -125,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: const Icon(Icons.close),
                 ),
                 keyboardType: TextInputType.emailAddress,
-                placeholder: 'Enter your email',
+                placeholder: const Text('Enter your email'),
               ),
             ),
             LabelledFormWidget(
@@ -140,11 +148,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
                 ),
                 keyboardType: TextInputType.text,
-                placeholder: 'Enter your password',
+                placeholder: const Text('Enter your password'),
               ),
             ),
-            const SizedBox(
-              height: 18,
+            const Gap(
+              18,
             ),
             _isLoading
                 ? const CircularProgressIndicator()
@@ -152,8 +160,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: _login,
                     child: const Text('Login'),
                   ),
-            const SizedBox(
-              height: 12,
+            const Gap(
+              12,
             ),
             OutlineButton(
               onPressed: () {
@@ -167,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Text('Do not have an account yet?'),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/signup');
+                    context.go("/signup");
                   },
                   child: const Text('Sign Up', style: TextStyle(color: Colors.blue)),
                 ),

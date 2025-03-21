@@ -19,6 +19,16 @@ class Categories with _$Categories {
 }
 
 @freezed
+class ComplaintsCount with _$ComplaintsCount {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory ComplaintsCount({
+    required int count,
+  }) = _ComplaintsCount;
+
+  factory ComplaintsCount.fromJson(Map<String, dynamic> json) => _$ComplaintsCountFromJson(json);
+}
+
+@freezed
 class Complaints with _$Complaints {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory Complaints({
@@ -28,6 +38,7 @@ class Complaints with _$Complaints {
     @JsonKey(defaultValue: []) List<String>? images,
     required int userId,
     required String status,
+    required int progress,
     int? isPublished,
     required DateTime createdAt,
     required DateTime updatedAt,
@@ -53,4 +64,17 @@ class ComplaintsRequest with _$ComplaintsRequest {
   }) = _ComplaintsRequest;
 
   factory ComplaintsRequest.fromJson(Map<String, dynamic> json) => _$ComplaintsRequestFromJson(json);
+}
+
+@freezed
+class ComplaintCommentRequest with _$ComplaintCommentRequest {
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory ComplaintCommentRequest({
+    required String message,
+    required int? userId,
+    int? parentId,
+    required int issueId,
+  }) = _ComplaintCommentRequest;
+
+  factory ComplaintCommentRequest.fromJson(Map<String, dynamic> json) => _$ComplaintCommentRequestFromJson(json);
 }

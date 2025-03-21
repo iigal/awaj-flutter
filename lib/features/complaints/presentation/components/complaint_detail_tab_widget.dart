@@ -1,11 +1,14 @@
+import 'package:awaj/core/extensions.dart';
 import 'package:awaj/features/complaints/api/notifier/complaints_notifier.dart';
+import 'package:awaj/features/complaints/models/complaints_categories_model.dart';
 import 'package:awaj/features/complaints/models/complaints_comment.dart';
+import 'package:awaj/features/complaints/presentation/components/complaint_comment_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 class ComplaintDetailTabWidget extends StatefulWidget {
-  final int complaintId;
-  const ComplaintDetailTabWidget({super.key, required this.complaintId});
+  final Complaints complaint;
+  const ComplaintDetailTabWidget({super.key, required this.complaint});
 
   @override
   State<ComplaintDetailTabWidget> createState() => _ComplaintDetailTabWidgetState();
@@ -19,27 +22,28 @@ class _ComplaintDetailTabWidgetState extends State<ComplaintDetailTabWidget> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TabList(
+          onChanged: (value) {},
           index: index,
           children: [
-            TabButton(
-              child: const Row(
-                children: [Icon(Icons.comment_outlined), Text("15")],
+            TabChildWidget(
+              child: TabButton(
+                child: const Icon(Icons.comment_outlined),
+                onPressed: () {
+                  setState(() {
+                    index = 0;
+                  });
+                },
               ),
-              onPressed: () {
-                setState(() {
-                  index = 0;
-                });
-              },
             ),
-            TabButton(
-              child: const Row(
-                children: [Icon(Icons.image), Text("15")],
+            TabChildWidget(
+              child: TabButton(
+                child: const Icon(Icons.image),
+                onPressed: () {
+                  setState(() {
+                    index = 1;
+                  });
+                },
               ),
-              onPressed: () {
-                setState(() {
-                  index = 1;
-                });
-              },
             ),
           ],
         ),
@@ -49,9 +53,9 @@ class _ComplaintDetailTabWidgetState extends State<ComplaintDetailTabWidget> {
             index: index,
             children: [
               CommentContainer(
-                id: widget.complaintId,
+                complaintId: widget.complaint.id,
               ),
-              const ImageContainer(),
+              ImageContainer(images: widget.complaint.images),
             ],
           ),
         ),
@@ -61,17 +65,29 @@ class _ComplaintDetailTabWidgetState extends State<ComplaintDetailTabWidget> {
 }
 
 class ImageContainer extends StatelessWidget {
-  const ImageContainer({super.key});
+  final List<String>? images;
+  const ImageContainer({super.key, this.images});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    if (images != null && images!.isNotEmpty) {
+      return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+        ),
+        itemCount: images!.length,
+        itemBuilder: (context, index) {
+          return Image.network(images![index], fit: BoxFit.contain);
+        },
+      );
+    }
+    return Container();
   }
 }
 
 class CommentContainer extends ConsumerWidget {
-  final int id;
-  const CommentContainer({super.key, required this.id});
+  final int complaintId;
+  const CommentContainer({super.key, required this.complaintId});
 
   List<TreeItem> commentReply(List<ComplaintsComment> data) {
     List<TreeItem> comments = [];
@@ -79,8 +95,11 @@ class CommentContainer extends ConsumerWidget {
       var tcomment = data[i];
       comments.add(
         TreeItem(
+          expanded: true,
           data: tcomment.message,
-          children: (tcomment.reply!.isNotEmpty) ? tcomment.reply!.map((element) => TreeItem(data: element.message)).toList() : [],
+          children: (tcomment.reply!.isNotEmpty)
+              ? tcomment.reply!.map((element) => TreeItem(expanded: false, data: element.message)).toList()
+              : [],
         ),
       );
     }
@@ -89,57 +108,84 @@ class CommentContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(complaintsCommentNotifierProvider(id)).when(
+    return ref.watch(complaintsCommentNotifierProvider(complaintId)).when(
           data: (data) {
             List<TreeItem> treeItem = commentReply(data);
-
-            return TreeView(
-              recursiveSelection: true,
-              nodes: treeItem,
-              expandIcon: true,
-              builder: (context, node) {
-                return TreeItemView(
-                  expandable: true,
-                  onPressed: () {},
-                  onExpand: TreeView.defaultItemExpandHandler(treeItem, node, (value) {
-                    // setState(() {
-                    //   treeItems = value;
-                    // });
-                  }),
-                  child: Card(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Avatar(initials: "AS"),
-                        const Gap(4),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
+            return Stack(
+              children: [
+                Positioned.fill(
+                  child: TreeView(
+                    nodes: treeItem,
+                    branchLine: BranchLine.path,
+                    builder: (context, node) {
+                      return TreeItemView(
+                        onPressed: () {},
+                        onExpand: TreeView.defaultItemExpandHandler(treeItem, node, (value) {}),
+                        child: Card(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TextArea(
-                                initialValue: node.data,
-                                expandableHeight: true,
-                                expandableWidth: false,
-                                filled: false,
-                                readOnly: true,
+                              const Avatar(initials: "AS"),
+                              const Gap(4),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    if (node.expanded) ...[
+                                      TextArea(
+                                        initialValue: node.data,
+                                        expandableHeight: true,
+                                        expandableWidth: false,
+                                        filled: false,
+                                        readOnly: true,
+                                      ),
+                                      const Gap(2),
+                                      Row(
+                                        children: [
+                                          LinkButton(
+                                            child: const Text("Reply"),
+                                            onPressed: () => bottomSheetBuilder(
+                                                context,
+                                                ComplaintCommentWidget(
+                                                  complaintId: complaintId,
+                                                  complaintCommentId: data[treeItem.indexOf(node)].id,
+                                                )),
+                                          )
+                                        ],
+                                      )
+                                    ] else ...[
+                                      TextArea(
+                                        initialValue: node.data,
+                                        expandableHeight: true,
+                                        expandableWidth: false,
+                                        filled: false,
+                                        readOnly: true,
+                                      ),
+                                    ],
+                                  ],
+                                ),
                               ),
-                              const Gap(2),
-                              Row(
-                                children: [
-                                  LinkButton(
-                                    child: const Text("Reply"),
-                                    onPressed: () {},
-                                  )
-                                ],
-                              )
                             ],
                           ),
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+                Positioned(
+                  bottom: 6,
+                  right: 6,
+                  child: IconButton.primary(
+                    size: ButtonSize.large,
+                    icon: const Icon(Icons.add),
+                    onPressed: () => bottomSheetBuilder(
+                        context,
+                        ComplaintCommentWidget(
+                          complaintId: complaintId,
+                        )),
+                  ),
+                ),
+              ],
             );
           },
           error: (err, stack) => Text(err.toString()),

@@ -34,6 +34,7 @@ class IconDate extends StatelessWidget {
             RadixIcons.calendar,
             color: contextColor,
           ),
+          Gap(2),
           Text(
             DateFormat(datePattern ?? "d MMM").format(
               DateTime.parse(dateInString),

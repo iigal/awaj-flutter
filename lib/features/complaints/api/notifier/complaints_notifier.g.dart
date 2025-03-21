@@ -7,24 +7,7 @@ part of 'complaints_notifier.dart';
 // **************************************************************************
 
 String _$complaintsNotifierHash() =>
-    r'9ab96c7be29bd7600cc0c694409d849d06901b54';
-
-/// See also [ComplaintsNotifier].
-@ProviderFor(ComplaintsNotifier)
-final complaintsNotifierProvider = AutoDisposeAsyncNotifierProvider<
-    ComplaintsNotifier, List<Complaints>>.internal(
-  ComplaintsNotifier.new,
-  name: r'complaintsNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$complaintsNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$ComplaintsNotifier = AutoDisposeAsyncNotifier<List<Complaints>>;
-String _$complaintsCommentNotifierHash() =>
-    r'94661a7e0fdcec5645fda2e12f85d7cb1146e5ac';
+    r'53095576d742de80e8a4550a0a2ccc75de38db16';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -46,6 +29,172 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+abstract class _$ComplaintsNotifier
+    extends BuildlessAutoDisposeAsyncNotifier<List<Complaints>> {
+  late final ComplaintTableState filter;
+
+  FutureOr<List<Complaints>> build({
+    required ComplaintTableState filter,
+  });
+}
+
+/// See also [ComplaintsNotifier].
+@ProviderFor(ComplaintsNotifier)
+const complaintsNotifierProvider = ComplaintsNotifierFamily();
+
+/// See also [ComplaintsNotifier].
+class ComplaintsNotifierFamily extends Family<AsyncValue<List<Complaints>>> {
+  /// See also [ComplaintsNotifier].
+  const ComplaintsNotifierFamily();
+
+  /// See also [ComplaintsNotifier].
+  ComplaintsNotifierProvider call({
+    required ComplaintTableState filter,
+  }) {
+    return ComplaintsNotifierProvider(
+      filter: filter,
+    );
+  }
+
+  @override
+  ComplaintsNotifierProvider getProviderOverride(
+    covariant ComplaintsNotifierProvider provider,
+  ) {
+    return call(
+      filter: provider.filter,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'complaintsNotifierProvider';
+}
+
+/// See also [ComplaintsNotifier].
+class ComplaintsNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
+    ComplaintsNotifier, List<Complaints>> {
+  /// See also [ComplaintsNotifier].
+  ComplaintsNotifierProvider({
+    required ComplaintTableState filter,
+  }) : this._internal(
+          () => ComplaintsNotifier()..filter = filter,
+          from: complaintsNotifierProvider,
+          name: r'complaintsNotifierProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$complaintsNotifierHash,
+          dependencies: ComplaintsNotifierFamily._dependencies,
+          allTransitiveDependencies:
+              ComplaintsNotifierFamily._allTransitiveDependencies,
+          filter: filter,
+        );
+
+  ComplaintsNotifierProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.filter,
+  }) : super.internal();
+
+  final ComplaintTableState filter;
+
+  @override
+  FutureOr<List<Complaints>> runNotifierBuild(
+    covariant ComplaintsNotifier notifier,
+  ) {
+    return notifier.build(
+      filter: filter,
+    );
+  }
+
+  @override
+  Override overrideWith(ComplaintsNotifier Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: ComplaintsNotifierProvider._internal(
+        () => create()..filter = filter,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        filter: filter,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeAsyncNotifierProviderElement<ComplaintsNotifier, List<Complaints>>
+      createElement() {
+    return _ComplaintsNotifierProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ComplaintsNotifierProvider && other.filter == filter;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, filter.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin ComplaintsNotifierRef
+    on AutoDisposeAsyncNotifierProviderRef<List<Complaints>> {
+  /// The parameter `filter` of this provider.
+  ComplaintTableState get filter;
+}
+
+class _ComplaintsNotifierProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<ComplaintsNotifier,
+        List<Complaints>> with ComplaintsNotifierRef {
+  _ComplaintsNotifierProviderElement(super.provider);
+
+  @override
+  ComplaintTableState get filter =>
+      (origin as ComplaintsNotifierProvider).filter;
+}
+
+String _$complaintsCountNotifierHash() =>
+    r'b7b9d5e4f82bf4baaffcf5f04fdd591ffcc2cc09';
+
+/// See also [ComplaintsCountNotifier].
+@ProviderFor(ComplaintsCountNotifier)
+final complaintsCountNotifierProvider = AutoDisposeAsyncNotifierProvider<
+    ComplaintsCountNotifier, ComplaintsCount>.internal(
+  ComplaintsCountNotifier.new,
+  name: r'complaintsCountNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$complaintsCountNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ComplaintsCountNotifier = AutoDisposeAsyncNotifier<ComplaintsCount>;
+String _$complaintsCommentNotifierHash() =>
+    r'94661a7e0fdcec5645fda2e12f85d7cb1146e5ac';
 
 abstract class _$ComplaintsCommentNotifier
     extends BuildlessAutoDisposeAsyncNotifier<List<ComplaintsComment>> {

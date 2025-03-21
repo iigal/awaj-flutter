@@ -1,15 +1,8 @@
 import 'package:awaj/core/router.dart';
-import 'package:awaj/features/complaints/presentation/complaint_detail_page.dart';
-import 'package:awaj/features/home/home.dart';
-import 'package:awaj/features/introductions/introduction_page.dart';
-import 'package:awaj/features/auth/login.dart';
-import 'package:awaj/features/auth/otp_screen.dart';
-import 'package:awaj/features/auth/signup_screen.dart';
-import 'package:awaj/firebase_options.dart';
-import 'package:awaj/splash_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:awaj/features/auth/providers/auth_provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as rp;
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 void main() async {
@@ -20,6 +13,7 @@ void main() async {
   // } catch (err) {
   //   print(err.toString());
   // }
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
@@ -32,7 +26,7 @@ void main() async {
   //   print(err.toString());
   // }
   runApp(
-    const ProviderScope(
+    const rp.ProviderScope(
       child: AwajApp(),
     ),
   );
@@ -76,14 +70,17 @@ class _AwajAppState extends State<AwajApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ShadcnApp.router(
-      title: 'Awaj Mobile',
-      theme: ThemeData(
-        colorScheme: ColorSchemes.lightZinc(),
-        radius: 0.5,
-      ),
-      // Define named routes
-      routerConfig: gorouter,
-    );
+    return rp.Consumer(builder: (context, ref, _) {
+      ref.watch(authProviderProvider);
+      return ShadcnApp.router(
+        title: 'Awaj Mobile',
+        theme: ThemeData(
+          colorScheme: ColorSchemes.lightZinc(),
+          radius: 0.5,
+        ),
+        // Define named routes
+        routerConfig: ref.watch(gorouter),
+      );
+    });
   }
 }
