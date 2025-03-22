@@ -1,3 +1,5 @@
+import 'package:awaj/features/main/ambulance/ambulance_provider.dart';
+import 'package:awaj/features/main/ambulance/ambulance_tracking.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -57,6 +59,10 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
   Future<void> _getUserLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
+      setState(() {
+        _userLocation = LatLng(27.7211348, 85.3078008);
+      });
+
       return;
     }
 
@@ -64,6 +70,9 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
+        setState(() {
+          _userLocation = LatLng(27.7211348, 85.3078008);
+        });
         return;
       }
     }
@@ -515,110 +524,4 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
       },
     );
   }
-}
-
-class AmbulanceTrackingPage extends StatelessWidget {
-  final LatLng userLocation;
-  final LatLng ambulanceLocation;
-  final String ambulanceName;
-  final String arrivalTime;
-
-  const AmbulanceTrackingPage({
-    super.key,
-    required this.userLocation,
-    required this.ambulanceLocation,
-    required this.ambulanceName,
-    required this.arrivalTime,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      headers: [
-        AppBar(
-          title: const Text('Track Ambulance'),
-        )
-      ],
-      child: Column(
-        children: [
-          Expanded(
-            child: FlutterMap(
-              options: MapOptions(
-                initialCenter: userLocation,
-                initialZoom: 15.0,
-              ),
-              children: [
-                TileLayer(
-                  urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  subdomains: const ['a', 'b', 'c'],
-                ),
-                MarkerLayer(
-                  markers: [
-                    Marker(
-                      point: userLocation,
-                      child: const Icon(
-                        Icons.location_pin,
-                        color: Colors.blue,
-                        size: 40,
-                      ),
-                    ),
-                    Marker(
-                      point: ambulanceLocation,
-                      child: const Icon(
-                        Icons.local_hospital,
-                        color: Colors.red,
-                        size: 40,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Ambulance: $ambulanceName',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Gap(8),
-                Text(
-                  'Arriving in $arrivalTime',
-                  style: TextStyle(
-                    color: Colors.gray.shade700,
-                  ),
-                ).medium(),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class AmbulanceProvider {
-  final String id;
-  final String name;
-  final String distance;
-  final double rating;
-  final String responseTime;
-  final bool available;
-  final LatLng location;
-
-  AmbulanceProvider({
-    required this.id,
-    required this.name,
-    required this.distance,
-    required this.rating,
-    required this.responseTime,
-    required this.available,
-    required this.location,
-  });
 }
