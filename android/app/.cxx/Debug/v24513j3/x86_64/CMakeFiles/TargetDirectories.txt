@@ -1,0 +1,2 @@
+/Users/adds08/Development Hobby/adds08/awajapp/awaj-flutter/android/app/.cxx/Debug/v24513j3/x86_64/CMakeFiles/edit_cache.dir
+/Users/adds08/Development Hobby/adds08/awajapp/awaj-flutter/android/app/.cxx/Debug/v24513j3/x86_64/CMakeFiles/rebuild_cache.dir
