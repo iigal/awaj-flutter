@@ -1,9 +1,19 @@
+import 'dart:io';
+
 import 'package:awaj/core/router.dart';
 import 'package:awaj/features/auth/providers/auth_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as rp;
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
+}
 
 void main() async {
   // try {
@@ -13,8 +23,10 @@ void main() async {
   // } catch (err) {
   //   print(err.toString());
   // }
+
   usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   // await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
@@ -25,9 +37,16 @@ void main() async {
   // } catch (err) {
   //   print(err.toString());
   // }
+  HttpOverrides.global = MyHttpOverrides();
+
   runApp(
-    const rp.ProviderScope(
-      child: AwajApp(),
+    EasyLocalization(
+      supportedLocales: [Locale('np', 'NP'), Locale('en', 'US')],
+      path: 'assets/translations', // <-- change the path of the translation files
+      fallbackLocale: Locale('en', 'US'),
+      child: const rp.ProviderScope(
+        child: AwajApp(),
+      ),
     ),
   );
 }
@@ -69,10 +88,20 @@ class _AwajAppState extends State<AwajApp> {
   }
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    context.setLocale(Locale('np', 'NP'));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return rp.Consumer(builder: (context, ref, _) {
       ref.watch(authProviderProvider);
       return ShadcnApp.router(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         title: 'Awaj Mobile',
         theme: ThemeData(
           colorScheme: ColorSchemes.lightZinc(),

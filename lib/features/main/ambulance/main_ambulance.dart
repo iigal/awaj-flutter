@@ -1,8 +1,8 @@
 import 'package:awaj/features/main/ambulance/ambulance_provider.dart';
 import 'package:awaj/features/main/ambulance/ambulance_tracking.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -152,19 +152,19 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
               const SizedBox(height: 16),
               FormField(
                 key: FormKey("name"),
-                label: const Text('Name'),
+                label: Text(context.tr('Name')),
                 child: TextField(
                   controller: nameController,
-                  placeholder: const Text('Enter patient name'),
+                  placeholder: Text(context.tr('Enter patient name')),
                 ),
               ),
               const SizedBox(height: 16),
               FormField(
                 key: FormKey("contact"),
-                label: const Text('Contact'),
+                label: Text(context.tr('Contact')),
                 child: TextField(
                   controller: contactController,
-                  placeholder: const Text('Enter contact number'),
+                  placeholder: Text(context.tr('Enter contact number')),
                 ),
               ),
               const SizedBox(height: 16),
@@ -176,7 +176,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
                   _simulateBackendAcceptance();
                   closeSheet(context);
                 },
-                child: const Text('Request Ambulance'),
+                child: Text(context.tr('Request Ambulance')),
               ),
               const SizedBox(height: 16),
             ],
@@ -200,7 +200,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
               },
             ),
           ],
-          title: const Text('Ambulance Service').extraBold().xLarge(),
+          title: Text(context.tr('Ambulance Service')).extraBold().xLarge(),
           trailing: [
             IconButton.ghost(
               icon: const Icon(Icons.history),
@@ -357,7 +357,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
             ],
           ),
           const Gap(8),
-          const Text(
+          Text(
             'For life-threatening emergencies, call directly:',
             style: TextStyle(
               color: Colors.black,
@@ -374,7 +374,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
                     _showEmergencyCallDialog();
                   },
                   leading: const Icon(Icons.call),
-                  child: const Text('Call 102'),
+                  child: Text(context.tr('Call 102')),
                 ),
               ),
               Gap(18),
@@ -385,7 +385,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
                     _showEmergencyGuidelines();
                   },
                   leading: const Icon(Icons.info_outline),
-                  child: const Text('Guidelines'),
+                  child: Text(context.tr('Guidelines')),
                 ),
               ),
             ],
@@ -398,13 +398,13 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
   Widget _buildLocationInput() {
     return FormField(
       key: FormKey("location"),
-      label: const Text('Your Location').bold().large(),
+      label: Text(context.tr('Your Location')).bold().large(),
       child: Row(
         children: [
           Expanded(
             child: TextField(
               controller: _locationController,
-              placeholder: const Text('Enter your current location'),
+              placeholder: Text(context.tr('Enter your current location')),
             ),
           ),
           const Gap(12),
@@ -473,7 +473,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
                     _showRequestBottomSheet(provider);
                   }
                 : null,
-            child: const Text('Request Ambulance'),
+            child: Text(context.tr('Request Ambulance')),
           ),
         ],
       ),
@@ -485,14 +485,14 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Emergency Call'),
-          content: const Text('Calling emergency number 102...'),
+          title: Text(context.tr('Emergency Call')),
+          content: Text(context.tr('Calling emergency number 102...')),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Close'),
+              child: Text(context.tr('Close')),
             ),
           ],
         );
@@ -505,8 +505,8 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Emergency Guidelines'),
-          content: const Text(
+          title: Text(context.tr('Emergency Guidelines')),
+          content: Text(
             '1. Stay calm and assess the situation.\n'
             '2. Call emergency services immediately.\n'
             '3. Provide clear information about the location and situation.\n'
@@ -517,7 +517,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Close'),
+              child: Text(context.tr('Close')),
             ),
           ],
         );

@@ -1,6 +1,7 @@
 import 'package:awaj/features/main/new_routes/store/main_auth_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class UserDetailsScreen extends StatefulWidget {
   const UserDetailsScreen({super.key});
@@ -39,24 +40,22 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Gap(20),
-            Text('Enter your Details as stated below').large().semiBold(),
+            Text(context.tr('Enter your Details as stated below')).large().semiBold(),
             Gap(32),
             FormField(
               key: FormKey('name'),
-              label: const Text('Full Name'),
+              label: Text(context.tr('Full Name')),
               validator: const LengthValidator(min: 8),
               // showErrors: const {FormValidationMode.changed, FormValidationMode.submitted},
               child: TextField(
                 controller: _nameController,
-                placeholder: Text('Enter your full name'),
+                placeholder: Text(context.tr('Enter your full name')),
               ),
             ),
             Gap(18),
             FormField(
               key: FormKey('dob'),
-              label: const Text("Enter your date of birth (in AD)"),
-              // validator: const LengthValidator(min: 8),
-              // showErrors: const {FormValidationMode.changed, FormValidationMode.submitted},
+              label: Text(context.tr("Enter your date of birth (in AD))")),
               child: DatePicker(
                 value: dobValue,
                 mode: PromptMode.dialog,
@@ -76,7 +75,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             Gap(18),
             FormField(
               key: FormKey('gender'),
-              label: const Text('Select your Gender'),
+              label: Text(context.tr('Select your Gender')),
               // validator: const LengthValidator(min: 8),
               // showErrors: const {FormValidationMode.changed, FormValidationMode.submitted},
               child: RadioGroup<String>(
@@ -86,20 +85,20 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     _selectedGender = value;
                   });
                 },
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RadioItem(
                       value: "Male",
-                      trailing: Text('Male'),
+                      trailing: Text(context.tr('Male')),
                     ),
                     RadioItem(
                       value: "Female",
-                      trailing: Text('Female'),
+                      trailing: Text(context.tr('Female')),
                     ),
                     RadioItem(
                       value: "Others",
-                      trailing: Text('Others'),
+                      trailing: Text(context.tr('Others')),
                     ),
                   ],
                 ),
@@ -109,7 +108,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             Center(
               child: PrimaryButton(
                 onPressed: _saveUserDetails,
-                child: Text('Save & Continue'),
+                child: Text(context.tr('Save & Continue')),
               ),
             ),
           ],

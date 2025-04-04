@@ -4,6 +4,10 @@ import 'package:awaj/features/complaints/models/complaints_categories_model.dart
 import 'package:awaj/features/complaints/presentation/complaint_detail_page.dart';
 import 'package:awaj/features/home/home.dart';
 import 'package:awaj/features/main/ambulance/main_ambulance.dart';
+import 'package:awaj/features/main/data.dart';
+import 'package:awaj/features/main/health_information/government_announcement.dart';
+import 'package:awaj/features/main/health_information/health_information.dart';
+import 'package:awaj/features/main/health_information/models/government_announcement_model.dart';
 import 'package:awaj/features/main/health_location/main_health_location.dart';
 import 'package:awaj/features/main/main_medical_record.dart';
 import 'package:awaj/features/main/main_menu.dart';
@@ -41,6 +45,39 @@ final List<RouteBase> routes = [
         GoRoute(path: "health-location", builder: (context, state) => MobileSizeBox(child: const FindHospitalsPage()), routes: []),
         GoRoute(path: "ambulance", builder: (context, state) => MobileSizeBox(child: const AmbulanceServicePage()), routes: []),
         GoRoute(path: "medical-record", builder: (context, state) => MobileSizeBox(child: const MedicalRecordsPage()), routes: []),
+        GoRoute(
+          path: '/health-tips',
+          builder: (context, state) => MobileSizeBox(
+            child: HealthTipsPage(
+              tips: state.extra as List<HealthTip> ?? [],
+            ),
+          ),
+        ),
+        GoRoute(
+          path: '/health-tips/:id',
+          builder: (context, state) {
+            final tip = state.extra as HealthTip;
+            return MobileSizeBox(child: HealthTipDetailPage(tip: tip));
+          },
+        ),
+        GoRoute(
+          path: '/announcements',
+          builder: (context, state) => MobileSizeBox(
+            child: AnnouncementsPage(
+              // announcements: state.extra as List<Announcement>,
+              announcements: announcements,
+            ),
+          ),
+        ),
+        GoRoute(
+          path: '/announcements/:id',
+          builder: (context, state) {
+            final announcement = state.extra as Announcement;
+            return MobileSizeBox(
+              child: AnnouncementDetailPage(announcement: announcement),
+            );
+          },
+        ),
       ]),
     ]),
   ]),

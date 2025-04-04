@@ -1,3 +1,6 @@
+import 'package:awaj/features/main/data.dart';
+import 'package:awaj/features/main/health_information/models/government_announcement_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,6 +26,12 @@ class _HomePageState extends State<HomePage> {
   final bool _hasNotifications = true;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -40,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(width: 12),
-              const Text('Nepal Health'),
+              Text(context.tr("nepalHealth")),
             ],
           ),
           trailing: [
@@ -331,14 +340,14 @@ class _HomePageState extends State<HomePage> {
     // return SizedBox(height: 32, child: Placeholder());
     return Button.text(
       leading: Icon(icon),
-      child: Text(label),
+      child: Text(context.tr(label)),
       // icon: Icon(icon),
       onPressed: () {},
     );
     // return ElevatedButton.icon(
     //   onPressed: () {},
     //   icon: Icon(icon, size: 18),
-    //   label: Text(label),
+    //   label: Text(context.tr(label)),
     //   style: ElevatedButton.styleFrom(
     //     foregroundColor: color,
     //     backgroundColor: color.withValues(alpha:0.1),
@@ -514,29 +523,18 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(width: 12),
-              Text(
-                //const Color(0xFF253858),
-                'Government Announcements',
-              ).medium().bold(),
+              Text(context.tr('Government Announcements')).medium().bold(),
             ],
           ),
           const Gap(26),
-          _buildAnnouncementItem(
-            'Free Health Checkup Camp',
-            'March 25-27, 2025 at Central Hospital Kathmandu',
-            DateTime.parse('2025-03-25'),
-          ),
+          _buildAnnouncementItem(announcements[0]),
           const Divider(height: 24),
-          _buildAnnouncementItem(
-            'New Health Insurance Policy',
-            'Government launches new health insurance policy for all citizens',
-            DateTime.parse('2025-03-15'),
-          ),
+          _buildAnnouncementItem(announcements[1]),
           const SizedBox(height: 16),
           Center(
             child: TextButton(
-              onPressed: () {},
-              child: const Text('View All Announcements'),
+              onPressed: () => context.go("/main/menu/announcements", extra: announcements),
+              child: Text(context.tr('View All Announcements')),
             ),
           ),
         ],
@@ -544,7 +542,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildAnnouncementItem(String title, String description, DateTime date) {
+  Widget _buildAnnouncementItem(Announcement announcement) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -555,7 +553,7 @@ class _HomePageState extends State<HomePage> {
             borderRadius: BorderRadius.circular(4),
           ),
           child: Text(
-            '${date.day}/${date.month}',
+            '${announcement.created.day}/${announcement.created.month}',
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
@@ -569,7 +567,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                announcement.title,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -578,7 +576,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 4),
               Text(
-                description,
+                announcement.fullSummary,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.gray[600],

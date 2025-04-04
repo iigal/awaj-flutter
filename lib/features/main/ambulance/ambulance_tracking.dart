@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -30,7 +31,7 @@ class AmbulanceTrackingPage extends StatelessWidget {
               },
             ),
           ],
-          title: const Text('Tracking').extraBold().xLarge(),
+          title: Text(context.tr('Tracking')).extraBold().xLarge(),
           trailing: [
             IconButton.ghost(
               icon: const Icon(Icons.refresh),

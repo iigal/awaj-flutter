@@ -1,4 +1,9 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:awaj/features/main/health_location/health_facility_model.dart';
+import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -11,8 +16,8 @@ class FindHospitalsPage extends StatefulWidget {
 
 class _FindHospitalsPageState extends State<FindHospitalsPage> {
   final TextEditingController _searchController = TextEditingController();
-  List<Map<String, dynamic>> _hospitals = [];
-  List<Map<String, dynamic>> _filteredHospitals = [];
+  List<HealthFacility> _hospitals = [];
+  List<HealthFacility> _filteredHospitals = [];
   String _selectedFilter = 'All';
   final MapController _mapController = MapController();
 
@@ -24,96 +29,82 @@ class _FindHospitalsPageState extends State<FindHospitalsPage> {
 
   Future<void> _fetchHospitals() async {
     // Mock API call to fetch hospitals
-    final response = await Future.delayed(
-      const Duration(seconds: 2),
-      () => [
-        {
-          'id': '1',
-          'name': 'Central Hospital',
-          'type': 'Hospital',
-          'latitude': 27.7172,
-          'longitude': 85.3240,
-          'address': 'Kathmandu, Nepal',
-          'phone': '+977-1-1234567',
-          'services': ['Emergency', 'Surgery', 'Pharmacy'],
-        },
-        {
-          'id': '2',
-          'name': 'City Clinic',
-          'type': 'Clinic',
-          'latitude': 27.7100,
-          'longitude': 85.3200,
-          'address': 'Lalitpur, Nepal',
-          'phone': '+977-1-7654321',
-          'services': ['General Checkup', 'Vaccination'],
-        },
-        // Add more mock data as needed
-      ],
-    );
+    List<HealthFacility> hospitals = [];
+    try {
+      var headers = {
+        'Content-Type': 'application/json',
+        'Authorization': '\$2a\$10\$VArlCZOPPmx2c5FMNbeVDuQ6PPjMb5HRV6h21f04NrD.NSNHCyhDS'
+      };
+      var data = json.encode({"pageno": 1, "pagesize": 10, "sortby": ""});
+      Response response = await Dio().request(
+        'https://nhfr.mohp.gov.np/api/v1/getHf',
+        data: data,
+        options: Options(
+          method: 'POST',
+          headers: headers,
+        ),
+      );
 
+      var responseBody = response.data as List;
+      print(responseBody);
+      for (int i = 0; i < responseBody.length; i++) {
+        hospitals.add(HealthFacility.fromJson(responseBody[i]));
+      }
+    } catch (err) {
+      print(err);
+    }
     setState(() {
-      _hospitals = response;
-      _filteredHospitals = response;
-    });
-  }
-
-  void _onSearch(String query) {
-    setState(() {
-      _filteredHospitals = _hospitals.where((hospital) => hospital['name'].toLowerCase().contains(query.toLowerCase())).toList();
-    });
-  }
-
-  void _onFilterChanged(String? value) {
-    setState(() {
-      _selectedFilter = value ?? 'All';
-      _filteredHospitals = _hospitals.where((hospital) => _selectedFilter == 'All' || hospital['type'] == _selectedFilter).toList();
+      _hospitals = hospitals;
+      _filteredHospitals = hospitals;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Find Hospitals'),
-      ),
-      body: Column(
+      headers: [
+        AppBar(
+          title: Text(context.tr('Find Hospitals')),
+        )
+      ],
+      child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Search hospitals...',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-              onChanged: _onSearch,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: DropdownButtonFormField<String>(
-              value: _selectedFilter,
-              items: ['All', 'Hospital', 'Clinic', 'Lab', 'Health Post'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: _onFilterChanged,
-              decoration: InputDecoration(
-                labelText: 'Filter by type',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(16.0),
+          //   child: TextField(
+          //     controller: _searchController,
+          //     decoration: InputDecoration(
+          //       hintText: 'Search hospitals...',
+          //       prefixIcon: const Icon(Icons.search),
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(8.0),
+          //       ),
+          //     ),
+          //     onChanged: _onSearch,
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //   child: DropdownButtonFormField<String>(
+          //     value: _selectedFilter,
+          //     items: ['All', 'Hospital', 'Clinic', 'Lab', 'Health Post'].map((String value) {
+          //       return DropdownMenuItem<String>(
+          //         value: value,
+          //         child: Text(context.tr(value)),
+          //       );
+          //     }).toList(),
+          //     onChanged: _onFilterChanged,
+          //     decoration: InputDecoration(
+          //       labelText: 'Filter by type',
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(8.0),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Expanded(
             child: _filteredHospitals.isEmpty
-                ? const Center(child: Text('No hospitals found'))
+                ? Center(child: Text(context.tr('No hospitals found')))
                 : FlutterMap(
                     mapController: _mapController,
                     options: MapOptions(
@@ -129,17 +120,17 @@ class _FindHospitalsPageState extends State<FindHospitalsPage> {
                         markers: _filteredHospitals.map((hospital) {
                           return Marker(
                             point: LatLng(
-                              hospital['latitude'],
-                              hospital['longitude'],
+                              double.parse(hospital.coordinates!.latitude ?? "0.0"),
+                              double.parse(hospital.coordinates!.longitude ?? "0.0"),
                             ),
-                            child: IconButton(
+                            child: IconButton.ghost(
                               icon: Icon(
                                 Icons.location_on,
                                 color: Colors.red,
                                 size: 30,
                               ),
                               onPressed: () {
-                                _showHospitalDetails(hospital);
+                                // _showHospitalDetails(hospital);
                               },
                             ),
                           );
@@ -153,40 +144,39 @@ class _FindHospitalsPageState extends State<FindHospitalsPage> {
     );
   }
 
-  void _showHospitalDetails(Map<String, dynamic> hospital) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                hospital['name'],
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text('Type: ${hospital['type']}'),
-              Text('Address: ${hospital['address']}'),
-              Text('Phone: ${hospital['phone']}'),
-              const SizedBox(height: 16),
-              const Text(
-                'Services:',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Wrap(
-                spacing: 8.0,
-                children: hospital['services'].map<Widget>((service) => Chip(label: Text(service))).toList(),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // void _showHospitalDetails(HealthFacility hospital) {
+  //   show(
+  //     context: context,
+  //     builder: (context) {
+  //       return Container(
+  //         padding: const EdgeInsets.all(16.0),
+  //         child: Column(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             Text(
+  //               hospital.hfName ?? "",
+  //               style: const TextStyle(
+  //                 fontSize: 20,
+  //                 fontWeight: FontWeight.bold,
+  //               ),
+  //             ),
+  //             const SizedBox(height: 8),
+  //             Text(context.tr('Address: ${hospital.contactPerson}')),
+  //             Text(context.tr('Phone: ${hospital.contactPersonMobile}')),
+  //             const SizedBox(height: 16),
+  //             Text(
+  //               'Services:',
+  //               style: TextStyle(fontWeight: FontWeight.bold),
+  //             ),
+  //             Wrap(
+  //               spacing: 8.0,
+  //               children: hospital.services.map<Widget>((service) => Chip(label: Text(context.tr(service)))).toList(),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }

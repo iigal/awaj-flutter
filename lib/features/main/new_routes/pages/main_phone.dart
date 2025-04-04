@@ -1,5 +1,6 @@
 import 'package:awaj/features/main/new_routes/main_alert_toast.dart';
 import 'package:awaj/features/main/new_routes/store/main_mock.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
@@ -37,7 +38,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
         builder: buildToast,
         location: ToastLocation.bottomCenter,
       );
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to send OTP')));
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.tr('Failed to send OTP'))));
     }
   }
 
@@ -60,47 +61,47 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Gap(20),
-            Text('Verify Phone Number').large().semiBold(),
+            Text(context.tr('Verify Phone Number')).large().semiBold(),
             Gap(12),
             Alert(
-              title: Text('Info').large(),
-              content: Text('Use the primary phone number used with NID'),
+              title: Text(context.tr('Info')).large(),
+              content: Text(context.tr('Use the primary phone number used with NID')),
               leading: Icon(Icons.info_outline),
             ),
             Gap(32),
             FormField(
               key: FormKey('phone'),
-              label: const Text('Enter your primary phone number'),
+              label: Text(context.tr('Enter your primary phone number')),
               validator: const LengthValidator(min: 8),
               // showErrors: const {FormValidationMode.changed, FormValidationMode.submitted},
               child: TextField(
                 controller: _phoneController,
                 keyboardType: TextInputType.phone,
-                placeholder: Text('Enter phone number'),
+                placeholder: Text(context.tr('Enter phone number')),
               ),
             ),
             Gap(18),
             FormField(
               key: FormKey('password'),
-              label: const Text('Set a password'),
+              label: Text(context.tr('Set a password')),
               validator: const LengthValidator(min: 8),
               // showErrors: const {FormValidationMode.changed, FormValidationMode.submitted},
               child: TextField(
                 controller: _passwordController,
                 obscureText: true,
-                placeholder: Text('Set Password'),
+                placeholder: Text(context.tr('Set Password')),
               ),
             ),
             Gap(18),
             FormField(
               key: FormKey('confirmpassword'),
-              label: const Text('Confirm your password'),
+              label: Text(context.tr('Confirm your password')),
               validator: const LengthValidator(min: 8),
               // showErrors: const {FormValidationMode.changed, FormValidationMode.submitted},
               child: TextField(
                 controller: _confirmPasswordController,
                 obscureText: true,
-                placeholder: Text('Confirmation Password'),
+                placeholder: Text(context.tr('Confirmation Password')),
               ),
             ),
             Gap(18),
@@ -109,7 +110,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                   ? CircularProgressIndicator()
                   : PrimaryButton(
                       onPressed: _sendOTP,
-                      child: Text('Send OTP'),
+                      child: Text(context.tr('Send OTP')),
                     ),
             ),
           ],

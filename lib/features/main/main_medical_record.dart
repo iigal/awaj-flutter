@@ -1,4 +1,5 @@
 // Ambulance Service Page
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 // Medical Records Page
@@ -84,9 +85,9 @@ class _MedicalRecordsPageState extends State<MedicalRecordsPage> with SingleTick
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: const Text('Medical Records'),
+        title: Text(context.tr('medicalRecords')),
         centerTitle: false,
         actions: [
           IconButton(
@@ -185,7 +186,7 @@ class _MedicalRecordsPageState extends State<MedicalRecordsPage> with SingleTick
                     return Padding(
                       padding: const EdgeInsets.only(right: 8),
                       child: ChoiceChip(
-                        label: Text(filter),
+                        label: Text(context.tr(filter)),
                         selected: isSelected,
                         onSelected: (selected) {
                           setState(() {

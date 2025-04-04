@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:awaj/features/main/new_routes/main_alert_toast.dart';
 import 'package:awaj/features/main/new_routes/store/main_mock.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
@@ -65,7 +66,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
         builder: buildToast,
         location: ToastLocation.bottomCenter,
       );
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid OTP')));
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.tr('Invalid OTP'))));
     }
   }
 
@@ -96,16 +97,16 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('OTP Verification').large().semiBold(),
+            Text(context.tr('OTP Verification')).large().semiBold(),
             Gap(20),
             Alert(
-              title: Text('Info').large(),
+              title: Text(context.tr('Info')).large(),
               content: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text('1. Please wait for OTP to arrive on your phone'),
-                  Text('2. OTP is valid for 5 miniutes'),
-                  Text('3. Never share your OTP with anyone'),
+                  Text(context.tr('1. Please wait for OTP to arrive on your phone')),
+                  Text(context.tr('2. OTP is valid for 5 miniutes')),
+                  Text(context.tr('3. Never share your OTP with anyone')),
                 ],
               ),
               leading: Icon(Icons.info_outline),
@@ -114,7 +115,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
             FormField(
               labelAxisAlignment: MainAxisAlignment.center,
               key: FormKey('nid'),
-              label: Center(child: const Text('Enter OTP below')),
+              label: Center(child: Text(context.tr('Enter OTP below'))),
               child: Center(
                 child: InputOTP(
                   onChanged: (value) {
@@ -137,12 +138,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   ? CircularProgressIndicator()
                   : PrimaryButton(
                       onPressed: _verifyOTP,
-                      child: Text('Verify OTP'),
+                      child: Text(context.tr('Verify OTP')),
                     ),
             ),
             Gap(32),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text(_canResendOTP ? "Didn't receive OTP? " : "Resend OTP in $_timerSeconds sec"),
+              Text(context.tr(_canResendOTP ? "Didn't receive OTP? " : "Resend OTP in $_timerSeconds sec")),
               _canResendOTP
                   ? GestureDetector(
                       onTap: _resendOTP,

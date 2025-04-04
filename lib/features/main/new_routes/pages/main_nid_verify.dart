@@ -1,5 +1,6 @@
 import 'package:awaj/features/main/new_routes/main_alert_toast.dart';
 import 'package:awaj/features/main/new_routes/store/main_mock.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
@@ -27,7 +28,7 @@ class _NIDVerificationScreenState extends State<NIDVerificationScreen> {
         builder: buildToast,
         location: ToastLocation.bottomCenter,
       );
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('NID not found')));
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.tr('NID not found'))));
     }
   }
 
@@ -65,20 +66,20 @@ class _NIDVerificationScreenState extends State<NIDVerificationScreen> {
             ).light(),
             Gap(12),
             Alert(
-              title: Text('Info').large(),
-              content: Text('National ID is required to verify your identity'),
+              title: Text(context.tr('Info')).large(),
+              content: Text(context.tr('National ID is required to verify your identity')),
               leading: Icon(Icons.info_outline),
             ),
             Gap(32),
             FormField(
               key: FormKey('nid'),
-              label: const Text('Enter your NID below'),
+              label: Text(context.tr('Enter your NID below')),
               validator: const LengthValidator(min: 8),
               showErrors: const {FormValidationMode.changed, FormValidationMode.submitted},
               child: TextField(
                 controller: _nidController,
                 keyboardType: TextInputType.number,
-                placeholder: Text('Enter your NID'),
+                placeholder: Text(context.tr('Enter your NID')),
               ),
             ),
             Gap(32),
@@ -87,7 +88,7 @@ class _NIDVerificationScreenState extends State<NIDVerificationScreen> {
                   ? CircularProgressIndicator()
                   : PrimaryButton(
                       onPressed: _verifyNID,
-                      child: Text('Verify NID'),
+                      child: Text(context.tr('Verify NID')),
                     ),
             ),
           ],
