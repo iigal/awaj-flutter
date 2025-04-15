@@ -4,14 +4,14 @@ import 'dart:convert';
 import 'package:awaj/db.dart';
 import 'package:awaj/features/main/app_bar.dart';
 import 'package:awaj/features/main/health_information/models/government_announcement_model.dart';
+import 'package:awaj/features/shared_components/app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 class AnnouncementsPage extends StatefulWidget {
-  final List<Announcement> announcements;
-
-  const AnnouncementsPage({super.key, required this.announcements});
+  const AnnouncementsPage({super.key});
 
   @override
   State<AnnouncementsPage> createState() => _AnnouncementsPageState();
@@ -20,8 +20,9 @@ class AnnouncementsPage extends StatefulWidget {
 class _AnnouncementsPageState extends State<AnnouncementsPage> {
   List<Announcement> _filteredAnnouncements = [];
   List<Announcement> announcements = [];
-  final TextEditingController _searchController = TextEditingController();
   AnnouncementFilter _currentFilter = AnnouncementFilter.all;
+  final int perPage = 10;
+  int page = 1;
 
   bool isLoadingData = true;
 
@@ -39,14 +40,14 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   }
 
   Future<void> fetchAllAnnouncements() async {
+    setState(() {
+      isLoadingData = true;
+    });
     try {
-      final records = await pocketBaseDB.collection('app_gov_announcements').getFullList();
-      if (records.isEmpty) {
-        announcements = [];
-        return;
-      }
-      announcements = records.map((element) => Announcement.fromJson(element.data)).toList();
-      _filteredAnnouncements = announcements;
+      final records = await pocketBaseDB.collection('dhapp_tbl_announcements').getList(page: page, perPage: perPage, sort: "-created");
+      if (records.totalItems > 0) page++;
+      announcements = records.items.map((element) => Announcement.fromJson(element.data)).toList();
+      _filteredAnnouncements = [..._filteredAnnouncements, ...announcements];
     } catch (err) {
       print(err);
       rethrow;
@@ -60,203 +61,184 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   void initState() {
     super.initState();
     isLoadingData = true;
+    page = 1;
     subscribeAnnouncements();
     fetchAllAnnouncements();
-    _searchController.addListener(_onSearchChanged);
   }
 
   @override
   void dispose() {
-    _searchController.dispose();
     isLoadingData = true;
     super.dispose();
   }
 
-  void _onSearchChanged() {
-    _applyFilters();
-  }
-
   void _applyFilters() {
-    setState(() {
-      // _filteredAnnouncements = widget.announcements.where((announcement) {
-      //   final matchesSearch = announcement.title.toLowerCase().contains(_searchController.text.toLowerCase()) ||
-      //       announcement.description.toLowerCase().contains(_searchController.text.toLowerCase());
-
-      //   final matchesFilter = _currentFilter == AnnouncementFilter.all ||
-      //       (_currentFilter == AnnouncementFilter.urgent && announcement.isUrgent) ||
-      //       (_currentFilter == AnnouncementFilter.recent && announcement.date.isAfter(DateTime.now().subtract(const Duration(days: 7))));
-
-      //   return matchesSearch && matchesFilter;
-      // }).toList();
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      headers: [AppBarComponent()],
-      child: Column(
-        children: [
-          // Search and Filter Bar
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
+      headers: [
+        AppBarWidget(
+          title: context.tr('Announcements'),
+        )
+      ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            // Filter Chips
+            Row(
               children: [
-                // Search Input
-                TextField(
-                  controller: _searchController,
-                  placeholder: Text(
-                    'Search announcements...',
-                  ),
+                Chip(
+                  style: _currentFilter == AnnouncementFilter.all ? const ButtonStyle.primary() : null,
+                  child: Text(context.tr('All')),
+                  onPressed: () {
+                    setState(() {
+                      _currentFilter = AnnouncementFilter.all;
+                      _applyFilters();
+                    });
+                  },
                 ),
-                const Gap(12),
-                // Filter Chips
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      // material.FilterChip(
-                      //   label: Text(context.tr('All')),
-                      //   selected: _currentFilter == AnnouncementFilter.all,
-                      //   onSelected: (_) {
-                      //     setState(() {
-                      //       _currentFilter = AnnouncementFilter.all;
-                      //       _applyFilters();
-                      //     });
-                      //   },
-                      // ),
-                      // const Gap(8),
-                      // material.FilterChip(
-                      //   label: Text(context.tr('Urgent')),
-                      //   selected: _currentFilter == AnnouncementFilter.urgent,
-                      //   onSelected: (_) {
-                      //     setState(() {
-                      //       _currentFilter = AnnouncementFilter.urgent;
-                      //       _applyFilters();
-                      //     });
-                      //   },
-                      // ),
-                      // const Gap(8),
-                      // material.FilterChip(
-                      //   label: Text(context.tr('Recent')),
-                      //   selected: _currentFilter == AnnouncementFilter.recent,
-                      //   onSelected: (_) {
-                      //     setState(() {
-                      //       _currentFilter = AnnouncementFilter.recent;
-                      //       _applyFilters();
-                      //     });
-                      //   },
-                      // ),
-                    ],
-                  ),
+                Gap(6),
+                Chip(
+                  style: _currentFilter == AnnouncementFilter.urgent ? const ButtonStyle.primary() : null,
+                  child: Text(context.tr('Urgent')),
+                  onPressed: () {
+                    setState(() {
+                      _currentFilter = AnnouncementFilter.urgent;
+                      _applyFilters();
+                    });
+                  },
+                ),
+                Gap(6),
+                Chip(
+                  style: _currentFilter == AnnouncementFilter.recent ? const ButtonStyle.primary() : null,
+                  child: Text(context.tr('Recent')),
+                  onPressed: () {
+                    setState(() {
+                      _currentFilter = AnnouncementFilter.recent;
+                      _applyFilters();
+                    });
+                  },
                 ),
               ],
             ),
-          ),
-          // Results Count
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
+            const Gap(12),
+            Row(
               children: [
                 Text(
                   '${_filteredAnnouncements.length} ${_filteredAnnouncements.length == 1 ? 'announcement' : 'announcements'} found',
                 ).small().muted(),
               ],
             ),
-          ),
-          const Gap(8),
-          // Announcements List
-
-          Expanded(
-            child: isLoadingData
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.announcement_outlined, size: 48).muted(),
-                        const Gap(16),
-                        Text(context.tr('No announcements found')).muted(),
-                        if (_searchController.text.isNotEmpty || _currentFilter != AnnouncementFilter.all)
-                          TextButton(
-                            onPressed: () {
-                              _searchController.clear();
-                              setState(() {
-                                _currentFilter = AnnouncementFilter.all;
-                                _filteredAnnouncements = widget.announcements;
-                              });
-                            },
-                            child: Text(context.tr('Clear filters')),
-                          ),
-                      ],
-                    ),
-                  )
-                : Card(
-                    child: ListView.separated(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: _filteredAnnouncements.length,
-                      separatorBuilder: (_, __) => const Gap(8),
-                      itemBuilder: (context, index) {
-                        final announcement = _filteredAnnouncements[index];
-                        return _buildAnnouncementCard(announcement, context);
-                      },
-                    ),
+            const Gap(6),
+            Divider(),
+            const Gap(6),
+            if (isLoadingData)
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.announcement_outlined, size: 48).muted(),
+                    const Gap(16),
+                    Text(context.tr('NoAnnouncementsFound')).muted(),
+                    if (_currentFilter != AnnouncementFilter.all)
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _currentFilter = AnnouncementFilter.all;
+                          });
+                        },
+                        child: Text(context.tr('Clear filters')),
+                      ),
+                  ],
+                ),
+              )
+            else
+              Expanded(
+                child: RefreshTrigger(
+                  onRefresh: () async {
+                    await Future.delayed(
+                      const Duration(seconds: 1),
+                      () => fetchAllAnnouncements(),
+                    );
+                  },
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(4),
+                    itemCount: _filteredAnnouncements.length,
+                    separatorBuilder: (context, index) => const Gap(8),
+                    itemBuilder: (context, index) {
+                      final announcement = _filteredAnnouncements[index];
+                      return AnnouncementCard(announcement: announcement);
+                    },
                   ),
-          ),
-        ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
+}
 
-  Widget _buildAnnouncementCard(Announcement announcement, BuildContext context) {
-    return Button.secondary(
-      // borderRadius: BorderRadius.circular(12),
-      onPressed: () => context.go("/main/menu/announcements/${announcement.collectionId}", extra: announcement),
+class AnnouncementCard extends StatelessWidget {
+  final Announcement announcement;
+  const AnnouncementCard({super.key, required this.announcement});
 
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(context.tr(announcement.title)).large().bold(),
-                      const Gap(4),
-                      Text(context.tr(announcement.fullSummary)).muted(),
-                    ],
+  @override
+  Widget build(BuildContext context) {
+    return Button.card(
+      onPressed: () => context.go("/main/announcements/${announcement.collectionId}", extra: announcement),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(context.tr(announcement.title)).large().bold(),
+                    const Gap(4),
+                    Text(context.tr(announcement.fullSummary)).muted(),
+                  ],
+                ),
+              ),
+              if (announcement.priority.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 2),
+                  child: DestructiveBadge(
+                    child: Text(context.tr('Urgent')),
                   ),
                 ),
-                const Icon(Icons.chevron_right),
-              ],
-            ),
-            const Gap(12),
-            Row(
-              children: [
-                const Icon(Icons.calendar_today, size: 16).muted(),
-                const Gap(4),
-                Text(
-                  DateFormat('MMM d, yyyy').format(announcement.created),
-                ).small().muted(),
-                if (announcement.created.isAfter(DateTime.now().subtract(const Duration(days: 3))))
-                  SecondaryBadge(
-                    child: Text(context.tr('NEW')),
-                  ),
-                const Spacer(),
-                if (announcement.priority.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: DestructiveBadge(
-                      child: Text(context.tr('URGENT')),
-                    ),
-                  ),
-              ],
-            ),
-          ],
-        ),
+            ],
+          ),
+          const Gap(12),
+          Row(
+            children: [
+              const Icon(Icons.calendar_today, size: 16).muted(),
+              const Gap(4),
+              Text(
+                DateFormat('MMM d, yyyy').format(announcement.created),
+              ).small().muted(),
+              Gap(8),
+              if (announcement.created.isAfter(DateTime.now().subtract(const Duration(hours: 12))))
+                SecondaryBadge(
+                  child: Text(context.tr('NEW')),
+                ),
+              const Spacer(),
+              Row(
+                children: [
+                  Text(context.tr("ReadMore")),
+                  const Icon(Icons.chevron_right),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

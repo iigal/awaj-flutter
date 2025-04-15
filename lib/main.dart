@@ -7,6 +7,20 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as rp;
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+final globalAppScaleNotifierProvider = rp.NotifierProvider<GlobalAppScaleNotifier, double>(GlobalAppScaleNotifier.new);
+
+class GlobalAppScaleNotifier extends rp.Notifier<double> {
+  @override
+  double build() {
+    return 1.0;
+  }
+
+  void changeScale(double value) {
+    state = value;
+  }
+}
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -27,6 +41,7 @@ void main() async {
   usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  initializeDateFormatting('en_US', null);
   // await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
@@ -104,11 +119,12 @@ class _AwajAppState extends State<AwajApp> {
         locale: context.locale,
         title: 'Awaj Mobile',
         theme: ThemeData(
-          colorScheme: ColorSchemes.lightZinc(),
-          radius: 0.5,
+          colorScheme: ColorSchemes.lightBlue(),
+          scaling: ref.watch(globalAppScaleNotifierProvider),
+          radius: 0.35,
         ),
         // Define named routes
-        routerConfig: ref.watch(gorouter),
+        routerConfig: gorouter,
       );
     });
   }

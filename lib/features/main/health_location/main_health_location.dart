@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:awaj/features/main/health_location/health_facility_model.dart';
+import 'package:awaj/features/shared_components/app_bar.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
@@ -138,8 +139,9 @@ class _FindHospitalsPageState extends State<FindHospitalsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       headers: [
-        AppBar(
-          title: Text(context.tr('Find Hospitals')),
+        AppBarWidget(
+          title: context.tr('Find Hospitals'),
+          hasBackButton: true,
         )
       ],
       child: Column(

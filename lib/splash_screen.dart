@@ -25,7 +25,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         orElse: () {},
         data: (data) {
           if (data != null) {
-            ref.read(gorouter).go("/home");
+            context.go("/home");
           }
         },
       );
