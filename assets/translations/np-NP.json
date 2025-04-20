@@ -1,5 +1,32 @@
 {
-    "hello": "hello",
-    "nepalHealth": "नेपाल स्वास्थ्य आप",
-    "medicalRecords":"मेदिकल रेकोर्डस"
+  "hello": "नमस्ते",
+  "welcomeTitle": "हाम्रो हेल्थ एपमा स्वागत छ",
+  "welcomeDescription": "तपाईंका सबै स्वास्थ्य आवश्यकताहरूका लागि तपाईंको डिजिटल स्वास्थ्य साथी",
+  "nepalHealthApp": "नेपाल स्वास्थ्य एप",
+  "medicalRecords": "चिकित्सा अभिलेखहरू",
+  "clickHereToLogin": "लगइन गर्न यहाँ क्लिक गर्नुहोस्",
+  "findHospitals": "अस्पतालहरू खोज्नुहोस्",
+  "insurance": "बीमा",
+  "telemedicine": "टेलिमेडिसिन",
+  "vaccination": "खोप",
+  "bloodDonation": "रक्तदान",
+  "yourLocation": "तपाईंको स्थान",
+  "authentication": {
+    "login": "लगइन",
+    "register": "दर्ता गर्नुहोस्",
+    "dontHaveAnAccount": "खाता छैन?",
+    "biometricLoginFailed": "बायोमेट्रिक प्रमाणीकरण असफल भयो",
+    "biometricLoginNotConfigured": "बायोमेट्रिक प्रयोग गर्न एकपटक लगइन आवश्यक छ",
+    "enterYourUsername": "तपाईंको प्रयोगकर्ता नाम प्रविष्ट गर्नुहोस्",
+    "enterYourPassword": "तपाईंको पासवर्ड प्रविष्ट गर्नुहोस्"
+  },
+  "ambulance": {
+    "ambulance": "एम्बुलेन्स",
+    "ambulanceService": "एम्बुलेन्स सेवा",
+    "emergencyAmbulance": "आपतकालीन एम्बुलेन्स",
+    "emergencyAmbulanceMessage": "जीवन-खतराजनक अवस्थामा सिधै फोन गर्नुहोस्"
+  },
+  "guidelines": "निर्देशनहरू",
+  "emergency": "आपतकालीन",
+  "healthTips": "स्वास्थ्य सल्लाहहरू"
 }

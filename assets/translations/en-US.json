@@ -1,5 +1,32 @@
 {
     "hello": "hello",
+    "welcomeTitle": "Welcome to Hamro Health App",
+    "welcomeDescription": "Your digital health companion for all your health needs",
     "nepalHealthApp": "Nepal Health App",
-    "medicalRecords" : "Medical Records"
+    "medicalRecords": "Medical Records",
+    "clickHereToLogin": "Click Here To Login",
+    "findHospitals": "Find Hospitals",
+    "insurance": "Insurance",
+    "telemedicine": "Telemedicine",
+    "vaccination": "Vaccination",
+    "bloodDonation": "Blood Donation",
+    "yourLocation": "Your Location",
+    "authentication": {
+        "login": "Login",
+        "register": "Register",
+        "dontHaveAnAccount": "Don't have an account?",
+        "biometricLoginFailed": "Biometric authentication has failed",
+        "biometricLoginNotConfigured": "You need to login once for biometric to work",
+        "enterYourUsername": "Enter your username",
+        "enterYourPassword": "Enter your password"
+    },
+    "ambulance": {
+        "ambulance": "Ambulance",
+        "ambulanceService": "Ambulance Service",
+        "emergencyAmbulance": "Emergency Ambulance",
+        "emergencyAmbulanceMessage": "For life-threatening emergency call directly"
+    },
+    "guidelines": "Guidelines",
+    "emergency": "Emergency",
+    "healthTips": "Health Tips"
 }

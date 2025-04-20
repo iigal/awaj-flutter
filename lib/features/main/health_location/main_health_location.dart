@@ -4,6 +4,8 @@ import 'package:awaj/features/main/health_location/health_facility_model.dart';
 import 'package:awaj/features/shared_components/app_bar.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_map_animations/flutter_map_animations.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -95,18 +97,60 @@ class FindHospitalsPage extends StatefulWidget {
   State<FindHospitalsPage> createState() => _FindHospitalsPageState();
 }
 
-class _FindHospitalsPageState extends State<FindHospitalsPage> {
+class _FindHospitalsPageState extends State<FindHospitalsPage> with TickerProviderStateMixin {
+  late final _mapController = AnimatedMapController(
+    vsync: this,
+    duration: const Duration(milliseconds: 500),
+    curve: Curves.easeInOut,
+    cancelPreviousAnimations: true,
+  );
   List<HealthFacility> _filteredHospitals = [];
-  final MapController _mapController = MapController();
+  Position? currentPosition;
+  LatLng? currentLatLng;
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
+    _init();
+  }
+
+  _init() async {
+    setState(() {
+      isLoading = true;
+    });
+    await _getUserLocation();
+    setState(() {
+      isLoading = false;
+    });
     _fetchHospitals();
   }
 
+  Future<LatLng> _getUserLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      currentLatLng = LatLng(27.7211348, 85.3078008);
+      return currentLatLng!;
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        currentLatLng = LatLng(27.7211348, 85.3078008);
+        return currentLatLng!;
+      }
+    }
+
+    Position position = await Geolocator.getCurrentPosition(
+        locationSettings: LocationSettings(
+      accuracy: LocationAccuracy.high,
+    ));
+    currentLatLng = LatLng(position.latitude, position.longitude);
+    return currentLatLng!;
+  }
+
   Future<void> _fetchHospitals() async {
-    // Mock API call to fetch hospitals
     List<HealthFacility> hospitals = [];
     try {
       var headers = {
@@ -142,51 +186,27 @@ class _FindHospitalsPageState extends State<FindHospitalsPage> {
         AppBarWidget(
           title: context.tr('Find Hospitals'),
           hasBackButton: true,
+          hasActionButton: false,
         )
       ],
-      child: Column(
-        children: [
-          // Padding(
-          //   padding: const EdgeInsets.all(16.0),
-          //   child: TextField(
-          //     controller: _searchController,
-          //     decoration: InputDecoration(
-          //       hintText: 'Search hospitals...',
-          //       prefixIcon: const Icon(Icons.search),
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(8.0),
-          //       ),
-          //     ),
-          //     onChanged: _onSearch,
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          //   child: DropdownButtonFormField<String>(
-          //     value: _selectedFilter,
-          //     items: ['All', 'Hospital', 'Clinic', 'Lab', 'Health Post'].map((String value) {
-          //       return DropdownMenuItem<String>(
-          //         value: value,
-          //         child: Text(context.tr(value)),
-          //       );
-          //     }).toList(),
-          //     onChanged: _onFilterChanged,
-          //     decoration: InputDecoration(
-          //       labelText: 'Filter by type',
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(8.0),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          Expanded(
-            child: _filteredHospitals.isEmpty
-                ? Center(child: Text(context.tr('No hospitals found')))
-                : FlutterMap(
-                    mapController: _mapController,
+      child: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Stack(
+              children: [
+                Positioned.fill(
+                  child: FlutterMap(
+                    mapController: _mapController.mapController,
                     options: MapOptions(
-                      initialCenter: LatLng(27.7172, 85.3240), // Initial map center (Kathmandu)
-                      initialZoom: 13.0, // Initial zoom level
+                      initialCenter: currentLatLng!, // Initial map center (Kathmandu)
+                      initialZoom: 18.0,
+                      minZoom: 6.0,
+                      cameraConstraint: CameraConstraint.contain(
+                        bounds: LatLngBounds(
+                          LatLng(26.347, 80.058), // Southwest corner
+                          LatLng(30.447, 88.201), // Northeast corner
+                        ),
+                      ),
+                      maxZoom: 18.0,
                     ),
                     children: [
                       TileLayer(
@@ -196,10 +216,7 @@ class _FindHospitalsPageState extends State<FindHospitalsPage> {
                       ),
                       MarkerLayer(markers: [
                         Marker(
-                          point: LatLng(
-                            27.7172,
-                            85.3240,
-                          ),
+                          point: currentLatLng!,
                           child: GestureDetector(
                             child: Icon(
                               Icons.person,
@@ -236,9 +253,28 @@ class _FindHospitalsPageState extends State<FindHospitalsPage> {
                       ),
                     ],
                   ),
-          ),
-        ],
-      ),
+                ),
+                Positioned(
+                    right: 32,
+                    bottom: 32,
+                    child: Column(
+                      children: [
+                        IconButton.secondary(
+                          icon: Icon(Icons.location_searching),
+                          onPressed: () async {
+                            currentLatLng = await _getUserLocation();
+                            _mapController.mapController.move(currentLatLng!, 16);
+                          },
+                        ),
+                        Gap(8),
+                        IconButton.secondary(
+                          icon: Icon(Icons.location_searching),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ))
+              ],
+            ),
     );
   }
 

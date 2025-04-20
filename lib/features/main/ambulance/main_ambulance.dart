@@ -1,10 +1,12 @@
 import 'package:awaj/features/main/ambulance/ambulance_provider.dart';
 import 'package:awaj/features/main/ambulance/ambulance_tracking.dart';
+import 'package:awaj/features/shared_components/app_bar.dart';
+import 'package:awaj/generated/codegen_loader.g.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final List<AmbulanceProvider> _nearbyProviders = [
   AmbulanceProvider(
@@ -149,7 +151,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
                   color: Colors.gray.shade800,
                 ),
               ),
-              const SizedBox(height: 16),
+              const Gap(16),
               FormField(
                 key: FormKey("name"),
                 label: Text(context.tr('Name')),
@@ -158,7 +160,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
                   placeholder: Text(context.tr('Enter patient name')),
                 ),
               ),
-              const SizedBox(height: 16),
+              const Gap(16),
               FormField(
                 key: FormKey("contact"),
                 label: Text(context.tr('Contact')),
@@ -167,7 +169,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
                   placeholder: Text(context.tr('Enter contact number')),
                 ),
               ),
-              const SizedBox(height: 16),
+              const Gap(16),
               Button.primary(
                 onPressed: () {
                   setState(() {
@@ -189,67 +191,50 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
       headers: [
-        AppBar(
-          leading: [
-            IconButton.outline(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded),
-              onPressed: () {
-                context.go("/main/menu");
-              },
-            ),
-          ],
-          title: Text(context.tr('Ambulance Service')).extraBold().xLarge(),
-          trailing: [
-            IconButton.ghost(
-              icon: const Icon(Icons.history),
-              onPressed: () {
-                // Navigate to ambulance request history
-              },
-            ),
-          ],
-        )
+        AppBarWidget(
+          hasBackButton: true,
+          hasActionButton: false,
+          title: LocaleKeys.ambulance_ambulanceService,
+        ),
       ],
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildEmergencyCard(),
-                const Gap(16),
-                if (_isRequestPending) ...[
-                  Text(
-                    'Active Ambulance Dispatch',
-                  ).bold().large(),
-                  const Gap(8),
-                  _buildRequestPendingCard(),
-                  const Gap(16),
-                ],
-                if (_isAmbulanceDispatched) ...[
-                  Text(
-                    'Active Ambulance Dispatch',
-                  ).bold().large(),
-                  const Gap(8),
-                  _buildActiveServiceCard(),
-                  const Gap(16),
-                ],
-                _buildLocationInput(),
-                const Gap(32),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildEmergencyCard(),
+              const Gap(16),
+              if (_isRequestPending) ...[
                 Text(
-                  'Nearby Ambulance Providers',
+                  'Active Ambulance Dispatch',
                 ).bold().large(),
+                const Gap(8),
+                _buildRequestPendingCard(),
                 const Gap(16),
-                ..._nearbyProviders.map(
-                  (e) => Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: _buildProviderCard(e),
-                  ),
-                ),
               ],
-            ),
+              if (_isAmbulanceDispatched) ...[
+                Text(
+                  'Active Ambulance Dispatch',
+                ).bold().large(),
+                const Gap(8),
+                _buildActiveServiceCard(),
+                const Gap(16),
+              ],
+              _buildLocationInput(),
+              const Gap(32),
+              Text(
+                'Nearby Ambulance Providers',
+              ).bold().large(),
+              const Gap(16),
+              ..._nearbyProviders.map(
+                (e) => Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: _buildProviderCard(e),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -343,41 +328,41 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
               Icon(
                 Icons.emergency,
                 color: Colors.red.shade700,
-                size: 24,
               ),
               const Gap(8),
-              Text(
-                'Emergency Ambulance',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red.shade700,
-                ),
-              ),
+              Text(context.tr(LocaleKeys.ambulance_emergencyAmbulance),
+                  style: TextStyle(
+                    color: Colors.red.shade700,
+                  )).bold(),
             ],
           ),
           const Gap(8),
           Text(
-            'For life-threatening emergencies, call directly:',
+            context.tr(LocaleKeys.ambulance_emergencyAmbulanceMessage),
             style: TextStyle(
               color: Colors.black,
             ),
           ).small(),
           const Gap(12),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Button.destructive(
                   alignment: Alignment.center,
-                  onPressed: () {
-                    setState(() {});
-                    _showEmergencyCallDialog();
+                  onPressed: () async {
+                    // _showEmergencyCallDialog();
+                    final Uri launchUri = Uri(
+                      scheme: 'tel',
+                      path: "102",
+                    );
+                    await launchUrl(launchUri);
                   },
                   leading: const Icon(Icons.call),
                   child: Text(context.tr('Call 102')),
                 ),
               ),
-              Gap(18),
+              Gap(8),
               Expanded(
                 child: Button.primary(
                   alignment: Alignment.center,
@@ -398,7 +383,7 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
   Widget _buildLocationInput() {
     return FormField(
       key: FormKey("location"),
-      label: Text(context.tr('Your Location')).bold().large(),
+      label: Text(context.tr(LocaleKeys.yourLocation)).bold().large(),
       child: Row(
         children: [
           Expanded(
@@ -477,26 +462,6 @@ class _AmbulanceServicePageState extends State<AmbulanceServicePage> {
           ),
         ],
       ),
-    );
-  }
-
-  void _showEmergencyCallDialog() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(context.tr('Emergency Call')),
-          content: Text(context.tr('Calling emergency number 102...')),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(context.tr('Close')),
-            ),
-          ],
-        );
-      },
     );
   }
 

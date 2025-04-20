@@ -1,3 +1,4 @@
+import 'package:awaj/db.dart';
 import 'package:awaj/features/main/new_routes/store/main_auth_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
@@ -16,9 +17,14 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   DateTime? dobValue;
 
   void _saveUserDetails() async {
-    await LocalStorage.saveUserDetails(_nameController.text, dobValue.toString(), _selectedGender!);
-    // context.go('/main/menu');
-    GoRouter.of(context).go('/main/menu');
+    await pocketBaseDB.collection('users').update(pocketBaseDB.authStore.record!.id, body: {
+      "name": _nameController.text,
+      "dateOfBirth": dobValue?.toIso8601String(),
+      "gender": _selectedGender,
+    });
+    if (context.mounted) {
+      context.go('/main/menu');
+    }
   }
 
   @override
@@ -89,15 +95,15 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RadioItem(
-                      value: "Male",
+                      value: "male",
                       trailing: Text(context.tr('Male')),
                     ),
                     RadioItem(
-                      value: "Female",
+                      value: "female",
                       trailing: Text(context.tr('Female')),
                     ),
                     RadioItem(
-                      value: "Others",
+                      value: "others",
                       trailing: Text(context.tr('Others')),
                     ),
                   ],

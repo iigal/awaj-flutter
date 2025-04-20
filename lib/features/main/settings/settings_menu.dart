@@ -1,3 +1,4 @@
+import 'package:awaj/db.dart';
 import 'package:awaj/features/shared_components/app_bar.dart';
 import 'package:awaj/main.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -32,7 +33,8 @@ class SettingsMenu extends StatelessWidget {
             leading: const Icon(Icons.logout),
             child: const Text("Logout"),
             onPressed: () {
-              context.go("/");
+              pocketBaseDB.authStore.clear();
+              context.go("/main");
             },
           )
         ],

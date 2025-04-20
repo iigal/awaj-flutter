@@ -1,7 +1,10 @@
+import 'package:awaj/db.dart';
+import 'package:awaj/features/main/components/health_service_card.dart';
 import 'package:awaj/features/main/data.dart';
 import 'package:awaj/features/main/health_information/models/government_announcement_model.dart';
 import 'package:awaj/features/main/main_icons.dart';
 import 'package:awaj/features/shared_components/app_bar.dart';
+import 'package:awaj/generated/codegen_loader.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -16,8 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final bool _hasNotifications = true;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -27,7 +28,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
       headers: [
         AppBarWidget(leading: [
           ClipRRect(
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
               fit: BoxFit.cover,
             ),
           ),
-        ], title: context.tr("nepalHealth")),
+        ], title: context.tr("nepalHealthApp")),
       ],
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -80,39 +80,34 @@ class _HomePageState extends State<HomePage> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 8.0,
                 crossAxisSpacing: 8.0,
-                childAspectRatio: 1.25,
               ),
               delegate: SliverChildListDelegate([
-                _buildServiceCard(
-                  context,
-                  'National ID',
-                  Icons.credit_card,
-                  const Color(0xFF0052CC),
-                  'Register and manage your National ID',
+                HealthServiceCard(
+                  title: 'National ID',
+                  icon: Icons.credit_card,
+                  color: const Color(0xFF0052CC),
+                  description: 'Register and manage your National ID',
                   onPressed: () => context.go("/main/menu/medical-record"),
                 ),
-                _buildServiceCard(
-                  context,
-                  'Health ID',
-                  Icons.badge,
-                  const Color(0xFF00875A),
-                  'Access your health identity card',
+                HealthServiceCard(
+                  title: 'Health ID',
+                  icon: Icons.badge,
+                  color: const Color(0xFF00875A),
+                  description: 'Access your health identity card',
                   onPressed: () => context.go("/main/menu/medical-record"),
                 ),
-                _buildServiceCard(
-                  context,
-                  'Medical Records',
-                  Icons.folder_outlined,
-                  const Color(0xFF6554C0),
-                  'View your complete medical history',
+                HealthServiceCard(
+                  title: 'Medical Records',
+                  icon: Icons.folder_outlined,
+                  color: const Color(0xFF6554C0),
+                  description: 'View your complete medical history',
                   onPressed: () => context.go("/main/menu/medical-record"),
                 ),
-                _buildServiceCard(
-                  context,
-                  'Find Hospitals',
-                  Icons.local_hospital_outlined,
-                  const Color(0xFF172B4D),
-                  'Locate hospitals and clinics near you',
+                HealthServiceCard(
+                  title: LocaleKeys.findHospitals,
+                  icon: Icons.local_hospital_outlined,
+                  color: const Color(0xFF172B4D),
+                  description: 'Locate hospitals and clinics near you',
                   onPressed: () => context.go("/main/menu/health-location"),
                 ),
               ]),
@@ -130,45 +125,39 @@ class _HomePageState extends State<HomePage> {
                 crossAxisCount: 3,
                 mainAxisSpacing: 8.0,
                 crossAxisSpacing: 8.0,
-                childAspectRatio: 1.25,
+                childAspectRatio: 1,
               ),
               delegate: SliverChildListDelegate([
-                _buildCompactServiceCard(
-                  context,
-                  'Insurance',
-                  Icons.shield_outlined,
-                  const Color(0xFF0052CC),
+                HealthServiceCompactCard(
+                  title: LocaleKeys.insurance,
+                  icon: Icons.shield_outlined,
+                  color: const Color(0xFF0052CC),
                 ),
-                _buildCompactServiceCard(
-                  context,
-                  'Telemedicine',
-                  Icons.phone_in_talk,
-                  const Color(0xFF00875A),
+                HealthServiceCompactCard(
+                  title: LocaleKeys.telemedicine,
+                  icon: Icons.phone_in_talk,
+                  color: const Color(0xFF00875A),
                 ),
-                _buildCompactServiceCard(
-                  context,
-                  'Vaccination',
-                  Icons.vaccines,
-                  const Color(0xFF6554C0),
+                HealthServiceCompactCard(
+                  title: LocaleKeys.vaccination,
+                  icon: Icons.vaccines,
+                  color: const Color(0xFF6554C0),
                 ),
-                _buildCompactServiceCard(
-                  context,
-                  'Blood Donation',
-                  Icons.bloodtype,
-                  const Color(0xFFDE350B),
+                HealthServiceCompactCard(
+                  title: LocaleKeys.bloodDonation,
+                  icon: Icons.bloodtype,
+                  color: const Color(0xFFDE350B),
                 ),
-                _buildCompactServiceCard(
-                  context,
-                  'Ambulance',
-                  Icons.emergency,
-                  const Color(0xFFFF5630),
+                HealthServiceCompactCard(
+                  title: LocaleKeys.ambulance_ambulance,
+                  icon: Icons.emergency,
+                  color: const Color(0xFFFF5630),
                   onPressed: () => context.go('/main/menu/ambulance'),
                 ),
-                _buildCompactServiceCard(
-                  context,
-                  'Health Tips',
-                  Icons.health_and_safety_outlined,
-                  const Color(0xFF172B4D),
+                HealthServiceCompactCard(
+                  title: LocaleKeys.healthTips,
+                  icon: Icons.health_and_safety_outlined,
+                  color: const Color(0xFF172B4D),
                 ),
               ]),
             ),
@@ -184,13 +173,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildProfileCard() {
     return Card(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       child: Column(
         children: [
           Row(
             children: [
               Avatar(
-                initials: Avatar.getInitials('Atish Shakya'),
+                initials: Avatar.getInitials(pocketBaseDB.authStore.record!.data['name'] ?? 'User'),
                 size: 60,
                 badge: const AvatarBadge(
                   size: 16,
@@ -205,21 +194,25 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       children: [
                         Text(
-                          'Atish Shakya',
+                          pocketBaseDB.authStore.record!.data['name'] ?? 'User',
                           style: TextStyle(
                             color: Colors.gray[800],
                           ),
                         ).textLarge(),
                         const Gap(8),
                         Chip(
-                          child: Text('Male').xSmall().bold(),
+                          child: Text(
+                            pocketBaseDB.authStore.record!.data['gender'] ?? 'Unknown',
+                          ).xSmall().bold(),
                         )
                       ],
                     ),
                     const Gap(6),
+                    _buildInfoRow('Username', pocketBaseDB.authStore.record!.data['username'] ?? 'Unknown'),
                     _buildInfoRow('Health ID', 'xx12345xx'),
-                    _buildInfoRow('Date of Birth', '2025-03-05'),
-                    _buildInfoRow('Mobile No', '+977'),
+                    _buildInfoRow('Date of Birth',
+                        DateFormat('yyyy-MM-dd').format(DateTime.parse(pocketBaseDB.authStore.record?.data['dateOfBirth']))),
+                    _buildInfoRow('Mobile No', pocketBaseDB.authStore.record!.data['phoneNumber'].toString() ?? '+977-1234567890'),
                   ],
                 ),
               ),
@@ -250,7 +243,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildProfileActionButton(String label, IconData icon, Color color) {
     return Button.text(
-      leading: Icon(icon),
+      leading: Icon(icon).iconSmall(),
       child: Text(context.tr(label)).xSmall(),
       // icon: Icon(icon),
       onPressed: () {},
@@ -350,14 +343,14 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               Gap(12),
-              Text(
-                description,
-                style: TextStyle(
-                  color: Colors.gray[800],
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ).small(),
+              SizedBox(
+                height: 42,
+                child: Text(
+                  description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ).light().small(),
+              ),
               Gap(12),
               Align(
                 alignment: Alignment.centerRight,
@@ -478,57 +471,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     ).withPadding(bottom: 6);
-  }
-
-  Widget _buildServiceCard(BuildContext context, String title, IconData icon, Color color, String description, {VoidCallback? onPressed}) {
-    return Button.card(
-      onPressed: onPressed,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: color,
-            size: 32,
-          ),
-          Gap(12),
-          Text(
-            title,
-          ).bold().textCenter(),
-          Gap(4),
-          Text(
-            description,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ).xSmall().light().textCenter(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCompactServiceCard(BuildContext context, String title, IconData icon, Color color, {VoidCallback? onPressed}) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(6),
-          decoration: BoxDecoration(
-            color: color.withValues(alpha: 0.1),
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            icon,
-            color: color,
-            size: 32,
-          ),
-        ),
-        const Gap(12),
-        Text(
-          title,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ).xSmall().semiBold().textCenter(),
-      ],
-    );
   }
 }

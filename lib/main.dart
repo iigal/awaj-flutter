@@ -1,11 +1,16 @@
 import 'dart:io';
 
 import 'package:awaj/core/router.dart';
-import 'package:awaj/features/auth/providers/auth_provider.dart';
+import 'package:awaj/firebase_options.dart';
+import 'package:awaj/local_notification.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as rp;
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -29,7 +34,21 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(); // Needed if you use Firebase inside this handler
+  print('Handling a background message: ${message.data.toString()}');
+}
+
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.dark,
+    ),
+  );
+
   // try {
   //   final fcmToken = await FirebaseMessaging.instance
   //       .getToken(vapidKey: "BIanhKtM9gHiIpL-VwNr7ZGFnsKLaUqhH5zF1jWURvQ1Y6QonIgidqfRJVdCKdH5DEZG1XU3nwECWb2KBNyTFag");
@@ -42,21 +61,26 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   initializeDateFormatting('en_US', null);
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
-  // try {
-  //   final fcmToken = await FirebaseMessaging.instance
-  //       .getToken(vapidKey: "BErf2hhJL5tQxmxEN3S-nExK5myUxJLckGRx1HoKmXa6EpTtli0DnjPjsag2KVxEzgee3AGOzkUgVXmluFSRdrI");
-  //   print(fcmToken.toString());
-  // } catch (err) {
-  //   print(err.toString());
-  // }
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  try {
+    final fcmToken = await FirebaseMessaging.instance
+        .getToken(vapidKey: "BErf2hhJL5tQxmxEN3S-nExK5myUxJLckGRx1HoKmXa6EpTtli0DnjPjsag2KVxEzgee3AGOzkUgVXmluFSRdrI");
+    print(fcmToken.toString());
+  } catch (err) {
+    print(err.toString());
+  }
   HttpOverrides.global = MyHttpOverrides();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+  await FirebaseMessaging.instance.subscribeToTopic("all");
+  LocalNotificationService.initialize();
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('np', 'NP'), Locale('en', 'US')],
+      startLocale: Locale('np', 'NP'),
+      saveLocale: true,
       path: 'assets/translations', // <-- change the path of the translation files
       fallbackLocale: Locale('en', 'US'),
       child: const rp.ProviderScope(
@@ -88,44 +112,71 @@ class _AwajAppState extends State<AwajApp> {
 
     // Also handle any interaction when the app is in the background via a
     // Stream listener
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessageOpen);
+    FirebaseMessaging.onMessage.listen(_handleMessage);
+  }
+
+  void _handleMessageOpen(RemoteMessage message) {
+    print("Message Opened");
   }
 
   void _handleMessage(RemoteMessage message) {
-    print(message);
+    print(message.data.toString());
+
+    print(message.messageType);
+
+    if (message.data.isNotEmpty) {
+      final title = message.notification?.title ?? 'No Title';
+      final body = message.notification?.body ?? 'No Body';
+      LocalNotificationService.showNotification(title, body);
+    }
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // setupInteractedMessage();
+    _requestNotificationPermission().then((value) {
+      if (value) {
+        print("Notification Permission Granted");
+        setupInteractedMessage();
+      } else {
+        print("Notification Permission Denied");
+      }
+    }).catchError((error) {
+      print("Error requesting notification permission: $error");
+    });
   }
 
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    context.setLocale(Locale('np', 'NP'));
+  }
+
+  // Request permission for notifications
+  Future<bool> _requestNotificationPermission() async {
+    final status = await Permission.notification.request();
+    if (status.isGranted) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return rp.Consumer(builder: (context, ref, _) {
-      ref.watch(authProviderProvider);
-      return ShadcnApp.router(
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        title: 'Awaj Mobile',
-        theme: ThemeData(
-          colorScheme: ColorSchemes.lightBlue(),
-          scaling: ref.watch(globalAppScaleNotifierProvider),
-          radius: 0.35,
-        ),
-        // Define named routes
-        routerConfig: gorouter,
-      );
-    });
+    return ShadcnApp.router(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      title: 'Awaj Mobile',
+      theme: ThemeData(
+        colorScheme: ColorSchemes.lightBlue(),
+        radius: 0.15,
+      ),
+      // Define named routes
+      routerConfig: gorouter,
+    );
   }
 }
