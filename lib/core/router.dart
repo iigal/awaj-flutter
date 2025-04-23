@@ -1,7 +1,5 @@
 import 'package:awaj/db.dart';
-import 'package:awaj/features/complaints/models/complaints_categories_model.dart';
-import 'package:awaj/features/complaints/presentation/complaint_detail_page.dart';
-import 'package:awaj/features/home/home.dart';
+
 import 'package:awaj/features/main/ambulance/main_ambulance.dart';
 import 'package:awaj/features/main/health_information/government_announcement.dart';
 import 'package:awaj/features/main/health_information/health_information.dart';

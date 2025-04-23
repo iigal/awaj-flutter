@@ -1,8 +1,8 @@
 import 'package:awaj/components/scaffold_wrapper.dart';
 import 'package:awaj/core/extensions.dart';
-import 'package:awaj/features/complaints/presentation/complaint_page.dart';
 import 'package:awaj/features/home/providers/home_provider.dart';
 import 'package:awaj/features/introductions/introduction_page.dart';
+import 'package:awaj/features/main/complaints/presentation/complaint_page.dart';
 import 'package:awaj/features/settings/settings_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';

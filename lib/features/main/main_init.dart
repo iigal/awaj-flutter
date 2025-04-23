@@ -15,6 +15,7 @@ class MainInitPage extends StatelessWidget {
         // Logo Section
         AppBarWidget(
             hasActionButton: false,
+            showServerConfiguration: true,
             leading: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),

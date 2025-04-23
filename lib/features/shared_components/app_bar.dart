@@ -1,6 +1,8 @@
+import 'package:awaj/db.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pocketbase_server_flutter/pocketbase_server_flutter.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 class AppBarWidget extends ConsumerWidget {
@@ -8,12 +10,19 @@ class AppBarWidget extends ConsumerWidget {
   final List<Widget>? leading;
   final bool hasBackButton;
   final bool hasActionButton;
-  const AppBarWidget({super.key, this.hasBackButton = false, this.hasActionButton = true, this.leading, this.title = ""});
+  final bool showServerConfiguration;
+  const AppBarWidget(
+      {super.key,
+      this.showServerConfiguration = false,
+      this.hasBackButton = false,
+      this.hasActionButton = true,
+      this.leading,
+      this.title = ""});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
-        height: 38,
+        height: 42,
         trailingGap: 0,
         leading: hasBackButton
             ? [
@@ -60,6 +69,69 @@ class AppBarWidget extends ConsumerWidget {
             },
             // tooltip: 'Change Language',
           ),
+          if (showServerConfiguration)
+            FutureBuilder<bool?>(
+                future: PocketbaseServerFlutter.isRunning,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+                  return IconButton.ghost(
+                    icon: Icon(
+                      Icons.sync,
+                      color: (snapshot.data == null) ? Colors.yellow : (snapshot.data! ? Colors.green : Colors.red),
+                    ),
+                    onPressed: () {
+                      openDrawer(
+                        context: context,
+                        useSafeArea: false,
+                        builder: (context) {
+                          return SizedBox(
+                            height: 320,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("IP Address: $mobilePocketbase"),
+                                  Text("Status: ${snapshot.data == null ? "Unknown" : (snapshot.data! ? "Running" : "Stopped")}"),
+                                  Text("Port: 8090"),
+                                  Text("Data Path: $mobilePocketbase/pb_data"),
+                                  Text("Static Path: $mobilePocketbase/pb_static"),
+                                  Text("Hooks Path: $mobilePocketbase/pb_hooks"),
+                                  Gap(16),
+                                  Row(
+                                    children: [
+                                      Button.primary(
+                                          child: Text("Start"),
+                                          onPressed: () async {
+                                            await setupPocketBase();
+                                            closeDrawer(context);
+                                          }),
+                                      Gap(12),
+                                      Button.destructive(
+                                          child: Text("Stop"),
+                                          onPressed: () async {
+                                            try {
+                                              await PocketbaseServerFlutter.stop();
+                                            } catch (err) {
+                                              print(err.toString());
+                                            }
+                                            closeDrawer(context);
+                                          }),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        position: OverlayPosition.bottom,
+                      );
+                    },
+                    // tooltip: 'Change Language',
+                  );
+                }),
           if (hasActionButton)
             Stack(
               children: [

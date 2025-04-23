@@ -1,12 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 import 'package:awaj/db.dart';
-import 'package:awaj/features/main/app_bar.dart';
 import 'package:awaj/features/main/health_information/models/government_announcement_model.dart';
 import 'package:awaj/features/shared_components/app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
@@ -254,7 +251,6 @@ class AnnouncementDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      headers: [AppBarComponent()],
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(

@@ -124,48 +124,6 @@ class LoginPage extends StatelessWidget {
     }
   }
 
-  Future<void> submitLogin(BuildContext context, Map<FormKey<dynamic>, dynamic> values) async {
-    try {
-      RecordAuth recordAuth = await pocketBaseDB.collection('users').authWithPassword(
-            values[_userNameKey],
-            values[_passwordKey],
-          );
-
-      pocketBaseDB.authStore.save(recordAuth.token, recordAuth.record);
-      await saveCredentials(
-        values[_userNameKey],
-        values[_passwordKey],
-      );
-      if (context.mounted) {
-        context.go("/main/menu");
-      }
-    } on ClientException catch (err, _) {
-      String errorText = "Something Went Wrong!";
-      if (err.statusCode == 403) {
-        errorText = err.response['message'] ?? "Invalid Credentials";
-      }
-      if (context.mounted) {
-        showToast(
-          context: context,
-          builder: (context, overlay) {
-            return SurfaceCard(
-              child: Basic(
-                title: Text(errorText),
-                trailing: PrimaryButton(
-                    size: ButtonSize.small,
-                    onPressed: () {
-                      overlay.close();
-                    },
-                    child: const Text('cancel')),
-                trailingAlignment: Alignment.center,
-              ),
-            );
-          },
-        );
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,6 +132,7 @@ class LoginPage extends StatelessWidget {
         AppBarWidget(
           hasBackButton: true,
           hasActionButton: false,
+          showServerConfiguration: true,
           leading: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
@@ -188,7 +147,47 @@ class LoginPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Form(
-          onSubmit: submitLogin,
+          onSubmit: (context, values) async {
+            try {
+              RecordAuth recordAuth = await pocketBaseDB.collection('users').authWithPassword(
+                    values[_userNameKey],
+                    values[_passwordKey],
+                  );
+
+              pocketBaseDB.authStore.save(recordAuth.token, recordAuth.record);
+              await saveCredentials(
+                values[_userNameKey],
+                values[_passwordKey],
+              );
+              if (context.mounted) {
+                context.go("/main/menu");
+              }
+            } on ClientException catch (err, _) {
+              String errorText = "Something Went Wrong!";
+              if (err.statusCode == 403) {
+                errorText = err.response['message'] ?? "Invalid Credentials";
+              }
+              if (context.mounted) {
+                showToast(
+                  context: context,
+                  builder: (context, overlay) {
+                    return SurfaceCard(
+                      child: Basic(
+                        title: Text(errorText),
+                        trailing: PrimaryButton(
+                            size: ButtonSize.small,
+                            onPressed: () {
+                              overlay.close();
+                            },
+                            child: const Text('cancel')),
+                        trailingAlignment: Alignment.center,
+                      ),
+                    );
+                  },
+                );
+              }
+            }
+          },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

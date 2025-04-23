@@ -26,6 +26,7 @@ class _RegisterIdentityPageState extends State<RegisterIdentityPage> {
         AppBarWidget(
           hasBackButton: true,
           hasActionButton: false,
+          showServerConfiguration: true,
           leading: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
