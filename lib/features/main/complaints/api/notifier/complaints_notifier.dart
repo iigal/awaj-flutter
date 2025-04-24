@@ -27,7 +27,7 @@ class ComplaintsCountNotifier extends _$ComplaintsCountNotifier {
 @riverpod
 class ComplaintsCommentNotifier extends _$ComplaintsCommentNotifier {
   @override
-  FutureOr<List<ComplaintsComment>> build(int id) {
+  FutureOr<List<ComplaintsComment>> build(String id) {
     var data = ref.watch(complaintsRepositoryProvider).getComplaintComments(id);
     return data;
   }

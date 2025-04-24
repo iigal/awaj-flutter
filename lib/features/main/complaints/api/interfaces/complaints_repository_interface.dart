@@ -7,6 +7,6 @@ abstract class ComplaintsRepositoryInterface {
   Future<List<Complaints>> getAllComplaints(ComplaintTableState filter);
   Future<void> registerComplaint(ComplaintsRequest complaint);
   Future<void> registerComplaintWithImages(ComplaintsRequest complaint);
-  Future<List<ComplaintsComment>> getComplaintComments(int id);
+  Future<List<ComplaintsComment>> getComplaintComments(String id);
   Future<void> registerComplaintComments(ComplaintCommentRequest request);
 }

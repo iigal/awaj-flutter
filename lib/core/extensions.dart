@@ -28,9 +28,6 @@ Widget showProgressStatusBadge(String status) {
 void bottomSheetBuilder(BuildContext context, Widget child) {
   openDrawer(
     context: context,
-    expands: true,
-    draggable: true,
-    useSafeArea: true,
     builder: (BuildContext context) => child,
     position: OverlayPosition.bottom,
   );

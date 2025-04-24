@@ -77,65 +77,65 @@ class _ComplaintTableState extends ConsumerState<ComplaintTable> {
               }
               return RefreshTrigger(
                 minExtent: 100,
-                maxExtent: 250,
+                maxExtent: 200,
                 onRefresh: () async {
                   ref.invalidate(complaintsNotifierProvider);
                 },
-                child: ListView.builder(
+                child: ListView.separated(
+                  padding: const EdgeInsets.only(top: 18),
                   itemCount: data.length,
+                  separatorBuilder: (context, index) => const Gap(12),
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () => context.goNamed("complaint-detail", extra: data[index]),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Card(
-                          padding: const EdgeInsets.all(12),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CreatedAtDateWidget(
-                                date: data[index].createdAt,
-                              ),
-                              const Gap(16),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      data[index].title,
-                                    ).semiBold().large(),
-                                    const Gap(6),
-                                    Text(
-                                      data[index].description,
-                                    ),
-                                    const Gap(6),
-                                    showProgressStatusBadge(data[index].status),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Progress(
-                                            progress: data[index].progress / 100,
-                                            color: Colors.orange,
-                                          ),
+                      child: Card(
+                        padding: const EdgeInsets.all(12),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CreatedAtDateWidget(
+                              date: data[index].created.toLocal(),
+                            ),
+                            const Gap(16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data[index].title,
+                                  ).semiBold(),
+                                  const Gap(6),
+                                  Text(
+                                    data[index].description,
+                                  ).small(),
+                                  const Gap(6),
+                                  showProgressStatusBadge("unknown"),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Progress(
+                                          progress: data[index].progress / 100,
+                                          color: Colors.orange,
                                         ),
-                                        const Gap(8),
-                                        Text("${data[index].progress}%"),
-                                      ],
-                                    ),
-                                    const Gap(6),
-                                    Row(
-                                      children: [
-                                        const Icon(Icons.access_time_outlined),
-                                        Text(
-                                          timeago.format(data[index].updatedAt),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                      const Gap(8),
+                                      Text("${data[index].progress}%").small(),
+                                    ],
+                                  ),
+                                  const Gap(6),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.access_time_outlined).iconSmall(),
+                                      Gap(8),
+                                      Text(
+                                        timeago.format(data[index].updated),
+                                      ).xSmall(),
+                                    ],
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     );

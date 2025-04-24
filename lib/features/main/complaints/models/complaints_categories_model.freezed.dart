@@ -584,19 +584,32 @@ Complaints _$ComplaintsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Complaints {
-  int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "collectionId")
+  String get collectionId => throw _privateConstructorUsedError;
+  @JsonKey(name: "collectionName")
+  String get collectionName => throw _privateConstructorUsedError;
+  @JsonKey(name: "id")
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "title")
   String get title => throw _privateConstructorUsedError;
+  @JsonKey(name: "description")
   String get description => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: [])
+  @JsonKey(name: "images")
   List<String>? get images => throw _privateConstructorUsedError;
-  int get userId => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
-  int get progress => throw _privateConstructorUsedError;
-  int? get isPublished => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
-  List<Categories> get categories => throw _privateConstructorUsedError;
-  List<Categories>? get subcategories => throw _privateConstructorUsedError;
+  @JsonKey(name: "complaintBy")
+  String? get complaintBy => throw _privateConstructorUsedError;
+  @JsonKey(name: "complaintSubCateogryId")
+  String? get complaintSubCateogryId => throw _privateConstructorUsedError;
+  @JsonKey(name: "complaintCategoryId")
+  String? get complaintCategoryId => throw _privateConstructorUsedError;
+  @JsonKey(name: "progress", defaultValue: 0.0)
+  double get progress => throw _privateConstructorUsedError;
+  @JsonKey(name: "status")
+  String? get status => throw _privateConstructorUsedError;
+  @JsonKey(name: "created")
+  DateTime get created => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated")
+  DateTime get updated => throw _privateConstructorUsedError;
 
   /// Serializes this Complaints to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -615,18 +628,19 @@ abstract class $ComplaintsCopyWith<$Res> {
       _$ComplaintsCopyWithImpl<$Res, Complaints>;
   @useResult
   $Res call(
-      {int id,
-      String title,
-      String description,
-      @JsonKey(defaultValue: []) List<String>? images,
-      int userId,
-      String status,
-      int progress,
-      int? isPublished,
-      DateTime createdAt,
-      DateTime updatedAt,
-      List<Categories> categories,
-      List<Categories>? subcategories});
+      {@JsonKey(name: "collectionId") String collectionId,
+      @JsonKey(name: "collectionName") String collectionName,
+      @JsonKey(name: "id") String id,
+      @JsonKey(name: "title") String title,
+      @JsonKey(name: "description") String description,
+      @JsonKey(name: "images") List<String>? images,
+      @JsonKey(name: "complaintBy") String? complaintBy,
+      @JsonKey(name: "complaintSubCateogryId") String? complaintSubCateogryId,
+      @JsonKey(name: "complaintCategoryId") String? complaintCategoryId,
+      @JsonKey(name: "progress", defaultValue: 0.0) double progress,
+      @JsonKey(name: "status") String? status,
+      @JsonKey(name: "created") DateTime created,
+      @JsonKey(name: "updated") DateTime updated});
 }
 
 /// @nodoc
@@ -644,24 +658,33 @@ class _$ComplaintsCopyWithImpl<$Res, $Val extends Complaints>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? collectionId = null,
+    Object? collectionName = null,
     Object? id = null,
     Object? title = null,
     Object? description = null,
     Object? images = freezed,
-    Object? userId = null,
-    Object? status = null,
+    Object? complaintBy = freezed,
+    Object? complaintSubCateogryId = freezed,
+    Object? complaintCategoryId = freezed,
     Object? progress = null,
-    Object? isPublished = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? categories = null,
-    Object? subcategories = freezed,
+    Object? status = freezed,
+    Object? created = null,
+    Object? updated = null,
   }) {
     return _then(_value.copyWith(
+      collectionId: null == collectionId
+          ? _value.collectionId
+          : collectionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      collectionName: null == collectionName
+          ? _value.collectionName
+          : collectionName // ignore: cast_nullable_to_non_nullable
+              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -674,38 +697,34 @@ class _$ComplaintsCopyWithImpl<$Res, $Val extends Complaints>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
+      complaintBy: freezed == complaintBy
+          ? _value.complaintBy
+          : complaintBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      complaintSubCateogryId: freezed == complaintSubCateogryId
+          ? _value.complaintSubCateogryId
+          : complaintSubCateogryId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      complaintCategoryId: freezed == complaintCategoryId
+          ? _value.complaintCategoryId
+          : complaintCategoryId // ignore: cast_nullable_to_non_nullable
+              as String?,
       progress: null == progress
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
-              as int,
-      isPublished: freezed == isPublished
-          ? _value.isPublished
-          : isPublished // ignore: cast_nullable_to_non_nullable
-              as int?,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+              as double,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      updated: null == updated
+          ? _value.updated
+          : updated // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      categories: null == categories
-          ? _value.categories
-          : categories // ignore: cast_nullable_to_non_nullable
-              as List<Categories>,
-      subcategories: freezed == subcategories
-          ? _value.subcategories
-          : subcategories // ignore: cast_nullable_to_non_nullable
-              as List<Categories>?,
     ) as $Val);
   }
 }
@@ -719,18 +738,19 @@ abstract class _$$ComplaintsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      String title,
-      String description,
-      @JsonKey(defaultValue: []) List<String>? images,
-      int userId,
-      String status,
-      int progress,
-      int? isPublished,
-      DateTime createdAt,
-      DateTime updatedAt,
-      List<Categories> categories,
-      List<Categories>? subcategories});
+      {@JsonKey(name: "collectionId") String collectionId,
+      @JsonKey(name: "collectionName") String collectionName,
+      @JsonKey(name: "id") String id,
+      @JsonKey(name: "title") String title,
+      @JsonKey(name: "description") String description,
+      @JsonKey(name: "images") List<String>? images,
+      @JsonKey(name: "complaintBy") String? complaintBy,
+      @JsonKey(name: "complaintSubCateogryId") String? complaintSubCateogryId,
+      @JsonKey(name: "complaintCategoryId") String? complaintCategoryId,
+      @JsonKey(name: "progress", defaultValue: 0.0) double progress,
+      @JsonKey(name: "status") String? status,
+      @JsonKey(name: "created") DateTime created,
+      @JsonKey(name: "updated") DateTime updated});
 }
 
 /// @nodoc
@@ -746,24 +766,33 @@ class __$$ComplaintsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? collectionId = null,
+    Object? collectionName = null,
     Object? id = null,
     Object? title = null,
     Object? description = null,
     Object? images = freezed,
-    Object? userId = null,
-    Object? status = null,
+    Object? complaintBy = freezed,
+    Object? complaintSubCateogryId = freezed,
+    Object? complaintCategoryId = freezed,
     Object? progress = null,
-    Object? isPublished = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? categories = null,
-    Object? subcategories = freezed,
+    Object? status = freezed,
+    Object? created = null,
+    Object? updated = null,
   }) {
     return _then(_$ComplaintsImpl(
+      collectionId: null == collectionId
+          ? _value.collectionId
+          : collectionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      collectionName: null == collectionName
+          ? _value.collectionName
+          : collectionName // ignore: cast_nullable_to_non_nullable
+              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -776,75 +805,78 @@ class __$$ComplaintsImplCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
+      complaintBy: freezed == complaintBy
+          ? _value.complaintBy
+          : complaintBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      complaintSubCateogryId: freezed == complaintSubCateogryId
+          ? _value.complaintSubCateogryId
+          : complaintSubCateogryId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      complaintCategoryId: freezed == complaintCategoryId
+          ? _value.complaintCategoryId
+          : complaintCategoryId // ignore: cast_nullable_to_non_nullable
+              as String?,
       progress: null == progress
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
-              as int,
-      isPublished: freezed == isPublished
-          ? _value.isPublished
-          : isPublished // ignore: cast_nullable_to_non_nullable
-              as int?,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+              as double,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      updated: null == updated
+          ? _value.updated
+          : updated // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      categories: null == categories
-          ? _value._categories
-          : categories // ignore: cast_nullable_to_non_nullable
-              as List<Categories>,
-      subcategories: freezed == subcategories
-          ? _value._subcategories
-          : subcategories // ignore: cast_nullable_to_non_nullable
-              as List<Categories>?,
     ));
   }
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$ComplaintsImpl implements _Complaints {
   const _$ComplaintsImpl(
-      {required this.id,
-      required this.title,
-      required this.description,
-      @JsonKey(defaultValue: []) final List<String>? images,
-      required this.userId,
-      required this.status,
-      required this.progress,
-      this.isPublished,
-      required this.createdAt,
-      required this.updatedAt,
-      required final List<Categories> categories,
-      final List<Categories>? subcategories})
-      : _images = images,
-        _categories = categories,
-        _subcategories = subcategories;
+      {@JsonKey(name: "collectionId") required this.collectionId,
+      @JsonKey(name: "collectionName") required this.collectionName,
+      @JsonKey(name: "id") required this.id,
+      @JsonKey(name: "title") required this.title,
+      @JsonKey(name: "description") required this.description,
+      @JsonKey(name: "images") final List<String>? images,
+      @JsonKey(name: "complaintBy") this.complaintBy,
+      @JsonKey(name: "complaintSubCateogryId") this.complaintSubCateogryId,
+      @JsonKey(name: "complaintCategoryId") this.complaintCategoryId,
+      @JsonKey(name: "progress", defaultValue: 0.0) required this.progress,
+      @JsonKey(name: "status") this.status,
+      @JsonKey(name: "created") required this.created,
+      @JsonKey(name: "updated") required this.updated})
+      : _images = images;
 
   factory _$ComplaintsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ComplaintsImplFromJson(json);
 
   @override
-  final int id;
+  @JsonKey(name: "collectionId")
+  final String collectionId;
   @override
+  @JsonKey(name: "collectionName")
+  final String collectionName;
+  @override
+  @JsonKey(name: "id")
+  final String id;
+  @override
+  @JsonKey(name: "title")
   final String title;
   @override
+  @JsonKey(name: "description")
   final String description;
   final List<String>? _images;
   @override
-  @JsonKey(defaultValue: [])
+  @JsonKey(name: "images")
   List<String>? get images {
     final value = _images;
     if (value == null) return null;
@@ -854,38 +886,30 @@ class _$ComplaintsImpl implements _Complaints {
   }
 
   @override
-  final int userId;
+  @JsonKey(name: "complaintBy")
+  final String? complaintBy;
   @override
-  final String status;
+  @JsonKey(name: "complaintSubCateogryId")
+  final String? complaintSubCateogryId;
   @override
-  final int progress;
+  @JsonKey(name: "complaintCategoryId")
+  final String? complaintCategoryId;
   @override
-  final int? isPublished;
+  @JsonKey(name: "progress", defaultValue: 0.0)
+  final double progress;
   @override
-  final DateTime createdAt;
+  @JsonKey(name: "status")
+  final String? status;
   @override
-  final DateTime updatedAt;
-  final List<Categories> _categories;
+  @JsonKey(name: "created")
+  final DateTime created;
   @override
-  List<Categories> get categories {
-    if (_categories is EqualUnmodifiableListView) return _categories;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_categories);
-  }
-
-  final List<Categories>? _subcategories;
-  @override
-  List<Categories>? get subcategories {
-    final value = _subcategories;
-    if (value == null) return null;
-    if (_subcategories is EqualUnmodifiableListView) return _subcategories;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  @JsonKey(name: "updated")
+  final DateTime updated;
 
   @override
   String toString() {
-    return 'Complaints(id: $id, title: $title, description: $description, images: $images, userId: $userId, status: $status, progress: $progress, isPublished: $isPublished, createdAt: $createdAt, updatedAt: $updatedAt, categories: $categories, subcategories: $subcategories)';
+    return 'Complaints(collectionId: $collectionId, collectionName: $collectionName, id: $id, title: $title, description: $description, images: $images, complaintBy: $complaintBy, complaintSubCateogryId: $complaintSubCateogryId, complaintCategoryId: $complaintCategoryId, progress: $progress, status: $status, created: $created, updated: $updated)';
   }
 
   @override
@@ -893,43 +917,45 @@ class _$ComplaintsImpl implements _Complaints {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ComplaintsImpl &&
+            (identical(other.collectionId, collectionId) ||
+                other.collectionId == collectionId) &&
+            (identical(other.collectionName, collectionName) ||
+                other.collectionName == collectionName) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.status, status) || other.status == status) &&
+            (identical(other.complaintBy, complaintBy) ||
+                other.complaintBy == complaintBy) &&
+            (identical(other.complaintSubCateogryId, complaintSubCateogryId) ||
+                other.complaintSubCateogryId == complaintSubCateogryId) &&
+            (identical(other.complaintCategoryId, complaintCategoryId) ||
+                other.complaintCategoryId == complaintCategoryId) &&
             (identical(other.progress, progress) ||
                 other.progress == progress) &&
-            (identical(other.isPublished, isPublished) ||
-                other.isPublished == isPublished) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            const DeepCollectionEquality()
-                .equals(other._categories, _categories) &&
-            const DeepCollectionEquality()
-                .equals(other._subcategories, _subcategories));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.created, created) || other.created == created) &&
+            (identical(other.updated, updated) || other.updated == updated));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      collectionId,
+      collectionName,
       id,
       title,
       description,
       const DeepCollectionEquality().hash(_images),
-      userId,
-      status,
+      complaintBy,
+      complaintSubCateogryId,
+      complaintCategoryId,
       progress,
-      isPublished,
-      createdAt,
-      updatedAt,
-      const DeepCollectionEquality().hash(_categories),
-      const DeepCollectionEquality().hash(_subcategories));
+      status,
+      created,
+      updated);
 
   /// Create a copy of Complaints
   /// with the given fields replaced by the non-null parameter values.
@@ -949,47 +975,65 @@ class _$ComplaintsImpl implements _Complaints {
 
 abstract class _Complaints implements Complaints {
   const factory _Complaints(
-      {required final int id,
-      required final String title,
-      required final String description,
-      @JsonKey(defaultValue: []) final List<String>? images,
-      required final int userId,
-      required final String status,
-      required final int progress,
-      final int? isPublished,
-      required final DateTime createdAt,
-      required final DateTime updatedAt,
-      required final List<Categories> categories,
-      final List<Categories>? subcategories}) = _$ComplaintsImpl;
+      {@JsonKey(name: "collectionId") required final String collectionId,
+      @JsonKey(name: "collectionName") required final String collectionName,
+      @JsonKey(name: "id") required final String id,
+      @JsonKey(name: "title") required final String title,
+      @JsonKey(name: "description") required final String description,
+      @JsonKey(name: "images") final List<String>? images,
+      @JsonKey(name: "complaintBy") final String? complaintBy,
+      @JsonKey(name: "complaintSubCateogryId")
+      final String? complaintSubCateogryId,
+      @JsonKey(name: "complaintCategoryId") final String? complaintCategoryId,
+      @JsonKey(name: "progress", defaultValue: 0.0)
+      required final double progress,
+      @JsonKey(name: "status") final String? status,
+      @JsonKey(name: "created") required final DateTime created,
+      @JsonKey(name: "updated")
+      required final DateTime updated}) = _$ComplaintsImpl;
 
   factory _Complaints.fromJson(Map<String, dynamic> json) =
       _$ComplaintsImpl.fromJson;
 
   @override
-  int get id;
+  @JsonKey(name: "collectionId")
+  String get collectionId;
   @override
+  @JsonKey(name: "collectionName")
+  String get collectionName;
+  @override
+  @JsonKey(name: "id")
+  String get id;
+  @override
+  @JsonKey(name: "title")
   String get title;
   @override
+  @JsonKey(name: "description")
   String get description;
   @override
-  @JsonKey(defaultValue: [])
+  @JsonKey(name: "images")
   List<String>? get images;
   @override
-  int get userId;
+  @JsonKey(name: "complaintBy")
+  String? get complaintBy;
   @override
-  String get status;
+  @JsonKey(name: "complaintSubCateogryId")
+  String? get complaintSubCateogryId;
   @override
-  int get progress;
+  @JsonKey(name: "complaintCategoryId")
+  String? get complaintCategoryId;
   @override
-  int? get isPublished;
+  @JsonKey(name: "progress", defaultValue: 0.0)
+  double get progress;
   @override
-  DateTime get createdAt;
+  @JsonKey(name: "status")
+  String? get status;
   @override
-  DateTime get updatedAt;
+  @JsonKey(name: "created")
+  DateTime get created;
   @override
-  List<Categories> get categories;
-  @override
-  List<Categories>? get subcategories;
+  @JsonKey(name: "updated")
+  DateTime get updated;
 
   /// Create a copy of Complaints
   /// with the given fields replaced by the non-null parameter values.
@@ -1309,9 +1353,9 @@ ComplaintCommentRequest _$ComplaintCommentRequestFromJson(
 /// @nodoc
 mixin _$ComplaintCommentRequest {
   String get message => throw _privateConstructorUsedError;
-  int? get userId => throw _privateConstructorUsedError;
-  int? get parentId => throw _privateConstructorUsedError;
-  int get issueId => throw _privateConstructorUsedError;
+  String get commentBy => throw _privateConstructorUsedError;
+  String? get parentId => throw _privateConstructorUsedError;
+  String get complaintId => throw _privateConstructorUsedError;
 
   /// Serializes this ComplaintCommentRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1329,7 +1373,8 @@ abstract class $ComplaintCommentRequestCopyWith<$Res> {
           $Res Function(ComplaintCommentRequest) then) =
       _$ComplaintCommentRequestCopyWithImpl<$Res, ComplaintCommentRequest>;
   @useResult
-  $Res call({String message, int? userId, int? parentId, int issueId});
+  $Res call(
+      {String message, String commentBy, String? parentId, String complaintId});
 }
 
 /// @nodoc
@@ -1349,27 +1394,27 @@ class _$ComplaintCommentRequestCopyWithImpl<$Res,
   @override
   $Res call({
     Object? message = null,
-    Object? userId = freezed,
+    Object? commentBy = null,
     Object? parentId = freezed,
-    Object? issueId = null,
+    Object? complaintId = null,
   }) {
     return _then(_value.copyWith(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
+      commentBy: null == commentBy
+          ? _value.commentBy
+          : commentBy // ignore: cast_nullable_to_non_nullable
+              as String,
       parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      issueId: null == issueId
-          ? _value.issueId
-          : issueId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String?,
+      complaintId: null == complaintId
+          ? _value.complaintId
+          : complaintId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -1383,7 +1428,8 @@ abstract class _$$ComplaintCommentRequestImplCopyWith<$Res>
       __$$ComplaintCommentRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message, int? userId, int? parentId, int issueId});
+  $Res call(
+      {String message, String commentBy, String? parentId, String complaintId});
 }
 
 /// @nodoc
@@ -1402,40 +1448,39 @@ class __$$ComplaintCommentRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
-    Object? userId = freezed,
+    Object? commentBy = null,
     Object? parentId = freezed,
-    Object? issueId = null,
+    Object? complaintId = null,
   }) {
     return _then(_$ComplaintCommentRequestImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
+      commentBy: null == commentBy
+          ? _value.commentBy
+          : commentBy // ignore: cast_nullable_to_non_nullable
+              as String,
       parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      issueId: null == issueId
-          ? _value.issueId
-          : issueId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String?,
+      complaintId: null == complaintId
+          ? _value.complaintId
+          : complaintId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$ComplaintCommentRequestImpl implements _ComplaintCommentRequest {
   const _$ComplaintCommentRequestImpl(
       {required this.message,
-      required this.userId,
+      required this.commentBy,
       this.parentId,
-      required this.issueId});
+      required this.complaintId});
 
   factory _$ComplaintCommentRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$ComplaintCommentRequestImplFromJson(json);
@@ -1443,15 +1488,15 @@ class _$ComplaintCommentRequestImpl implements _ComplaintCommentRequest {
   @override
   final String message;
   @override
-  final int? userId;
+  final String commentBy;
   @override
-  final int? parentId;
+  final String? parentId;
   @override
-  final int issueId;
+  final String complaintId;
 
   @override
   String toString() {
-    return 'ComplaintCommentRequest(message: $message, userId: $userId, parentId: $parentId, issueId: $issueId)';
+    return 'ComplaintCommentRequest(message: $message, commentBy: $commentBy, parentId: $parentId, complaintId: $complaintId)';
   }
 
   @override
@@ -1460,16 +1505,18 @@ class _$ComplaintCommentRequestImpl implements _ComplaintCommentRequest {
         (other.runtimeType == runtimeType &&
             other is _$ComplaintCommentRequestImpl &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.commentBy, commentBy) ||
+                other.commentBy == commentBy) &&
             (identical(other.parentId, parentId) ||
                 other.parentId == parentId) &&
-            (identical(other.issueId, issueId) || other.issueId == issueId));
+            (identical(other.complaintId, complaintId) ||
+                other.complaintId == complaintId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, message, userId, parentId, issueId);
+      Object.hash(runtimeType, message, commentBy, parentId, complaintId);
 
   /// Create a copy of ComplaintCommentRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -1491,9 +1538,9 @@ class _$ComplaintCommentRequestImpl implements _ComplaintCommentRequest {
 abstract class _ComplaintCommentRequest implements ComplaintCommentRequest {
   const factory _ComplaintCommentRequest(
       {required final String message,
-      required final int? userId,
-      final int? parentId,
-      required final int issueId}) = _$ComplaintCommentRequestImpl;
+      required final String commentBy,
+      final String? parentId,
+      required final String complaintId}) = _$ComplaintCommentRequestImpl;
 
   factory _ComplaintCommentRequest.fromJson(Map<String, dynamic> json) =
       _$ComplaintCommentRequestImpl.fromJson;
@@ -1501,11 +1548,11 @@ abstract class _ComplaintCommentRequest implements ComplaintCommentRequest {
   @override
   String get message;
   @override
-  int? get userId;
+  String get commentBy;
   @override
-  int? get parentId;
+  String? get parentId;
   @override
-  int get issueId;
+  String get complaintId;
 
   /// Create a copy of ComplaintCommentRequest
   /// with the given fields replaced by the non-null parameter values.

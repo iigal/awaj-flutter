@@ -34,20 +34,20 @@ class ComplaintsCount with _$ComplaintsCount {
 
 @freezed
 class Complaints with _$Complaints {
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory Complaints({
-    required int id,
-    required String title,
-    required String description,
-    @JsonKey(defaultValue: []) List<String>? images,
-    required int userId,
-    required String status,
-    required int progress,
-    int? isPublished,
-    required DateTime createdAt,
-    required DateTime updatedAt,
-    required List<Categories> categories,
-    List<Categories>? subcategories,
+    @JsonKey(name: "collectionId") required String collectionId,
+    @JsonKey(name: "collectionName") required String collectionName,
+    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "title") required String title,
+    @JsonKey(name: "description") required String description,
+    @JsonKey(name: "images") List<String>? images,
+    @JsonKey(name: "complaintBy") String? complaintBy,
+    @JsonKey(name: "complaintSubCateogryId") String? complaintSubCateogryId,
+    @JsonKey(name: "complaintCategoryId") String? complaintCategoryId,
+    @JsonKey(name: "progress", defaultValue: 0.0) required double progress,
+    @JsonKey(name: "status") String? status,
+    @JsonKey(name: "created") required DateTime created,
+    @JsonKey(name: "updated") required DateTime updated,
   }) = _Complaints;
 
   factory Complaints.fromJson(Map<String, dynamic> json) => _$ComplaintsFromJson(json);
@@ -71,12 +71,11 @@ class ComplaintsRequest with _$ComplaintsRequest {
 
 @freezed
 class ComplaintCommentRequest with _$ComplaintCommentRequest {
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory ComplaintCommentRequest({
     required String message,
-    required int? userId,
-    int? parentId,
-    required int issueId,
+    required String commentBy,
+    String? parentId,
+    required String complaintId,
   }) = _ComplaintCommentRequest;
 
   factory ComplaintCommentRequest.fromJson(Map<String, dynamic> json) => _$ComplaintCommentRequestFromJson(json);

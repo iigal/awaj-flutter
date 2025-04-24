@@ -1,6 +1,9 @@
 import 'package:awaj/db.dart';
 
 import 'package:awaj/features/main/ambulance/main_ambulance.dart';
+import 'package:awaj/features/main/complaints/models/complaints_categories_model.dart';
+import 'package:awaj/features/main/complaints/presentation/complaint_detail_page.dart';
+import 'package:awaj/features/main/complaints/presentation/complaint_page.dart';
 import 'package:awaj/features/main/health_information/government_announcement.dart';
 import 'package:awaj/features/main/health_information/health_information.dart';
 import 'package:awaj/features/main/health_information/models/government_announcement_model.dart';
@@ -149,11 +152,14 @@ final List<RouteBase> routes = [
               StatefulShellBranch(
                 navigatorKey: branchNavigatorKey04,
                 routes: [
-                  GoRoute(path: "/settings", builder: (context, state) => const SettingsMenu(), routes: [
+                  GoRoute(path: "/complaints", builder: (context, state) => const ComplaintPage(), routes: [
                     GoRoute(
-                        path: "display-setting",
-                        builder: (context, state) => AppWrapper(child: const SettingsAppDisplayMenu()),
-                        routes: []),
+                        path: "complaint-detail",
+                        name: "complaint-detail",
+                        builder: (context, state) {
+                          final complaint = state.extra as Complaints?;
+                          return ComplaintDetailPage(complaint: complaint);
+                        }),
                   ]),
                 ],
               ),

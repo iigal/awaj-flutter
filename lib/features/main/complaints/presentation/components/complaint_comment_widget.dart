@@ -1,3 +1,4 @@
+import 'package:awaj/db.dart';
 import 'package:awaj/features/main/complaints/api/complaints_repository.dart';
 import 'package:awaj/features/main/complaints/api/notifier/complaints_notifier.dart';
 import 'package:awaj/features/main/complaints/models/complaints_categories_model.dart';
@@ -5,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 class ComplaintCommentWidget extends ConsumerStatefulWidget {
-  final int complaintId;
-  final int? complaintCommentId;
+  final String complaintId;
+  final String? complaintCommentId;
 
   const ComplaintCommentWidget({super.key, required this.complaintId, this.complaintCommentId});
 
@@ -37,8 +38,8 @@ class _ComplaintCommentWidgetState extends ConsumerState<ComplaintCommentWidget>
     try {
       var complaintReq = ComplaintCommentRequest(
         message: values[_commentKey],
-        userId: 1,
-        issueId: widget.complaintId,
+        commentBy: pocketBaseDB.authStore.record!.id,
+        complaintId: widget.complaintId,
         parentId: widget.complaintCommentId,
       );
       await ref.read(complaintsRepositoryProvider).registerComplaintComments(complaintReq);

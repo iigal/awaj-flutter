@@ -9,6 +9,7 @@ import 'package:awaj/features/main/complaints/models/complaints_comment.dart';
 import 'package:awaj/features/main/complaints/presentation/state/complaint_table_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:pocketbase/pocketbase.dart';
 
 final complaintsRepositoryProvider = Provider<ComplaintsRepository>((ref) {
   return ComplaintsRepository();
@@ -29,13 +30,10 @@ class ComplaintsRepository implements ComplaintsRepositoryInterface {
 
   @override
   Future<List<Complaints>> getAllComplaints(ComplaintTableState filter) async {
-    http.Response response =
-        await http.get(Uri.parse("${BaseUrl.baseUrl}/issues?search_text=${filter.searchTerm}"), headers: {"Authorization": "$_token"});
-    var jsonResponse = json.decode(response.body);
-    ApiResponse responseJson = ApiResponse.fromJson(jsonResponse);
+    List<RecordModel> result = await pocketBaseDB.collection("complaints").getFullList();
     List<Complaints> issues = [];
-    for (int i = 0; i < responseJson.data.length; i++) {
-      issues.add(Complaints.fromJson(responseJson.data[i]));
+    for (int i = 0; i < result.length; i++) {
+      issues.add(Complaints.fromJson(result[i].toJson()));
     }
     return issues;
   }
@@ -55,27 +53,19 @@ class ComplaintsRepository implements ComplaintsRepositoryInterface {
   }
 
   @override
-  Future<List<ComplaintsComment>> getComplaintComments(int id) async {
-    http.Response response = await http.post(
-      Uri.parse("${BaseUrl.baseUrl}/issues/comments"),
-      body: json.encode({"issue_id": id}),
-      headers: {"content-type": "application/json"},
-    );
-    var jsonResponse = json.decode(response.body);
-    ApiResponse responseJson = ApiResponse.fromJson(jsonResponse);
+  Future<List<ComplaintsComment>> getComplaintComments(String id) async {
+    List<RecordModel> result = await pocketBaseDB.collection("complaintsComments").getFullList(
+          filter: "complaintId = '$id'",
+        );
     List<ComplaintsComment> comments = [];
-    for (int i = 0; i < responseJson.data.length; i++) {
-      comments.add(ComplaintsComment.fromJson(responseJson.data[i]));
+    for (int i = 0; i < result.length; i++) {
+      comments.add(ComplaintsComment.fromJson(result[i].data));
     }
     return comments;
   }
 
   @override
   Future<void> registerComplaintComments(ComplaintCommentRequest request) async {
-    await http.post(
-      Uri.parse("${BaseUrl.baseUrl}/issues/comments/create"),
-      body: json.encode(request.toJson()),
-      headers: {"content-type": "application/json"},
-    );
+    await pocketBaseDB.collection("complaintsComment").create(body: request.toJson());
   }
 }

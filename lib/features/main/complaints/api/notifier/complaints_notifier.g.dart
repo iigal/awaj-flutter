@@ -194,14 +194,14 @@ final complaintsCountNotifierProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$ComplaintsCountNotifier = AutoDisposeAsyncNotifier<ComplaintsCount>;
 String _$complaintsCommentNotifierHash() =>
-    r'94661a7e0fdcec5645fda2e12f85d7cb1146e5ac';
+    r'f4ff132cb769af2e38c6d1010b0614b7a3637a20';
 
 abstract class _$ComplaintsCommentNotifier
     extends BuildlessAutoDisposeAsyncNotifier<List<ComplaintsComment>> {
-  late final int id;
+  late final String id;
 
   FutureOr<List<ComplaintsComment>> build(
-    int id,
+    String id,
   );
 }
 
@@ -217,7 +217,7 @@ class ComplaintsCommentNotifierFamily
 
   /// See also [ComplaintsCommentNotifier].
   ComplaintsCommentNotifierProvider call(
-    int id,
+    String id,
   ) {
     return ComplaintsCommentNotifierProvider(
       id,
@@ -254,7 +254,7 @@ class ComplaintsCommentNotifierProvider
         List<ComplaintsComment>> {
   /// See also [ComplaintsCommentNotifier].
   ComplaintsCommentNotifierProvider(
-    int id,
+    String id,
   ) : this._internal(
           () => ComplaintsCommentNotifier()..id = id,
           from: complaintsCommentNotifierProvider,
@@ -279,7 +279,7 @@ class ComplaintsCommentNotifierProvider
     required this.id,
   }) : super.internal();
 
-  final int id;
+  final String id;
 
   @override
   FutureOr<List<ComplaintsComment>> runNotifierBuild(
@@ -331,7 +331,7 @@ class ComplaintsCommentNotifierProvider
 mixin ComplaintsCommentNotifierRef
     on AutoDisposeAsyncNotifierProviderRef<List<ComplaintsComment>> {
   /// The parameter `id` of this provider.
-  int get id;
+  String get id;
 }
 
 class _ComplaintsCommentNotifierProviderElement
@@ -340,7 +340,7 @@ class _ComplaintsCommentNotifierProviderElement
   _ComplaintsCommentNotifierProviderElement(super.provider);
 
   @override
-  int get id => (origin as ComplaintsCommentNotifierProvider).id;
+  String get id => (origin as ComplaintsCommentNotifierProvider).id;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

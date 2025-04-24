@@ -86,7 +86,7 @@ class ImageContainer extends StatelessWidget {
 }
 
 class CommentContainer extends ConsumerWidget {
-  final int complaintId;
+  final String complaintId;
   const CommentContainer({super.key, required this.complaintId});
 
   List<TreeItem> commentReply(List<ComplaintsComment> data) {

@@ -20,15 +20,13 @@ ComplaintsComment _$ComplaintsCommentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ComplaintsComment {
-  int get id => throw _privateConstructorUsedError;
-  int get issueId => throw _privateConstructorUsedError;
-  int? get userId => throw _privateConstructorUsedError;
-  int? get parentId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get complaintId => throw _privateConstructorUsedError;
+  String? get commentBy => throw _privateConstructorUsedError;
+  String? get parentId => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
-  int get sorting => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
-  User? get user => throw _privateConstructorUsedError;
+  DateTime get created => throw _privateConstructorUsedError;
+  DateTime get updated => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: [])
   List<ComplaintsComment>? get reply => throw _privateConstructorUsedError;
 
@@ -49,18 +47,14 @@ abstract class $ComplaintsCommentCopyWith<$Res> {
       _$ComplaintsCommentCopyWithImpl<$Res, ComplaintsComment>;
   @useResult
   $Res call(
-      {int id,
-      int issueId,
-      int? userId,
-      int? parentId,
+      {String id,
+      String complaintId,
+      String? commentBy,
+      String? parentId,
       String message,
-      int sorting,
-      DateTime createdAt,
-      DateTime updatedAt,
-      User? user,
+      DateTime created,
+      DateTime updated,
       @JsonKey(defaultValue: []) List<ComplaintsComment>? reply});
-
-  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -79,72 +73,48 @@ class _$ComplaintsCommentCopyWithImpl<$Res, $Val extends ComplaintsComment>
   @override
   $Res call({
     Object? id = null,
-    Object? issueId = null,
-    Object? userId = freezed,
+    Object? complaintId = null,
+    Object? commentBy = freezed,
     Object? parentId = freezed,
     Object? message = null,
-    Object? sorting = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? user = freezed,
+    Object? created = null,
+    Object? updated = null,
     Object? reply = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      issueId: null == issueId
-          ? _value.issueId
-          : issueId // ignore: cast_nullable_to_non_nullable
-              as int,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String,
+      complaintId: null == complaintId
+          ? _value.complaintId
+          : complaintId // ignore: cast_nullable_to_non_nullable
+              as String,
+      commentBy: freezed == commentBy
+          ? _value.commentBy
+          : commentBy // ignore: cast_nullable_to_non_nullable
+              as String?,
       parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      sorting: null == sorting
-          ? _value.sorting
-          : sorting // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      updated: null == updated
+          ? _value.updated
+          : updated // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User?,
       reply: freezed == reply
           ? _value.reply
           : reply // ignore: cast_nullable_to_non_nullable
               as List<ComplaintsComment>?,
     ) as $Val);
-  }
-
-  /// Create a copy of ComplaintsComment
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res>? get user {
-    if (_value.user == null) {
-      return null;
-    }
-
-    return $UserCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
   }
 }
 
@@ -157,19 +127,14 @@ abstract class _$$ComplaintsCommentImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      int issueId,
-      int? userId,
-      int? parentId,
+      {String id,
+      String complaintId,
+      String? commentBy,
+      String? parentId,
       String message,
-      int sorting,
-      DateTime createdAt,
-      DateTime updatedAt,
-      User? user,
+      DateTime created,
+      DateTime updated,
       @JsonKey(defaultValue: []) List<ComplaintsComment>? reply});
-
-  @override
-  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -186,53 +151,43 @@ class __$$ComplaintsCommentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? issueId = null,
-    Object? userId = freezed,
+    Object? complaintId = null,
+    Object? commentBy = freezed,
     Object? parentId = freezed,
     Object? message = null,
-    Object? sorting = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? user = freezed,
+    Object? created = null,
+    Object? updated = null,
     Object? reply = freezed,
   }) {
     return _then(_$ComplaintsCommentImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      issueId: null == issueId
-          ? _value.issueId
-          : issueId // ignore: cast_nullable_to_non_nullable
-              as int,
-      userId: freezed == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String,
+      complaintId: null == complaintId
+          ? _value.complaintId
+          : complaintId // ignore: cast_nullable_to_non_nullable
+              as String,
+      commentBy: freezed == commentBy
+          ? _value.commentBy
+          : commentBy // ignore: cast_nullable_to_non_nullable
+              as String?,
       parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      sorting: null == sorting
-          ? _value.sorting
-          : sorting // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      created: null == created
+          ? _value.created
+          : created // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
+      updated: null == updated
+          ? _value.updated
+          : updated // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User?,
       reply: freezed == reply
           ? _value._reply
           : reply // ignore: cast_nullable_to_non_nullable
@@ -242,19 +197,16 @@ class __$$ComplaintsCommentImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$ComplaintsCommentImpl implements _ComplaintsComment {
   const _$ComplaintsCommentImpl(
       {required this.id,
-      required this.issueId,
-      this.userId,
+      required this.complaintId,
+      this.commentBy,
       this.parentId,
       required this.message,
-      required this.sorting,
-      required this.createdAt,
-      required this.updatedAt,
-      this.user,
+      required this.created,
+      required this.updated,
       @JsonKey(defaultValue: []) final List<ComplaintsComment>? reply})
       : _reply = reply;
 
@@ -262,23 +214,19 @@ class _$ComplaintsCommentImpl implements _ComplaintsComment {
       _$$ComplaintsCommentImplFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
-  final int issueId;
+  final String complaintId;
   @override
-  final int? userId;
+  final String? commentBy;
   @override
-  final int? parentId;
+  final String? parentId;
   @override
   final String message;
   @override
-  final int sorting;
+  final DateTime created;
   @override
-  final DateTime createdAt;
-  @override
-  final DateTime updatedAt;
-  @override
-  final User? user;
+  final DateTime updated;
   final List<ComplaintsComment>? _reply;
   @override
   @JsonKey(defaultValue: [])
@@ -292,7 +240,7 @@ class _$ComplaintsCommentImpl implements _ComplaintsComment {
 
   @override
   String toString() {
-    return 'ComplaintsComment(id: $id, issueId: $issueId, userId: $userId, parentId: $parentId, message: $message, sorting: $sorting, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, reply: $reply)';
+    return 'ComplaintsComment(id: $id, complaintId: $complaintId, commentBy: $commentBy, parentId: $parentId, message: $message, created: $created, updated: $updated, reply: $reply)';
   }
 
   @override
@@ -301,17 +249,15 @@ class _$ComplaintsCommentImpl implements _ComplaintsComment {
         (other.runtimeType == runtimeType &&
             other is _$ComplaintsCommentImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.issueId, issueId) || other.issueId == issueId) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.complaintId, complaintId) ||
+                other.complaintId == complaintId) &&
+            (identical(other.commentBy, commentBy) ||
+                other.commentBy == commentBy) &&
             (identical(other.parentId, parentId) ||
                 other.parentId == parentId) &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.sorting, sorting) || other.sorting == sorting) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.user, user) || other.user == user) &&
+            (identical(other.created, created) || other.created == created) &&
+            (identical(other.updated, updated) || other.updated == updated) &&
             const DeepCollectionEquality().equals(other._reply, _reply));
   }
 
@@ -320,14 +266,12 @@ class _$ComplaintsCommentImpl implements _ComplaintsComment {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      issueId,
-      userId,
+      complaintId,
+      commentBy,
       parentId,
       message,
-      sorting,
-      createdAt,
-      updatedAt,
-      user,
+      created,
+      updated,
       const DeepCollectionEquality().hash(_reply));
 
   /// Create a copy of ComplaintsComment
@@ -349,15 +293,13 @@ class _$ComplaintsCommentImpl implements _ComplaintsComment {
 
 abstract class _ComplaintsComment implements ComplaintsComment {
   const factory _ComplaintsComment(
-          {required final int id,
-          required final int issueId,
-          final int? userId,
-          final int? parentId,
+          {required final String id,
+          required final String complaintId,
+          final String? commentBy,
+          final String? parentId,
           required final String message,
-          required final int sorting,
-          required final DateTime createdAt,
-          required final DateTime updatedAt,
-          final User? user,
+          required final DateTime created,
+          required final DateTime updated,
           @JsonKey(defaultValue: []) final List<ComplaintsComment>? reply}) =
       _$ComplaintsCommentImpl;
 
@@ -365,23 +307,19 @@ abstract class _ComplaintsComment implements ComplaintsComment {
       _$ComplaintsCommentImpl.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
-  int get issueId;
+  String get complaintId;
   @override
-  int? get userId;
+  String? get commentBy;
   @override
-  int? get parentId;
+  String? get parentId;
   @override
   String get message;
   @override
-  int get sorting;
+  DateTime get created;
   @override
-  DateTime get createdAt;
-  @override
-  DateTime get updatedAt;
-  @override
-  User? get user;
+  DateTime get updated;
   @override
   @JsonKey(defaultValue: [])
   List<ComplaintsComment>? get reply;

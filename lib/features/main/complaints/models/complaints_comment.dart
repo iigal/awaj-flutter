@@ -6,17 +6,14 @@ part 'complaints_comment.g.dart';
 
 @freezed
 class ComplaintsComment with _$ComplaintsComment {
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory ComplaintsComment({
-    required int id,
-    required int issueId,
-    int? userId,
-    int? parentId,
+    required String id,
+    required String complaintId,
+    String? commentBy,
+    String? parentId,
     required String message,
-    required int sorting,
-    required DateTime createdAt,
-    required DateTime updatedAt,
-    User? user,
+    required DateTime created,
+    required DateTime updated,
     @JsonKey(defaultValue: []) List<ComplaintsComment>? reply,
   }) = _ComplaintsComment;
 
