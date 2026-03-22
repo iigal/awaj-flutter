@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Clinical Curator - Patient Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#434655",
+              "inverse-surface": "#2d3133",
+              "on-secondary-container": "#586377",
+              "on-background": "#191c1e",
+              "primary-fixed-dim": "#b4c5ff",
+              "outline-variant": "#c3c6d7",
+              "secondary-fixed": "#d8e3fb",
+              "on-primary-fixed": "#00174b",
+              "primary-container": "#2563eb",
+              "secondary-container": "#d5e0f8",
+              "inverse-on-surface": "#eff1f3",
+              "on-secondary-fixed-variant": "#3c475a",
+              "surface-variant": "#e0e3e5",
+              "on-tertiary-fixed-variant": "#3f465c",
+              "surface-dim": "#d8dadc",
+              "secondary-fixed-dim": "#bcc7de",
+              "primary-fixed": "#dbe1ff",
+              "tertiary-fixed-dim": "#bec6e0",
+              "on-tertiary-container": "#eef0ff",
+              "on-surface": "#191c1e",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed": "#131b2e",
+              "surface-container": "#eceef0",
+              "secondary": "#545f73",
+              "surface-tint": "#0053db",
+              "tertiary": "#4d556b",
+              "surface-container-lowest": "#ffffff",
+              "outline": "#737686",
+              "surface": "#f7f9fb",
+              "on-tertiary": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "on-primary": "#ffffff",
+              "surface-container-high": "#e6e8ea",
+              "inverse-primary": "#b4c5ff",
+              "surface-bright": "#f7f9fb",
+              "on-primary-container": "#eeefff",
+              "on-secondary-fixed": "#111c2d",
+              "error": "#ba1a1a",
+              "background": "#f7f9fb",
+              "primary": "#004ac6",
+              "tertiary-fixed": "#dae2fd",
+              "surface-container-highest": "#e0e3e5",
+              "on-primary-fixed-variant": "#003ea8",
+              "surface-container-low": "#f2f4f6",
+              "on-error": "#ffffff",
+              "tertiary-container": "#656d84"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem", 
+              "sm": "0.125rem",
+              "md": "0.375rem",
+              "lg": "0.5rem", 
+              "xl": "0.75rem", 
+              "2xl": "1rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .clinical-shadow {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar - Unified Standard from SCREEN_36 -->
+<header class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center overflow-hidden">
+<img alt="Arjun's Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb2fq17D5HH1Nt8UJr8AkFCeY75munbs2FLnD_L6Ov_E6v-V5tw_gjOl3JLFnfjoEM_LhHUGKxkq5eidPhb1FAKxZLVr7x24gHDJKTw95n9QYPib_Bb4FtaM-N6QqbaJkzxs28YFTHf3ME-oDpL8rChKY8qUB5HXamZngdybU26bKX0WRVHaILVqkNJ-0Ok_IqS3oPfaffn9Piq2eXTpkb3E_ApfuAMf650H6lCgkB8nySyDJvaljF69GFf8tcAb9ClUvenEUaxbAP"/>
+</div>
+<div class="flex flex-col">
+<span class="text-lg font-bold tracking-tight text-[#004ac6] leading-tight">The Clinical Curator</span>
+<span class="text-[10px] uppercase tracking-widest text-secondary font-bold">Health Portal</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<nav class="hidden md:flex items-center gap-6 mr-4">
+<a class="text-primary font-bold text-sm" href="#">Dashboard</a>
+<a class="text-secondary hover:text-primary transition-colors text-sm font-medium" href="#">Records</a>
+<a class="text-secondary hover:text-primary transition-colors text-sm font-medium" href="#">Services</a>
+</nav>
+<button class="p-2 rounded-full hover:bg-slate-100 transition-colors text-primary relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-3xl mx-auto px-4 py-4">
+<!-- Header Section -->
+<section class="mb-4">
+<h1 class="text-xl font-extrabold tracking-tight text-on-surface mb-1">Hello Arjun,</h1>
+<p class="text-xs text-slate-500">Your health journey is currently <span class="text-primary font-bold">85% complete</span>.</p>
+</section>
+<!-- Profile Strength Card - Updated to match SCREEN_36 card style -->
+<section class="mb-4">
+<div class="bg-white rounded-lg border border-slate-200 clinical-shadow p-4">
+<div class="flex justify-between text-[9px] font-bold uppercase tracking-wider text-slate-500 mb-2">
+<span>Profile Strength</span>
+<span>85%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[85%]"></div>
+</div>
+</div>
+</section>
+<!-- Dengue Alert - Updated to prominent style with 8px radius (lg) from SCREEN_36 -->
+<section class="mb-4 bg-white rounded-lg border border-slate-200 border-l-4 border-l-error clinical-shadow p-4 flex items-center gap-4">
+<div class="bg-error text-white p-2 rounded-md shrink-0">
+<span class="material-symbols-outlined text-lg">warning</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-slate-900 text-sm">Dengue Alert</h3>
+<p class="text-[11px] text-slate-500 leading-relaxed">High mosquito activity reported in your area. Please take precautions.</p>
+</div>
+<button class="text-error font-bold text-[11px] px-3 py-1.5 hover:bg-error/5 rounded-md transition-colors border border-error/20">
+                View Advice
+            </button>
+</section>
+<!-- Search & Filter Shell - Styled from SCREEN_36 -->
+<div class="flex gap-2 mb-4">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-full pl-11 pr-4 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all text-on-surface placeholder:text-slate-400 shadow-sm py-2.5 text-sm" placeholder="Search services..." type="text"/>
+</div>
+<button class="h-10 w-10 shrink-0 bg-white border border-slate-200 text-slate-700 rounded-xl font-semibold flex items-center justify-center hover:bg-slate-50 transition-colors clinical-shadow">
+<span class="material-symbols-outlined text-lg">tune</span>
+</button>
+</div>
+<!-- Medical Services Section -->
+<section class="mb-6">
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-sm font-bold tracking-tight text-on-surface uppercase tracking-wider">Medical Services</h2>
+<button class="text-primary text-xs font-semibold">View All</button>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Services Cards - Unified to match SCREEN_36/37 mini-cards -->
+<div class="bg-white p-3 rounded-lg border border-slate-200 clinical-shadow flex items-center gap-3 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="w-9 h-9 rounded-md bg-blue-50 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-lg">description</span>
+</div>
+<span class="text-xs font-bold text-slate-900 leading-tight">Medical Records</span>
+</div>
+<div class="bg-white p-3 rounded-lg border border-slate-200 clinical-shadow flex items-center gap-3 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="w-9 h-9 rounded-md bg-blue-50 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-lg">local_hospital</span>
+</div>
+<span class="text-xs font-bold text-slate-900 leading-tight">Find Hospitals</span>
+</div>
+<div class="bg-white p-3 rounded-lg border border-slate-200 clinical-shadow flex items-center gap-3 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="w-9 h-9 rounded-md bg-blue-50 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-lg">videocam</span>
+</div>
+<span class="text-xs font-bold text-slate-900 leading-tight">Telemedicine</span>
+</div>
+<div class="bg-white p-3 rounded-lg border border-slate-200 clinical-shadow flex items-center gap-3 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="w-9 h-9 rounded-md bg-blue-50 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-lg">ambulance</span>
+</div>
+<span class="text-xs font-bold text-slate-900 leading-tight">Ambulance</span>
+</div>
+</div>
+</section>
+<!-- Public Health Updates -->
+<section class="mb-6">
+<h2 class="text-sm font-bold tracking-tight text-on-surface uppercase tracking-wider mb-3">Public Health Updates</h2>
+<div class="relative rounded-lg overflow-hidden aspect-[21/9] flex items-end p-4 bg-slate-900 group">
+<img alt="Vaccination Drive" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHJq8cSWZwT7YudtIBfIB6TEg7rVtwUggWMhbkgd9jMih0eXrN63V0FiMDoXhz9F2bKt1ljkXluGSu10JrRMlEw40wWQn7tWnAUW9uCQ4Iwuhiv6MvQ977aoeBNRVDCjNQ6ducmc73X3CENXQY7pswd-CcXt-EJYGu4Pleu_P9a3Q64-1x42dexpOxDFG5WhOCLUjn5zR8xJ0-62pzYiUlJA0bmWYaceNZ3whEAg9ERydp-SLysN-jCjrmpXbBK3FI4qKOh3hg4R_S"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+<div class="relative z-10">
+<div class="bg-primary text-white text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded inline-block mb-1">Announcement</div>
+<h3 class="text-sm font-bold text-white mb-1">National Vaccination Drive 2024</h3>
+<button class="bg-white text-primary px-3 py-1 rounded-md font-bold text-[10px] hover:bg-primary hover:text-white transition-all">Details</button>
+</div>
+</div>
+</section>
+<!-- Vital Stats - Updated to prominent style with 8px radius from SCREEN_36 -->
+<section class="mb-6">
+<h2 class="text-sm font-bold tracking-tight text-on-surface uppercase tracking-wider mb-3">My Vital Stats</h2>
+<div class="space-y-3">
+<!-- Stat Card 1 -->
+<div class="bg-white p-4 rounded-lg border border-slate-200 clinical-shadow flex items-center gap-4 group hover:border-primary/30 transition-all">
+<div class="w-10 h-10 rounded-md bg-blue-50 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<div class="flex-1">
+<p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Heart Rate</p>
+<div class="flex items-baseline gap-1">
+<span class="text-lg font-extrabold text-slate-900">72</span>
+<span class="text-[10px] font-semibold text-slate-400">bpm</span>
+</div>
+</div>
+<div class="text-green-600 font-bold text-[10px] bg-green-50 px-2 py-0.5 rounded border border-green-100 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">trending_down</span>
+                        2%
+                    </div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-white p-4 rounded-lg border border-slate-200 clinical-shadow flex items-center gap-4 group hover:border-primary/30 transition-all">
+<div class="w-10 h-10 rounded-md bg-blue-50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">speed</span>
+</div>
+<div class="flex-1">
+<p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Blood Pressure</p>
+<div class="flex items-baseline gap-1">
+<span class="text-lg font-extrabold text-slate-900">120/80</span>
+<span class="text-[10px] font-semibold text-slate-400">mmHg</span>
+</div>
+</div>
+<div class="text-slate-500 font-bold text-[10px] bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                        Normal
+                    </div>
+</div>
+</div>
+</section>
+<!-- AI Symptom Checker Banner - Unified style -->
+<section class="bg-[#004ac6] rounded-xl p-5 text-white relative overflow-hidden mb-8">
+<div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12 blur-2xl"></div>
+<h3 class="text-sm font-bold mb-1">Need immediate help?</h3>
+<p class="text-blue-100 text-[11px] mb-4 leading-relaxed">Our AI clinical assistant is available 24/7 for non-emergency guidance.</p>
+<button class="w-full bg-white text-primary py-2.5 rounded-lg font-bold text-xs hover:shadow-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+                Start Symptom Checker
+            </button>
+</section>
+</main>
+<!-- BottomNavBar - Unified with SCREEN_36 style -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2 bg-white border-t border-slate-100 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-primary px-3 py-1.5" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold mt-1 uppercase tracking-tighter">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-3 py-1.5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold mt-1 uppercase tracking-tighter">Records</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-3 py-1.5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold mt-1 uppercase tracking-tighter">Services</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-3 py-1.5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold mt-1 uppercase tracking-tighter">Profile</span>
+</a>
+</nav>
+</body></html>

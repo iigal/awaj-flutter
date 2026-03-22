@@ -4,7 +4,7 @@ part 'complaints_categories_model.freezed.dart';
 part 'complaints_categories_model.g.dart';
 
 @freezed
-class Categories with _$Categories {
+abstract class Categories with _$Categories {
   const factory Categories({
     @JsonKey(name: "collectionId") String? collectionId,
     @JsonKey(name: "collectionName") String? collectionName,
@@ -23,7 +23,7 @@ class Categories with _$Categories {
 }
 
 @freezed
-class ComplaintsCount with _$ComplaintsCount {
+abstract class ComplaintsCount with _$ComplaintsCount {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory ComplaintsCount({
     required int count,
@@ -33,7 +33,7 @@ class ComplaintsCount with _$ComplaintsCount {
 }
 
 @freezed
-class Complaints with _$Complaints {
+abstract class Complaints with _$Complaints {
   const factory Complaints({
     @JsonKey(name: "collectionId") required String collectionId,
     @JsonKey(name: "collectionName") required String collectionName,
@@ -54,7 +54,7 @@ class Complaints with _$Complaints {
 }
 
 @freezed
-class ComplaintsRequest with _$ComplaintsRequest {
+abstract class ComplaintsRequest with _$ComplaintsRequest {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory ComplaintsRequest({
     required String title,
@@ -70,7 +70,7 @@ class ComplaintsRequest with _$ComplaintsRequest {
 }
 
 @freezed
-class ComplaintCommentRequest with _$ComplaintCommentRequest {
+abstract class ComplaintCommentRequest with _$ComplaintCommentRequest {
   const factory ComplaintCommentRequest({
     required String message,
     required String commentBy,

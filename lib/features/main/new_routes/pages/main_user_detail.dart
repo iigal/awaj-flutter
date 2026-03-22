@@ -1,5 +1,5 @@
 import 'package:awaj/db.dart';
-import 'package:awaj/features/main/new_routes/store/main_auth_storage.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,11 +17,11 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   DateTime? dobValue;
 
   void _saveUserDetails() async {
-    await pocketBaseDB.collection('users').update(pocketBaseDB.authStore.record!.id, body: {
-      "name": _nameController.text,
-      "dateOfBirth": dobValue?.toIso8601String(),
-      "gender": _selectedGender,
-    });
+    final record = pocketBaseDB.authStore.record!;
+    record.data['name'] = _nameController.text;
+    record.data['dateOfBirth'] = dobValue?.toIso8601String();
+    record.data['gender'] = _selectedGender;
+    pocketBaseDB.authStore.save(pocketBaseDB.authStore.token, record);
     if (context.mounted) {
       context.go('/main/menu');
     }

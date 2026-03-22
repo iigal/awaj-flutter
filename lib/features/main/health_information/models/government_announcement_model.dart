@@ -4,7 +4,7 @@ part 'government_announcement_model.freezed.dart';
 part 'government_announcement_model.g.dart';
 
 @freezed
-class Announcement with _$Announcement {
+abstract class Announcement with _$Announcement {
   const factory Announcement({
     @JsonKey(name: "collectionId") String? collectionId,
     @JsonKey(name: "collectionName") String? collectionName,

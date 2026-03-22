@@ -6,8 +6,8 @@ part of 'health_facility_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$HealthFacilityImpl _$$HealthFacilityImplFromJson(Map<String, dynamic> json) =>
-    _$HealthFacilityImpl(
+_HealthFacility _$HealthFacilityFromJson(Map<String, dynamic> json) =>
+    _HealthFacility(
       name: json['name'] as String?,
       href: json['href'] as String?,
       uuid: json['uuid'] as String?,
@@ -29,8 +29,7 @@ _$HealthFacilityImpl _$$HealthFacilityImplFromJson(Map<String, dynamic> json) =>
           : Properties.fromJson(json['properties'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$HealthFacilityImplToJson(
-        _$HealthFacilityImpl instance) =>
+Map<String, dynamic> _$HealthFacilityToJson(_HealthFacility instance) =>
     <String, dynamic>{
       'name': instance.name,
       'href': instance.href,
@@ -43,122 +42,118 @@ Map<String, dynamic> _$$HealthFacilityImplToJson(
       'properties': instance.properties,
     };
 
-_$CoordinatesImpl _$$CoordinatesImplFromJson(Map<String, dynamic> json) =>
-    _$CoordinatesImpl(
-      latitude: json['latitude'] as String?,
-      longitude: json['longitude'] as String?,
-    );
+_Coordinates _$CoordinatesFromJson(Map<String, dynamic> json) => _Coordinates(
+  latitude: json['latitude'] as String?,
+  longitude: json['longitude'] as String?,
+);
 
-Map<String, dynamic> _$$CoordinatesImplToJson(_$CoordinatesImpl instance) =>
+Map<String, dynamic> _$CoordinatesToJson(_Coordinates instance) =>
     <String, dynamic>{
       'latitude': instance.latitude,
       'longitude': instance.longitude,
     };
 
-_$IdentifiersImpl _$$IdentifiersImplFromJson(Map<String, dynamic> json) =>
-    _$IdentifiersImpl(
-      iid: json['iid'] as String?,
-      agency: json['agency'] as String?,
-    );
+_Identifiers _$IdentifiersFromJson(Map<String, dynamic> json) => _Identifiers(
+  iid: json['iid'] as String?,
+  agency: json['agency'] as String?,
+);
 
-Map<String, dynamic> _$$IdentifiersImplToJson(_$IdentifiersImpl instance) =>
-    <String, dynamic>{
-      'iid': instance.iid,
-      'agency': instance.agency,
-    };
+Map<String, dynamic> _$IdentifiersToJson(_Identifiers instance) =>
+    <String, dynamic>{'iid': instance.iid, 'agency': instance.agency};
 
-_$PropertiesImpl _$$PropertiesImplFromJson(Map<String, dynamic> json) =>
-    _$PropertiesImpl(
-      hfCode: (json['hfCode'] as num?)?.toInt(),
-      type: (json['type'] as num?)?.toInt(),
-      healthFacilityType: json['Health_facility_Type'] == null
-          ? null
-          : HealthFacilityType.fromJson(
-              json['Health_facility_Type'] as Map<String, dynamic>),
-      authlevel: json['authlevel'] as String?,
-      ftype: (json['ftype'] as num?)?.toInt(),
-      opstatus: json['opstatus'] as String?,
-      internet: json['internet'] as String?,
-      renDate: json['ren_date'] as String?,
-      sectioned: json['sectioned'],
-      functional: (json['functional'] as num?)?.toInt(),
-      icuSectioned: json['icu_sectioned'],
-      icuFunctional: json['icu_functional'],
-      ventilatorSectioned: json['ventilator_sectioned'],
-      ventilatorFunctional: json['ventilator_functional'],
-      province: json['province'] == null
-          ? null
-          : Province.fromJson(json['province'] as Map<String, dynamic>),
-      district: json['district'] == null
-          ? null
-          : District.fromJson(json['district'] as Map<String, dynamic>),
-      municipality: json['municipality'] == null
-          ? null
-          : Municipality.fromJson(json['municipality'] as Map<String, dynamic>),
-      ward: (json['ward'] as num?)?.toInt(),
-      estdDate: json['estd_date'] as String?,
-      validity: json['validity'] as String?,
-      email: json['email'] as String?,
-      telephone: json['telephone'] as String?,
-      oxygen: json['oxygen'] as String?,
-      ambulance: json['ambulance'] as String?,
-      concentrator: json['concentrator'] as String?,
-      cylinder: json['cylinder'] as String?,
-      ehs: json['ehs'] as String?,
-      geriatrics: json['geriatrics'] as String?,
-      insurance: json['insurance'] as String?,
-      ocmc: json['ocmc'] as String?,
-      pharmacy: json['pharmacy'] as String?,
-      plantCapacity: json['plant_capacity'] as String?,
-      ssu: json['ssu'] as String?,
-      contactPerson: json['contact_person'] as String?,
-      contactPersonMobile: json['contact_person_mobile'] as String?,
-      ambulanceCategory: json['ambulance_category'] as String?,
-      ambulanceContact: json['ambulance_contact'] as String?,
-      hduFunctional: json['hdu_functional'],
-      hduSectioned: json['hdu_sectioned'],
-      nicuFunctional: json['nicu_functional'],
-      nicuSectioned: json['nicu_sectioned'],
-      orgSource: json['org_source'],
-      buildingCost: json['building_cost'],
-      deviceCost: json['device_cost'],
-      estIncome: json['est_income'],
-      loanOrg: json['loan_org'],
-      otherSource: json['other_source'],
-      propertySource: json['property_source'],
-      workforceCost: json['workforce_cost'],
-      approvedate: json['approvedate'] == null
-          ? null
-          : DateTime.parse(json['approvedate'] as String),
-      approveby: json['approveby'] as String?,
-      serviceType: json['service_type'] == null
-          ? null
-          : ServiceType.fromJson(json['service_type'] as Map<String, dynamic>),
-      ownership: (json['ownership'] as num?)?.toInt(),
-      ownerships: json['ownerships'] == null
-          ? null
-          : Ownerships.fromJson(json['ownerships'] as Map<String, dynamic>),
-      level: (json['level'] as num?)?.toInt(),
-      healthFacilityLevel: json['health_facility_level'] == null
-          ? null
-          : HealthFacilityLevel.fromJson(
-              json['health_facility_level'] as Map<String, dynamic>),
-      oldlevel: (json['oldlevel'] as num?)?.toInt(),
-      buildingMaps: json['building_maps'] as String?,
-      hfDetails: json['hf_details'] as String?,
-      ieeCerts: json['iee_certs'],
-      memCitizenships: json['mem_citizenships'],
-      orgArticles: json['org_articles'],
-      orgPerms: json['org_perms'],
-      regOrgs: json['reg_orgs'],
-      serviceFees: json['service_fees'],
-      taxClears: json['tax_clears'],
-      vatPans: json['vat_pans'],
-      hcode: json['hcode'],
-      rtype: json['rtype'],
-    );
+_Properties _$PropertiesFromJson(Map<String, dynamic> json) => _Properties(
+  hfCode: (json['hfCode'] as num?)?.toInt(),
+  type: (json['type'] as num?)?.toInt(),
+  healthFacilityType: json['Health_facility_Type'] == null
+      ? null
+      : HealthFacilityType.fromJson(
+          json['Health_facility_Type'] as Map<String, dynamic>,
+        ),
+  authlevel: json['authlevel'] as String?,
+  ftype: (json['ftype'] as num?)?.toInt(),
+  opstatus: json['opstatus'] as String?,
+  internet: json['internet'] as String?,
+  renDate: json['ren_date'] as String?,
+  sectioned: json['sectioned'],
+  functional: (json['functional'] as num?)?.toInt(),
+  icuSectioned: json['icu_sectioned'],
+  icuFunctional: json['icu_functional'],
+  ventilatorSectioned: json['ventilator_sectioned'],
+  ventilatorFunctional: json['ventilator_functional'],
+  province: json['province'] == null
+      ? null
+      : Province.fromJson(json['province'] as Map<String, dynamic>),
+  district: json['district'] == null
+      ? null
+      : District.fromJson(json['district'] as Map<String, dynamic>),
+  municipality: json['municipality'] == null
+      ? null
+      : Municipality.fromJson(json['municipality'] as Map<String, dynamic>),
+  ward: (json['ward'] as num?)?.toInt(),
+  estdDate: json['estd_date'] as String?,
+  validity: json['validity'] as String?,
+  email: json['email'] as String?,
+  telephone: json['telephone'] as String?,
+  oxygen: json['oxygen'] as String?,
+  ambulance: json['ambulance'] as String?,
+  concentrator: json['concentrator'] as String?,
+  cylinder: json['cylinder'] as String?,
+  ehs: json['ehs'] as String?,
+  geriatrics: json['geriatrics'] as String?,
+  insurance: json['insurance'] as String?,
+  ocmc: json['ocmc'] as String?,
+  pharmacy: json['pharmacy'] as String?,
+  plantCapacity: json['plant_capacity'] as String?,
+  ssu: json['ssu'] as String?,
+  contactPerson: json['contact_person'] as String?,
+  contactPersonMobile: json['contact_person_mobile'] as String?,
+  ambulanceCategory: json['ambulance_category'] as String?,
+  ambulanceContact: json['ambulance_contact'] as String?,
+  hduFunctional: json['hdu_functional'],
+  hduSectioned: json['hdu_sectioned'],
+  nicuFunctional: json['nicu_functional'],
+  nicuSectioned: json['nicu_sectioned'],
+  orgSource: json['org_source'],
+  buildingCost: json['building_cost'],
+  deviceCost: json['device_cost'],
+  estIncome: json['est_income'],
+  loanOrg: json['loan_org'],
+  otherSource: json['other_source'],
+  propertySource: json['property_source'],
+  workforceCost: json['workforce_cost'],
+  approvedate: json['approvedate'] == null
+      ? null
+      : DateTime.parse(json['approvedate'] as String),
+  approveby: json['approveby'] as String?,
+  serviceType: json['service_type'] == null
+      ? null
+      : ServiceType.fromJson(json['service_type'] as Map<String, dynamic>),
+  ownership: (json['ownership'] as num?)?.toInt(),
+  ownerships: json['ownerships'] == null
+      ? null
+      : Ownerships.fromJson(json['ownerships'] as Map<String, dynamic>),
+  level: (json['level'] as num?)?.toInt(),
+  healthFacilityLevel: json['health_facility_level'] == null
+      ? null
+      : HealthFacilityLevel.fromJson(
+          json['health_facility_level'] as Map<String, dynamic>,
+        ),
+  oldlevel: (json['oldlevel'] as num?)?.toInt(),
+  buildingMaps: json['building_maps'] as String?,
+  hfDetails: json['hf_details'] as String?,
+  ieeCerts: json['iee_certs'],
+  memCitizenships: json['mem_citizenships'],
+  orgArticles: json['org_articles'],
+  orgPerms: json['org_perms'],
+  regOrgs: json['reg_orgs'],
+  serviceFees: json['service_fees'],
+  taxClears: json['tax_clears'],
+  vatPans: json['vat_pans'],
+  hcode: json['hcode'],
+  rtype: json['rtype'],
+);
 
-Map<String, dynamic> _$$PropertiesImplToJson(_$PropertiesImpl instance) =>
+Map<String, dynamic> _$PropertiesToJson(_Properties instance) =>
     <String, dynamic>{
       'hfCode': instance.hfCode,
       'type': instance.type,
@@ -231,21 +226,18 @@ Map<String, dynamic> _$$PropertiesImplToJson(_$PropertiesImpl instance) =>
       'rtype': instance.rtype,
     };
 
-_$DistrictImpl _$$DistrictImplFromJson(Map<String, dynamic> json) =>
-    _$DistrictImpl(
-      districtId: json['district_id'] as String?,
-      districtName: json['district_name'] as String?,
-    );
+_District _$DistrictFromJson(Map<String, dynamic> json) => _District(
+  districtId: json['district_id'] as String?,
+  districtName: json['district_name'] as String?,
+);
 
-Map<String, dynamic> _$$DistrictImplToJson(_$DistrictImpl instance) =>
-    <String, dynamic>{
-      'district_id': instance.districtId,
-      'district_name': instance.districtName,
-    };
+Map<String, dynamic> _$DistrictToJson(_District instance) => <String, dynamic>{
+  'district_id': instance.districtId,
+  'district_name': instance.districtName,
+};
 
-_$HealthFacilityLevelImpl _$$HealthFacilityLevelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$HealthFacilityLevelImpl(
+_HealthFacilityLevel _$HealthFacilityLevelFromJson(Map<String, dynamic> json) =>
+    _HealthFacilityLevel(
       facilityLevelId: json['facility_level_id'] as String?,
       facilityLevelCode: json['facility_level_code'] as String?,
       facilityLevelName: json['facility_level_name'] as String?,
@@ -254,54 +246,51 @@ _$HealthFacilityLevelImpl _$$HealthFacilityLevelImplFromJson(
       facilityLevelTypes: json['facility_level_types'] as String?,
     );
 
-Map<String, dynamic> _$$HealthFacilityLevelImplToJson(
-        _$HealthFacilityLevelImpl instance) =>
-    <String, dynamic>{
-      'facility_level_id': instance.facilityLevelId,
-      'facility_level_code': instance.facilityLevelCode,
-      'facility_level_name': instance.facilityLevelName,
-      'facility_level_status': instance.facilityLevelStatus,
-      'facility_level_parent': instance.facilityLevelParent,
-      'facility_level_types': instance.facilityLevelTypes,
-    };
+Map<String, dynamic> _$HealthFacilityLevelToJson(
+  _HealthFacilityLevel instance,
+) => <String, dynamic>{
+  'facility_level_id': instance.facilityLevelId,
+  'facility_level_code': instance.facilityLevelCode,
+  'facility_level_name': instance.facilityLevelName,
+  'facility_level_status': instance.facilityLevelStatus,
+  'facility_level_parent': instance.facilityLevelParent,
+  'facility_level_types': instance.facilityLevelTypes,
+};
 
-_$HealthFacilityTypeImpl _$$HealthFacilityTypeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$HealthFacilityTypeImpl(
+_HealthFacilityType _$HealthFacilityTypeFromJson(Map<String, dynamic> json) =>
+    _HealthFacilityType(
       hftypeId: json['hftype_id'] as String?,
       hftypeCode: json['hftype_code'] as String?,
       hftypeName: json['hftype_name'] as String?,
     );
 
-Map<String, dynamic> _$$HealthFacilityTypeImplToJson(
-        _$HealthFacilityTypeImpl instance) =>
+Map<String, dynamic> _$HealthFacilityTypeToJson(_HealthFacilityType instance) =>
     <String, dynamic>{
       'hftype_id': instance.hftypeId,
       'hftype_code': instance.hftypeCode,
       'hftype_name': instance.hftypeName,
     };
 
-_$MunicipalityImpl _$$MunicipalityImplFromJson(Map<String, dynamic> json) =>
-    _$MunicipalityImpl(
+_Municipality _$MunicipalityFromJson(Map<String, dynamic> json) =>
+    _Municipality(
       municipalityId: json['municipality_id'] as String?,
       municipalityName: json['municipality_name'] as String?,
     );
 
-Map<String, dynamic> _$$MunicipalityImplToJson(_$MunicipalityImpl instance) =>
+Map<String, dynamic> _$MunicipalityToJson(_Municipality instance) =>
     <String, dynamic>{
       'municipality_id': instance.municipalityId,
       'municipality_name': instance.municipalityName,
     };
 
-_$OwnershipsImpl _$$OwnershipsImplFromJson(Map<String, dynamic> json) =>
-    _$OwnershipsImpl(
-      ownershipId: json['ownership_id'] as String?,
-      ownershipName: json['ownership_name'] as String?,
-      ownershipCode: json['ownership_code'] as String?,
-      ownershipStatus: json['ownership_status'] as String?,
-    );
+_Ownerships _$OwnershipsFromJson(Map<String, dynamic> json) => _Ownerships(
+  ownershipId: json['ownership_id'] as String?,
+  ownershipName: json['ownership_name'] as String?,
+  ownershipCode: json['ownership_code'] as String?,
+  ownershipStatus: json['ownership_status'] as String?,
+);
 
-Map<String, dynamic> _$$OwnershipsImplToJson(_$OwnershipsImpl instance) =>
+Map<String, dynamic> _$OwnershipsToJson(_Ownerships instance) =>
     <String, dynamic>{
       'ownership_id': instance.ownershipId,
       'ownership_name': instance.ownershipName,
@@ -309,27 +298,24 @@ Map<String, dynamic> _$$OwnershipsImplToJson(_$OwnershipsImpl instance) =>
       'ownership_status': instance.ownershipStatus,
     };
 
-_$ProvinceImpl _$$ProvinceImplFromJson(Map<String, dynamic> json) =>
-    _$ProvinceImpl(
-      provinceId: json['province_id'] as String?,
-      provinceName: json['province_name'] as String?,
-    );
+_Province _$ProvinceFromJson(Map<String, dynamic> json) => _Province(
+  provinceId: json['province_id'] as String?,
+  provinceName: json['province_name'] as String?,
+);
 
-Map<String, dynamic> _$$ProvinceImplToJson(_$ProvinceImpl instance) =>
-    <String, dynamic>{
-      'province_id': instance.provinceId,
-      'province_name': instance.provinceName,
-    };
+Map<String, dynamic> _$ProvinceToJson(_Province instance) => <String, dynamic>{
+  'province_id': instance.provinceId,
+  'province_name': instance.provinceName,
+};
 
-_$ServiceTypeImpl _$$ServiceTypeImplFromJson(Map<String, dynamic> json) =>
-    _$ServiceTypeImpl(
-      ftypeId: json['ftype_id'] as String?,
-      ftypeCode: json['ftype_code'] as String?,
-      ftypeName: json['ftype_name'] as String?,
-      ftypeStatus: json['ftype_status'] as String?,
-    );
+_ServiceType _$ServiceTypeFromJson(Map<String, dynamic> json) => _ServiceType(
+  ftypeId: json['ftype_id'] as String?,
+  ftypeCode: json['ftype_code'] as String?,
+  ftypeName: json['ftype_name'] as String?,
+  ftypeStatus: json['ftype_status'] as String?,
+);
 
-Map<String, dynamic> _$$ServiceTypeImplToJson(_$ServiceTypeImpl instance) =>
+Map<String, dynamic> _$ServiceTypeToJson(_ServiceType instance) =>
     <String, dynamic>{
       'ftype_id': instance.ftypeId,
       'ftype_code': instance.ftypeCode,

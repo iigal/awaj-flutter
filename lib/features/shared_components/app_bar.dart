@@ -1,5 +1,6 @@
 import 'package:awaj/db.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pocketbase_server_flutter/pocketbase_server_flutter.dart';
@@ -69,7 +70,7 @@ class AppBarWidget extends ConsumerWidget {
             },
             // tooltip: 'Change Language',
           ),
-          if (showServerConfiguration)
+          if (showServerConfiguration && !kIsWeb)
             FutureBuilder<bool?>(
                 future: PocketbaseServerFlutter.isRunning,
                 builder: (context, snapshot) {

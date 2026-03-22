@@ -43,7 +43,7 @@ class _ComplaintCommentWidgetState extends ConsumerState<ComplaintCommentWidget>
         parentId: widget.complaintCommentId,
       );
       await ref.read(complaintsRepositoryProvider).registerComplaintComments(complaintReq);
-      ref.invalidate(complaintsCommentNotifierProvider);
+      ref.invalidate(complaintsCommentProvider(widget.complaintId));
     } catch (err) {}
     setState(() {
       isSaving = false;

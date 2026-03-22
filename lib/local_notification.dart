@@ -10,7 +10,7 @@ class LocalNotificationService {
       android: androidInitSettings,
     );
 
-    _notificationsPlugin.initialize(initSettings);
+    _notificationsPlugin.initialize(settings: initSettings);
   }
 
   static void showNotification(String title, String body) {
@@ -25,6 +25,6 @@ class LocalNotificationService {
       android: androidDetails,
     );
 
-    _notificationsPlugin.show(0, title, body, platformDetails);
+    _notificationsPlugin.show(id: 0, title: title, body: body, notificationDetails: platformDetails);
   }
 }

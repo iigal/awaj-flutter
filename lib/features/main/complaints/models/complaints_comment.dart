@@ -1,11 +1,11 @@
-import 'package:awaj/model/user_model.dart';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'complaints_comment.freezed.dart';
 part 'complaints_comment.g.dart';
 
 @freezed
-class ComplaintsComment with _$ComplaintsComment {
+abstract class ComplaintsComment with _$ComplaintsComment {
   const factory ComplaintsComment({
     required String id,
     required String complaintId,

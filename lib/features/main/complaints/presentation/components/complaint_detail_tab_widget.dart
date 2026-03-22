@@ -108,7 +108,7 @@ class CommentContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(complaintsCommentNotifierProvider(complaintId)).when(
+    return ref.watch(complaintsCommentProvider(complaintId)).when(
           data: (data) {
             List<TreeItem> treeItem = commentReply(data);
             return Stack(

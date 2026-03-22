@@ -4,7 +4,7 @@ part 'complaint_table_state.freezed.dart';
 part 'complaint_table_state.g.dart';
 
 @freezed
-class ComplaintTableState with _$ComplaintTableState {
+abstract class ComplaintTableState with _$ComplaintTableState {
   @JsonSerializable(fieldRename: FieldRename.snake)
   factory ComplaintTableState({
     @Default("") final String searchTerm,

@@ -36,7 +36,7 @@ class AuthProvider extends _$AuthProvider {
   }
 
   Future<void> saveToken(AuthUser authUser) async {
-    _sharedPreferences.remove(_sharedPrefsKey).catchError((error) {});
+    _sharedPreferences.remove(_sharedPrefsKey).catchError((error) => false);
     await _sharedPreferences.setString(_sharedPrefsKey, json.encode(authUser));
   }
 
@@ -45,7 +45,7 @@ class AuthProvider extends _$AuthProvider {
   }
 
   void disposeAuth() async {
-    _sharedPreferences.remove(_sharedPrefsKey).catchError((error) {});
+    _sharedPreferences.remove(_sharedPrefsKey).catchError((error) => false);
     state = const AsyncValue.data(null);
   }
 }

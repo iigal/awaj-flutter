@@ -6,28 +6,27 @@ part of 'complaints_categories_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CategoriesImpl _$$CategoriesImplFromJson(Map<String, dynamic> json) =>
-    _$CategoriesImpl(
-      collectionId: json['collectionId'] as String?,
-      collectionName: json['collectionName'] as String?,
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-      description: json['description'] as String?,
-      assignedTo: json['assignedTo'] as String?,
-      teamMembers: (json['teamMembers'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      prefix: json['prefix'] as String?,
-      code: json['code'] as String?,
-      created: json['created'] == null
-          ? null
-          : DateTime.parse(json['created'] as String),
-      updated: json['updated'] == null
-          ? null
-          : DateTime.parse(json['updated'] as String),
-    );
+_Categories _$CategoriesFromJson(Map<String, dynamic> json) => _Categories(
+  collectionId: json['collectionId'] as String?,
+  collectionName: json['collectionName'] as String?,
+  id: json['id'] as String?,
+  name: json['name'] as String?,
+  description: json['description'] as String?,
+  assignedTo: json['assignedTo'] as String?,
+  teamMembers: (json['teamMembers'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
+  prefix: json['prefix'] as String?,
+  code: json['code'] as String?,
+  created: json['created'] == null
+      ? null
+      : DateTime.parse(json['created'] as String),
+  updated: json['updated'] == null
+      ? null
+      : DateTime.parse(json['updated'] as String),
+);
 
-Map<String, dynamic> _$$CategoriesImplToJson(_$CategoriesImpl instance) =>
+Map<String, dynamic> _$CategoriesToJson(_Categories instance) =>
     <String, dynamic>{
       'collectionId': instance.collectionId,
       'collectionName': instance.collectionName,
@@ -42,37 +41,29 @@ Map<String, dynamic> _$$CategoriesImplToJson(_$CategoriesImpl instance) =>
       'updated': instance.updated?.toIso8601String(),
     };
 
-_$ComplaintsCountImpl _$$ComplaintsCountImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ComplaintsCountImpl(
-      count: (json['count'] as num).toInt(),
-    );
+_ComplaintsCount _$ComplaintsCountFromJson(Map<String, dynamic> json) =>
+    _ComplaintsCount(count: (json['count'] as num).toInt());
 
-Map<String, dynamic> _$$ComplaintsCountImplToJson(
-        _$ComplaintsCountImpl instance) =>
-    <String, dynamic>{
-      'count': instance.count,
-    };
+Map<String, dynamic> _$ComplaintsCountToJson(_ComplaintsCount instance) =>
+    <String, dynamic>{'count': instance.count};
 
-_$ComplaintsImpl _$$ComplaintsImplFromJson(Map<String, dynamic> json) =>
-    _$ComplaintsImpl(
-      collectionId: json['collectionId'] as String,
-      collectionName: json['collectionName'] as String,
-      id: json['id'] as String,
-      title: json['title'] as String,
-      description: json['description'] as String,
-      images:
-          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      complaintBy: json['complaintBy'] as String?,
-      complaintSubCateogryId: json['complaintSubCateogryId'] as String?,
-      complaintCategoryId: json['complaintCategoryId'] as String?,
-      progress: (json['progress'] as num?)?.toDouble() ?? 0.0,
-      status: json['status'] as String?,
-      created: DateTime.parse(json['created'] as String),
-      updated: DateTime.parse(json['updated'] as String),
-    );
+_Complaints _$ComplaintsFromJson(Map<String, dynamic> json) => _Complaints(
+  collectionId: json['collectionId'] as String,
+  collectionName: json['collectionName'] as String,
+  id: json['id'] as String,
+  title: json['title'] as String,
+  description: json['description'] as String,
+  images: (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  complaintBy: json['complaintBy'] as String?,
+  complaintSubCateogryId: json['complaintSubCateogryId'] as String?,
+  complaintCategoryId: json['complaintCategoryId'] as String?,
+  progress: (json['progress'] as num?)?.toDouble() ?? 0.0,
+  status: json['status'] as String?,
+  created: DateTime.parse(json['created'] as String),
+  updated: DateTime.parse(json['updated'] as String),
+);
 
-Map<String, dynamic> _$$ComplaintsImplToJson(_$ComplaintsImpl instance) =>
+Map<String, dynamic> _$ComplaintsToJson(_Complaints instance) =>
     <String, dynamic>{
       'collectionId': instance.collectionId,
       'collectionName': instance.collectionName,
@@ -89,13 +80,13 @@ Map<String, dynamic> _$$ComplaintsImplToJson(_$ComplaintsImpl instance) =>
       'updated': instance.updated.toIso8601String(),
     };
 
-_$ComplaintsRequestImpl _$$ComplaintsRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ComplaintsRequestImpl(
+_ComplaintsRequest _$ComplaintsRequestFromJson(Map<String, dynamic> json) =>
+    _ComplaintsRequest(
       title: json['title'] as String,
       description: json['description'] as String,
       complaintBy: json['complaint_by'] as String?,
-      images: (json['images'] as List<dynamic>?)
+      images:
+          (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
@@ -104,8 +95,7 @@ _$ComplaintsRequestImpl _$$ComplaintsRequestImplFromJson(
       complaintSubCategoryId: json['complaint_sub_category_id'] as String?,
     );
 
-Map<String, dynamic> _$$ComplaintsRequestImplToJson(
-        _$ComplaintsRequestImpl instance) =>
+Map<String, dynamic> _$ComplaintsRequestToJson(_ComplaintsRequest instance) =>
     <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
@@ -116,20 +106,20 @@ Map<String, dynamic> _$$ComplaintsRequestImplToJson(
       'complaint_sub_category_id': instance.complaintSubCategoryId,
     };
 
-_$ComplaintCommentRequestImpl _$$ComplaintCommentRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ComplaintCommentRequestImpl(
-      message: json['message'] as String,
-      commentBy: json['commentBy'] as String,
-      parentId: json['parentId'] as String?,
-      complaintId: json['complaintId'] as String,
-    );
+_ComplaintCommentRequest _$ComplaintCommentRequestFromJson(
+  Map<String, dynamic> json,
+) => _ComplaintCommentRequest(
+  message: json['message'] as String,
+  commentBy: json['commentBy'] as String,
+  parentId: json['parentId'] as String?,
+  complaintId: json['complaintId'] as String,
+);
 
-Map<String, dynamic> _$$ComplaintCommentRequestImplToJson(
-        _$ComplaintCommentRequestImpl instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'commentBy': instance.commentBy,
-      'parentId': instance.parentId,
-      'complaintId': instance.complaintId,
-    };
+Map<String, dynamic> _$ComplaintCommentRequestToJson(
+  _ComplaintCommentRequest instance,
+) => <String, dynamic>{
+  'message': instance.message,
+  'commentBy': instance.commentBy,
+  'parentId': instance.parentId,
+  'complaintId': instance.complaintId,
+};

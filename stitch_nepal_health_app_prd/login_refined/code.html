@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clinical Curator - Secure Access</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface-variant": "#434655",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-container": "#586377",
+                        "on-background": "#191c1e",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "outline-variant": "#c3c6d7",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "secondary-container": "#d5e0f8",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "surface-dim": "#d8dadc",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "on-tertiary-container": "#eef0ff",
+                        "on-surface": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#131b2e",
+                        "surface-container": "#eceef0",
+                        "secondary": "#545f73",
+                        "surface-tint": "#0053db",
+                        "tertiary": "#4d556b",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#737686",
+                        "surface": "#f7f9fb",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "inverse-primary": "#b4c5ff",
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-container": "#eeefff",
+                        "on-secondary-fixed": "#111c2d",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "primary": "#004ac6",
+                        "tertiary-fixed": "#dae2fd",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-container-low": "#f2f4f6",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#656d84"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden; /* Prevent scrolling as requested */
+        }
+        @media (max-height: 800px) {
+            body { overflow-y: auto; }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-screen flex flex-col">
+<main class="flex-grow flex items-center justify-center p-6">
+<div class="max-w-md w-full flex flex-col gap-8">
+<div class="flex flex-col justify-center">
+<div class="px-2">
+<div class="mb-6 flex flex-col items-center text-center relative">
+<div class="absolute inset-x-0 -top-24 -z-10 flex justify-center opacity-30">
+<div class="w-96 h-96 bg-primary/20 blur-[120px] rounded-full"></div>
+</div>
+<div class="mb-4 inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded border border-outline-variant/30">
+<span class="material-symbols-outlined text-[14px] text-primary">verified</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary">Official Registered System</span>
+</div>
+<div class="relative mb-6 group">
+<div class="absolute inset-0 bg-primary/20 blur-2xl rounded-full scale-75 group-hover:scale-100 transition-transform duration-700"></div>
+<div class="relative bg-white dark:bg-inverse-surface p-4 rounded-xl shadow-xl border border-outline-variant/10">
+<div class="bg-primary p-3 rounded-lg shadow-inner">
+<span class="material-symbols-outlined text-on-primary text-3xl">medical_services</span>
+</div>
+</div>
+</div>
+<h1 class="text-3xl md:text-4xl font-extrabold text-on-surface tracking-tight mb-4 leading-tight">
+                            Welcome Back to <br/>
+<span class="text-primary">The Clinical Curator</span>
+</h1>
+<p class="text-secondary text-sm max-w-sm leading-relaxed mx-auto font-medium">
+                            Precision-driven health management for practitioners. Securely access patient registries and diagnostic insights.
+                        </p>
+</div>
+<form class="space-y-4">
+<div class="space-y-1.5">
+<label class="text-[11px] font-bold uppercase tracking-wider text-secondary ml-1">Work Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-xl">mail</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary/40 text-on-surface placeholder:text-outline/60 transition-all outline-none" placeholder="name@medical-center.org" type="email"/>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-center px-1">
+<label class="text-[11px] font-bold uppercase tracking-wider text-secondary">Password</label>
+<a class="text-[11px] font-bold text-primary hover:underline" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-xl">lock</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-lg focus:ring-2 focus:ring-primary/40 text-on-surface placeholder:text-outline/60 transition-all outline-none" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="pt-2">
+<button class="w-full py-3.5 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 active:scale-[0.98] transition-all shadow-lg shadow-primary/20" type="submit">
+                                Sign In
+                            </button>
+</div>
+<div class="pt-4 flex flex-col gap-3 text-center">
+<p class="text-sm font-medium text-on-surface-variant">
+                                Need a patient account? 
+                                <a class="text-primary font-bold hover:underline" href="#">Create an account</a>
+</p>
+<div class="flex items-center gap-3">
+<div class="h-px flex-grow bg-outline-variant/30"></div>
+<span class="text-[10px] font-bold uppercase tracking-[0.1em] text-outline">or</span>
+<div class="h-px flex-grow bg-outline-variant/30"></div>
+</div>
+<button class="w-full py-3 border-2 border-primary/20 text-primary font-bold rounded-lg hover:bg-primary/5 active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-0.5" type="button">
+<span class="text-sm">Register as a Practitioner</span>
+<span class="text-[10px] font-medium opacity-70">Practitioner roles include a standard patient account</span>
+</button>
+</div>
+</form>
+<div class="mt-8 flex items-center gap-4">
+<div class="h-px flex-grow bg-outline-variant/20"></div>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] text-outline">Secure Access</span>
+<div class="h-px flex-grow bg-outline-variant/20"></div>
+</div>
+<div class="mt-6 flex justify-center gap-6">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-[11px] font-bold">HIPAA Compliant</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">encrypted</span>
+<span class="text-[11px] font-bold">256-bit Encryption</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

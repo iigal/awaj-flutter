@@ -14,9 +14,9 @@ class ThemeColor {
   static const Color lightBlue = Color(0xFFBBDEFB); // Light Blue
   static const Color darkBlue = Color(0xFF0D47A1);
 
-  static var green;
+  static Color? green;
 
-  static var backgroundLight; // Dark Blue
+  static Color? backgroundLight; // Dark Blue
 
   static ThemeData get themeData {
     return ThemeData(

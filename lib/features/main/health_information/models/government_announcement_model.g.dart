@@ -6,8 +6,8 @@ part of 'government_announcement_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AnnouncementImpl _$$AnnouncementImplFromJson(Map<String, dynamic> json) =>
-    _$AnnouncementImpl(
+_Announcement _$AnnouncementFromJson(Map<String, dynamic> json) =>
+    _Announcement(
       collectionId: json['collectionId'] as String?,
       collectionName: json['collectionName'] as String?,
       content: json['content'] as String,
@@ -15,8 +15,9 @@ _$AnnouncementImpl _$$AnnouncementImplFromJson(Map<String, dynamic> json) =>
       fullSummary: json['full_summary'] as String,
       id: json['id'] as String?,
       metaData: json['meta_data'],
-      priority:
-          (json['priority'] as List<dynamic>).map((e) => e as String).toList(),
+      priority: (json['priority'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       status: json['status'] as bool?,
       summary: json['summary'] as String?,
       title: json['title'] as String,
@@ -25,7 +26,7 @@ _$AnnouncementImpl _$$AnnouncementImplFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updated'] as String),
     );
 
-Map<String, dynamic> _$$AnnouncementImplToJson(_$AnnouncementImpl instance) =>
+Map<String, dynamic> _$AnnouncementToJson(_Announcement instance) =>
     <String, dynamic>{
       'collectionId': instance.collectionId,
       'collectionName': instance.collectionName,

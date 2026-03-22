@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Patient Report | The Clinical Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#434655",
+              "inverse-surface": "#2d3133",
+              "on-secondary-container": "#586377",
+              "on-background": "#191c1e",
+              "primary-fixed-dim": "#b4c5ff",
+              "outline-variant": "#c3c6d7",
+              "secondary-fixed": "#d8e3fb",
+              "on-primary-fixed": "#00174b",
+              "primary-container": "#2563eb",
+              "secondary-container": "#d5e0f8",
+              "inverse-on-surface": "#eff1f3",
+              "on-secondary-fixed-variant": "#3c475a",
+              "surface-variant": "#e0e3e5",
+              "on-tertiary-fixed-variant": "#3f465c",
+              "surface-dim": "#d8dadc",
+              "secondary-fixed-dim": "#bcc7de",
+              "primary-fixed": "#dbe1ff",
+              "tertiary-fixed-dim": "#bec6e0",
+              "on-tertiary-container": "#eef0ff",
+              "on-surface": "#191c1e",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed": "#131b2e",
+              "surface-container": "#eceef0",
+              "secondary": "#545f73",
+              "surface-tint": "#0053db",
+              "tertiary": "#4d556b",
+              "surface-container-lowest": "#ffffff",
+              "outline": "#737686",
+              "surface": "#f7f9fb",
+              "on-tertiary": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "on-primary": "#ffffff",
+              "surface-container-high": "#e6e8ea",
+              "inverse-primary": "#b4c5ff",
+              "surface-bright": "#f7f9fb",
+              "on-primary-container": "#eeefff",
+              "on-secondary-fixed": "#111c2d",
+              "error": "#ba1a1a",
+              "background": "#f7f9fb",
+              "primary": "#004ac6",
+              "tertiary-fixed": "#dae2fd",
+              "surface-container-highest": "#e0e3e5",
+              "on-primary-fixed-variant": "#003ea8",
+              "surface-container-low": "#f2f4f6",
+              "on-error": "#ffffff",
+              "tertiary-container": "#656d84"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-[#f7f9fb] dark:bg-slate-950 docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="Professional medical staff profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzd0eoXP_2XRy3WJm-LNWcvjIfX6T9XO2RSS4yRlWAZMbVg0Htv4lSp6TIkDJ-LEk4wJNR2NxKrZKR5eDW4goJTcvPZ6moCGj4qVb6fNazX0LT3i2VE1JeQVbPuNxNVbr1KmR6in9uh530xQS6cnrT_ewUORwHXc4_q3D_ZrhTc1JjLqDmMf5CB5yYyiyO9yE98aH7TAUyWwseq9F927oyzW-omAc3Lh-TwelUheCQbHRf8lv7ajAvkdW0v48JT_AmCH93Og4Js0sD"/>
+</div>
+<h1 class="text-lg font-bold tracking-tighter text-[#004ac6] dark:text-blue-400">The Clinical Curator</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#545f73] dark:text-slate-400 font-semibold hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors px-3 py-2 rounded-lg" href="#">Dashboard</a>
+<a class="text-[#004ac6] dark:text-blue-400 font-semibold hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors px-3 py-2 rounded-lg" href="#">Records</a>
+<a class="text-[#545f73] dark:text-slate-400 font-semibold hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors px-3 py-2 rounded-lg" href="#">Services</a>
+</nav>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors text-[#004ac6] dark:text-blue-500">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8">
+<!-- Breadcrumb & Title -->
+<div class="mb-8">
+<div class="flex items-center gap-2 text-on-secondary-container text-sm mb-2">
+<span>Patients</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>Siddhartha Thapa</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-medium">New Clinical Report</span>
+</div>
+<h2 class="text-3xl font-bold tracking-tight text-on-surface">Clinical Report Entry</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Patient Profile & Uploads -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Patient Mini-Profile -->
+<section class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_24px_rgba(25,28,30,0.04)]">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 rounded-lg bg-blue-50 overflow-hidden">
+<img alt="Patient Siddhartha Thapa" class="w-full h-full object-cover" data-alt="Portrait of Siddhartha Thapa for medical identification" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBekraJ4Mn8_n_3p7iKEh8jvRivaukDYRCmOtkSq0j64Mq381aubLAGlKA3ar-b85s8u4Q7jlsgXX64W_LdzxO77Drej0_9G7jA4m6IvF8DlzgLD34x6h0xlFdYmRnhmnyg-Q8RhKVxVBRQzSKJauFzE-XhBiiA6Cv6ybfEc6zaLC-SW9Ed-6jBmR6tKgJsJqazgz13QEuUecfSM8840ZIBWPhISjhtk1rerK2ZV-jQCKSCWvsYgZiUQVzfgqHJ_qCXNP3FlShiDfZ8"/>
+</div>
+<div>
+<h3 class="text-xl font-bold text-on-surface">Siddhartha Thapa</h3>
+<p class="text-sm text-on-secondary-container">Patient ID: #MED-88291</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-outline-variant/20">
+<div>
+<p class="text-[10px] uppercase tracking-wider font-bold text-outline">Age / Sex</p>
+<p class="text-sm font-semibold">32 / Male</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-wider font-bold text-outline">Blood Type</p>
+<span class="inline-block px-2 py-0.5 bg-error-container text-on-error-container text-xs font-bold rounded-sm">B Positive</span>
+</div>
+</div>
+</section>
+<!-- File Upload Section -->
+<section class="bg-surface-container-low p-6 rounded-xl">
+<h4 class="text-sm font-bold mb-4 flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-primary text-lg">attach_file</span>
+                        Attachments &amp; Diagnostic Imagery
+                    </h4>
+<div class="border-2 border-dashed border-outline-variant/50 rounded-lg p-8 flex flex-col items-center justify-center text-center bg-surface-container-lowest">
+<span class="material-symbols-outlined text-4xl text-outline mb-2">cloud_upload</span>
+<p class="text-sm font-medium">Drag and drop medical files</p>
+<p class="text-xs text-on-secondary-container mb-4">Support for DICOM, PDF, JPEG</p>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity">
+                            Select Files
+                        </button>
+</div>
+<div class="mt-4 space-y-2">
+<div class="flex items-center justify-between p-3 bg-surface-container-highest rounded-lg text-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">description</span>
+<span class="font-medium">Previous_Labs.pdf</span>
+</div>
+<span class="material-symbols-outlined text-error cursor-pointer">close</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Entry Form -->
+<div class="lg:col-span-8">
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-[0_4px_24px_rgba(25,28,30,0.04)]">
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Date -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Report Date</label>
+<input class="w-full h-12 px-4 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-on-surface-variant/50" type="date" value="2023-10-27"/>
+</div>
+<!-- Department -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Department</label>
+<select class="w-full h-12 px-4 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all text-on-surface-variant">
+<option>Internal Medicine</option>
+<option>Cardiology</option>
+<option>Neurology</option>
+<option>Radiology</option>
+</select>
+</div>
+</div>
+<!-- Diagnosis -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Primary Diagnosis</label>
+<input class="w-full h-12 px-4 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-on-surface-variant/50" placeholder="Enter clinical diagnosis" type="text"/>
+</div>
+<!-- Notes -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Clinical Notes</label>
+<textarea class="w-full px-4 py-3 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-on-surface-variant/50" placeholder="Detailed observations, patient history nuances..." rows="4"></textarea>
+</div>
+<!-- Treatment Plan -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Treatment Plan</label>
+<textarea class="w-full px-4 py-3 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-on-surface-variant/50" placeholder="Medications, lifestyle changes, follow-up schedule..." rows="3"></textarea>
+</div>
+<!-- Action Buttons -->
+<div class="pt-8 flex flex-col gap-4">
+<button class="w-full h-14 bg-primary text-on-primary font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary-container transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-lg">cloud_done</span>
+                                Save Report to Registry
+                            </button>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<button class="w-full h-12 bg-surface-container-high text-on-surface text-sm font-bold rounded-lg hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-lg">share</span>
+                                    Save &amp; Share
+                                </button>
+<button class="w-full h-12 text-sm font-bold text-primary hover:bg-primary/5 rounded-lg transition-colors border border-primary/20" type="button">
+                                    Cancel Entry
+                                </button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-[#f7f9fb] dark:bg-slate-900 border-t border-slate-200/50 dark:border-slate-800/50 shadow-[0_-4px_24px_rgba(25,28,30,0.04)] flex justify-around items-center px-4 pb-6 pt-2 z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-[#545f73] dark:text-slate-500 px-3 py-1.5 hover:text-[#004ac6] dark:hover:text-blue-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-blue-50 dark:bg-blue-900/30 text-[#004ac6] dark:text-blue-300 rounded-lg px-3 py-1.5" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium text-[#004ac6] dark:text-blue-400 font-semibold">Records</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#545f73] dark:text-slate-500 px-3 py-1.5 hover:text-[#004ac6] dark:hover:text-blue-300" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Services</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#545f73] dark:text-slate-500 px-3 py-1.5 hover:text-[#004ac6] dark:hover:text-blue-300" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-medium">Profile</span>
+</a>
+</nav>
+</body></html>

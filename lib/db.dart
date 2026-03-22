@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -49,6 +50,12 @@ late PocketBase pocketBaseDB;
 late String mobilePocketbase;
 
 Future<void> setupPocketBase() async {
+  if (kIsWeb) {
+    mobilePocketbase = '';
+    pocketBaseDB = PocketBase('https://five-baths-lick.loca.lt');
+    return;
+  }
+
   await Permission.storage.request();
 
   mobilePocketbase = await PocketbaseServerFlutter.localIpAddress ?? '';

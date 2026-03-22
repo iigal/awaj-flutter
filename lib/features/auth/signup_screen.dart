@@ -194,10 +194,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
         controller: controller,
         // validator: (String? value) => value != null && value.length < 5 ? "The text should be longer than 5 characters." : null,
         onTap: () => controller.clear(),
-        leading: leading,
-        trailing: GestureDetector(
-          child: const Icon(Icons.close),
-        ),
+        features: [
+          if (leading != null) shadcnui.InputFeature.leading(leading),
+          shadcnui.InputFeature.trailing(
+            GestureDetector(
+              child: const Icon(Icons.close),
+            ),
+          ),
+        ],
         keyboardType: keyboardType,
         maxLength: maxLength,
         placeholder: Text(hintText ?? ""),
@@ -218,11 +222,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         controller: controller,
         // validator: (String? value) => value != null && value.length < 5 ? "The text should be longer than 5 characters." : null,
         onTap: () => controller.clear(),
-        leading: leading,
-        trailing: IconButton(
-          icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
-          onPressed: toggleVisibility, // This is now compatible
-        ),
+        features: [
+          if (leading != null) shadcnui.InputFeature.leading(leading),
+          shadcnui.InputFeature.trailing(
+            IconButton(
+              icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
+              onPressed: toggleVisibility, // This is now compatible
+            ),
+          ),
+        ],
         obscureText: obscureText,
         placeholder: Text(hintText ?? ""),
       ),

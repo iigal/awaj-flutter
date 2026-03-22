@@ -6,20 +6,49 @@ part of 'auth_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authProviderHash() => r'3a48a44b55e4d7d86ed7465dd09a2a9e85b8f6b8';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [AuthProvider].
 @ProviderFor(AuthProvider)
-final authProviderProvider =
-    AsyncNotifierProvider<AuthProvider, AuthUser?>.internal(
-  AuthProvider.new,
-  name: r'authProviderProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$authProviderHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final authProviderProvider = AuthProviderProvider._();
 
-typedef _$AuthProvider = AsyncNotifier<AuthUser?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class AuthProviderProvider
+    extends $AsyncNotifierProvider<AuthProvider, AuthUser?> {
+  AuthProviderProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'authProviderProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$authProviderHash();
+
+  @$internal
+  @override
+  AuthProvider create() => AuthProvider();
+}
+
+String _$authProviderHash() => r'8ce5eaa381195c36fc72ed7e393a85e2c1674a84';
+
+abstract class _$AuthProvider extends $AsyncNotifier<AuthUser?> {
+  FutureOr<AuthUser?> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<AuthUser?>, AuthUser?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<AuthUser?>, AuthUser?>,
+              AsyncValue<AuthUser?>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

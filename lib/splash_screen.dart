@@ -1,4 +1,3 @@
-import 'package:awaj/core/router.dart';
 import 'package:awaj/features/auth/providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
@@ -21,21 +20,18 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(authProviderProvider, (prev, next) {
-      next.maybeWhen(
-        orElse: () {},
-        data: (data) {
-          if (data != null) {
-            context.go("/home");
-          }
-        },
-      );
+      if (next is AsyncData) {
+        if (next.value != null) {
+          context.go("/home");
+        }
+      }
     });
     return Scaffold(
-      child: ref.watch(authProviderProvider).maybeWhen(
-            loading: () => const Center(
+      child: ref.watch(authProviderProvider).isLoading
+          ? const Center(
               child: CircularProgressIndicator(),
-            ),
-            orElse: () => Column(
+            )
+          : Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
@@ -74,7 +70,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 )
               ],
             ),
-          ),
     );
   }
 }

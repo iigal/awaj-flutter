@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Practitioner Registration | Nepal Health App</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#f7f9fb",
+              "primary-fixed-dim": "#b4c5ff",
+              "primary-fixed": "#dbe1ff",
+              "on-error": "#ffffff",
+              "tertiary": "#4d556b",
+              "error": "#ba1a1a",
+              "inverse-surface": "#2d3133",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed": "#111c2d",
+              "tertiary-fixed": "#dae2fd",
+              "surface-container-high": "#e6e8ea",
+              "inverse-on-surface": "#eff1f3",
+              "on-primary": "#ffffff",
+              "surface-container-highest": "#e0e3e5",
+              "on-tertiary-fixed-variant": "#3f465c",
+              "on-primary-fixed-variant": "#003ea8",
+              "secondary-fixed": "#d8e3fb",
+              "secondary-container": "#d5e0f8",
+              "on-surface": "#191c1e",
+              "on-primary-fixed": "#00174b",
+              "tertiary-container": "#656d84",
+              "secondary-fixed-dim": "#bcc7de",
+              "on-primary-container": "#eeefff",
+              "outline": "#737686",
+              "surface-container-low": "#f2f4f6",
+              "on-tertiary-fixed": "#131b2e",
+              "surface-dim": "#d8dadc",
+              "on-error-container": "#93000a",
+              "outline-variant": "#c3c6d7",
+              "surface": "#f7f9fb",
+              "on-secondary-container": "#586377",
+              "surface-variant": "#e0e3e5",
+              "tertiary-fixed-dim": "#bec6e0",
+              "surface-container-lowest": "#ffffff",
+              "on-background": "#191c1e",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#434655",
+              "primary": "#004ac6",
+              "primary-container": "#2563eb",
+              "background": "#f7f9fb",
+              "surface-container": "#eceef0",
+              "error-container": "#ffdad6",
+              "surface-tint": "#0053db",
+              "inverse-primary": "#b4c5ff",
+              "on-tertiary-container": "#eef0ff",
+              "on-secondary-fixed-variant": "#3c475a",
+              "secondary": "#545f73"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md">
+<div class="flex items-center justify-between px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-blue-700 dark:text-blue-500">arrow_back</span>
+</button>
+<h1 class="font-plus-jakarta-sans font-semibold tracking-tight text-lg text-slate-900 dark:text-slate-100">Practitioner Registration</h1>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<span class="text-blue-700 dark:text-blue-400 font-bold text-sm">Help Center</span>
+<span class="text-slate-500 dark:text-slate-400 text-sm">Contact Support</span>
+</div>
+</div>
+<div class="bg-slate-200/50 dark:bg-slate-800/50 h-[1px] w-full"></div>
+</nav>
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Information Banner (FHIR-based account) -->
+<section class="mb-8 p-5 bg-primary-fixed text-on-primary-fixed rounded-xl border border-primary-fixed-dim/30 flex gap-4 items-start shadow-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<p class="text-sm font-semibold leading-relaxed">Identity Synchronisation</p>
+<p class="text-xs opacity-90 mt-1 leading-relaxed">Registering as a practitioner automatically creates a user/patient FHIR-based account too. This ensures a unified medical history within the national health ecosystem.</p>
+</div>
+</section>
+<!-- Main Form Container -->
+<div class="bg-surface-container-low rounded-xl p-1">
+<div class="bg-surface-container-lowest rounded-lg shadow-[0_-4px_24px_rgba(0,0,0,0.02)] p-6">
+<header class="mb-8">
+<h2 class="text-2xl font-bold tracking-tight text-on-surface">Professional Credentials</h2>
+<p class="text-sm text-on-surface-variant mt-2">Please provide your official medical registration details for verification.</p>
+</header>
+<form class="space-y-6">
+<!-- Full Name -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Full Name</label>
+<input class="w-full h-12 px-4 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-on-surface-variant/50" placeholder="Dr. Samir K. Shrestha" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Medical ID -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Medical ID/License Number</label>
+<input class="w-full h-12 px-4 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-on-surface-variant/50" placeholder="NMC-XXXXX" type="text"/>
+</div>
+<!-- Specialization -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Specialization</label>
+<select class="w-full h-12 px-4 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all text-on-surface-variant">
+<option>General Medicine</option>
+<option>Cardiology</option>
+<option>Pediatrics</option>
+<option>Neurology</option>
+<option>Orthopedics</option>
+</select>
+</div>
+</div>
+<!-- Healthcare Facility -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Healthcare Facility</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">local_hospital</span>
+<input class="w-full h-12 pl-12 pr-4 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-on-surface-variant/50" placeholder="e.g. Tribhuvan University Teaching Hospital" type="text"/>
+</div>
+</div>
+<!-- Work Email -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Work Email</label>
+<input class="w-full h-12 px-4 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-on-surface-variant/50" placeholder="name@hospital.org.np" type="email"/>
+</div>
+<!-- Verification Notice -->
+<div class="pt-4 p-4 bg-surface-container-low rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">verified_user</span>
+<p class="text-[11px] text-on-surface-variant leading-tight">Your credentials will be verified against the Nepal Medical Council database. This process usually takes 24-48 hours.</p>
+</div>
+<!-- CTA -->
+<div class="pt-4">
+<button class="w-full h-14 bg-primary text-on-primary font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary-container transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                            Submit for Verification
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Secondary Information / Security Bento -->
+<section class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-6 bg-surface-container-low rounded-xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary mb-3">security</span>
+<h3 class="text-sm font-bold text-on-surface">Privacy First</h3>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">All professional data is encrypted and handled according to the National Health Data Privacy Guidelines.</p>
+</div>
+<div class="p-6 bg-surface-container-low rounded-xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary mb-3">account_tree</span>
+<h3 class="text-sm font-bold text-on-surface">Unified ID</h3>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">Access both your clinical dashboard and personal health records with a single set of credentials.</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-center gap-12 pb-safe pt-2 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_24px_rgba(0,0,0,0.04)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-6 py-1 hover:text-blue-600 transition-transform active:scale-95 touch-none select-none" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="text-[11px] font-medium font-plus-jakarta-sans mt-1">Help Center</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-6 py-1 hover:text-blue-600 transition-transform active:scale-95 touch-none select-none" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="text-[11px] font-medium font-plus-jakarta-sans mt-1">Contact Support</span>
+</a>
+</nav>
+</body></html>

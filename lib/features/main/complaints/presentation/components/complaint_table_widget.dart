@@ -35,7 +35,7 @@ class _ComplaintTableState extends ConsumerState<ComplaintTable> {
   Widget build(BuildContext context) {
     final filterProvider = ref.watch(complaintTableFilterStateProvider);
     final complaintProvider = ref.watch(
-      complaintsNotifierProvider(filter: filterProvider),
+      complaintsProvider(filter: filterProvider),
     );
     return Column(
       children: [
@@ -45,15 +45,19 @@ class _ComplaintTableState extends ConsumerState<ComplaintTable> {
               child: TextField(
                 controller: _searchController,
                 placeholder: Text('Search something...'),
-                leading: const Icon(Icons.search).iconMutedForeground(),
-                trailing: IconButton.text(
-                  icon: const Icon(Icons.close),
-                  density: ButtonDensity.compact,
-                  onPressed: () {
-                    _searchController.clear();
-                    ref.read(complaintTableFilterStateProvider.notifier).setSearchTerm = _searchController.text;
-                  },
-                ),
+                features: [
+                  InputFeature.leading(const Icon(Icons.search).iconMutedForeground()),
+                  InputFeature.trailing(
+                    IconButton.text(
+                      icon: const Icon(Icons.close),
+                      density: ButtonDensity.compact,
+                      onPressed: () {
+                        _searchController.clear();
+                        ref.read(complaintTableFilterStateProvider.notifier).setSearchTerm = _searchController.text;
+                      },
+                    ),
+                  ),
+                ],
                 onChanged: (value) {
                   if (_debounce?.isActive ?? false) _debounce?.cancel();
                   _debounce = Timer(const Duration(milliseconds: 500), () {
@@ -79,7 +83,7 @@ class _ComplaintTableState extends ConsumerState<ComplaintTable> {
                 minExtent: 100,
                 maxExtent: 200,
                 onRefresh: () async {
-                  ref.invalidate(complaintsNotifierProvider);
+                  ref.invalidate(complaintsProvider);
                 },
                 child: ListView.separated(
                   padding: const EdgeInsets.only(top: 18),

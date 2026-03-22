@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile &amp; Settings - The Clinical Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#434655",
+              "inverse-surface": "#2d3133",
+              "on-secondary-container": "#586377",
+              "on-background": "#191c1e",
+              "primary-fixed-dim": "#b4c5ff",
+              "outline-variant": "#c3c6d7",
+              "secondary-fixed": "#d8e3fb",
+              "on-primary-fixed": "#00174b",
+              "primary-container": "#2563eb",
+              "secondary-container": "#d5e0f8",
+              "inverse-on-surface": "#eff1f3",
+              "on-secondary-fixed-variant": "#3c475a",
+              "surface-variant": "#e0e3e5",
+              "on-tertiary-fixed-variant": "#3f465c",
+              "surface-dim": "#d8dadc",
+              "secondary-fixed-dim": "#bcc7de",
+              "primary-fixed": "#dbe1ff",
+              "tertiary-fixed-dim": "#bec6e0",
+              "on-tertiary-container": "#eef0ff",
+              "on-surface": "#191c1e",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed": "#131b2e",
+              "surface-container": "#eceef0",
+              "secondary": "#545f73",
+              "surface-tint": "#0053db",
+              "tertiary": "#4d556b",
+              "surface-container-lowest": "#ffffff",
+              "outline": "#737686",
+              "surface": "#f7f9fb",
+              "on-tertiary": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "on-primary": "#ffffff",
+              "surface-container-high": "#e6e8ea",
+              "inverse-primary": "#b4c5ff",
+              "surface-bright": "#f7f9fb",
+              "on-primary-container": "#eeefff",
+              "on-secondary-fixed": "#111c2d",
+              "error": "#ba1a1a",
+              "background": "#f7f9fb",
+              "primary": "#004ac6",
+              "tertiary-fixed": "#dae2fd",
+              "surface-container-highest": "#e0e3e5",
+              "on-primary-fixed-variant": "#003ea8",
+              "surface-container-low": "#f2f4f6",
+              "on-error": "#ffffff",
+              "tertiary-container": "#656d84"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .clinical-shadow {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-white/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-white overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt8e4tLhRqd72HgSy9rM8KzJJyZLKJSYLv4bQsaNstesjVmZGDGhUgJ1EdcHJXYhrr-KbsFs2HPNxsqHPLaXhCdG2P_x4By12--D0tFfMfX7gvKJ3LzhxVIPEyNjhwQEUkSeVYK06oZXXZwMBEVrqh32Hpn2AOgLO_KZog3sUNgFYPWzCA3TqT3w-PfuzEEyBsmzp4RnTHsr3XEhnaqvclI2o-JAF76QqmF3KErXRogueisYU0r9KvNX7lq5AIIEUS-Kk8aHx4BeZW"/>
+</div>
+<h1 class="text-lg font-bold tracking-tighter text-[#004ac6] dark:text-blue-400 font-['Plus_Jakarta_Sans']">The Clinical Curator</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-lg text-[#545f73] hover:bg-slate-200/50 transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-6 py-8 space-y-8">
+<!-- Profile Header Section: Matching Registration Style Sectioning -->
+<div class="bg-surface-container-low rounded-xl p-1">
+<div class="bg-surface-container-lowest rounded-lg shadow-[0_-4px_24px_rgba(0,0,0,0.02)] p-6">
+<div class="flex flex-col items-center text-center">
+<div class="relative mb-6">
+<div class="w-24 h-24 rounded-xl overflow-hidden bg-secondary-container ring-4 ring-surface-container-low">
+<img alt="Dr. Arpan K. Sharma" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKJMx0quWjP47ZhmchmZb6im6FU6CbfWxagetcK2vI8mdJXrLrklxt-vu-jX2N3_evpQiUxuqx5cthAxbq6X60XKJZhoPZHIbgevYoL5gkYHAF2vJwdBKmr2Nuc7oLFZEbYKvLx3OGc_x4GN21kxe7T31qBEnlq2TRSpA6nmggHnvK9ug6764eB3KcRi6kFSt7p25hMHrZJKe_btt7uXc3gnD5Q62Fyz3EtX_wSd427Vx9RyZtBDAmDCYsAXlbQitwaAylJhKieydG"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary p-1.5 rounded-lg border-2 border-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-white text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<h2 class="text-2xl font-bold text-on-surface tracking-tight">Dr. Arpan K. Sharma</h2>
+<p class="text-on-secondary-container font-medium mt-1">Senior Consultant • Cardiology</p>
+<div class="flex flex-wrap gap-2 justify-center mt-6">
+<span class="px-3 py-1 bg-surface-container-high text-[10px] font-bold rounded-lg text-on-surface-variant uppercase tracking-wider">Medical ID: 8842-X</span>
+<span class="px-3 py-1 bg-primary/10 text-[10px] font-bold rounded-lg text-primary uppercase tracking-wider">Admin Access</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Workspace: Prominent Card Style (SCREEN_36 Style with Primary Accent) -->
+<div class="bg-white rounded-lg border border-slate-200 clinical-shadow p-6 flex flex-col gap-6 group border-l-4 border-l-primary">
+<div class="flex justify-between items-start">
+<div class="flex min-w-0 gap-4">
+<div class="w-11 h-11 rounded-md bg-blue-50 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl">clinical_notes</span>
+</div>
+<div class="min-w-0">
+<p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Active Workspace</p>
+<h3 class="text-xl font-bold text-slate-900 truncate">Doctor Mode</h3>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="bg-slate-50/50 border border-slate-100 rounded-lg p-4">
+<p class="text-sm text-slate-600 leading-relaxed">Switch to Patient view to manage personal health records and appointment history.</p>
+</div>
+<button class="w-full h-12 bg-primary text-white py-1.5 rounded-lg text-sm font-bold hover:bg-[#003ea8] transition-colors shadow-lg shadow-primary/20">Switch Workspace</button>
+</div>
+<!-- System Preferences: Matching Registration Layout -->
+<div class="bg-surface-container-low rounded-xl p-1">
+<div class="bg-surface-container-lowest rounded-lg shadow-[0_-4px_24px_rgba(0,0,0,0.02)] p-6">
+<header class="mb-8">
+<h3 class="text-xl font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="settings">settings</span>
+                        System Preferences
+                    </h3>
+</header>
+<div class="space-y-6">
+<!-- Language Selection (Registration Input Style) -->
+<div class="space-y-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-secondary">Display Language</label>
+<select class="w-full h-12 px-4 bg-surface-container-highest border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/40 transition-all text-on-surface-variant">
+<option>English (US)</option>
+<option>Hindi (IN)</option>
+<option>Spanish (ES)</option>
+</select>
+</div>
+<!-- Security Options -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-low rounded-lg flex items-center justify-between border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">fingerprint</span>
+<p class="text-xs font-bold text-on-surface">Biometric Login</p>
+</div>
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg flex items-center justify-between border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">notifications_active</span>
+<p class="text-xs font-bold text-on-surface">Critical Alerts</p>
+</div>
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Privacy & Actions Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-6 bg-surface-container-low rounded-xl border border-outline-variant/10 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-primary mb-3">lock_person</span>
+<h3 class="text-sm font-bold text-on-surface">Privacy &amp; Data</h3>
+<ul class="mt-4 space-y-3">
+<li class="flex items-center gap-3 text-xs font-semibold text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-lg">description</span> Activity Logs
+                        </li>
+<li class="flex items-center gap-3 text-xs font-semibold text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-lg">security</span> Manage Permissions
+                        </li>
+<li class="flex items-center gap-3 text-xs font-semibold text-on-surface-variant hover:text-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-lg">history</span> Session History
+                        </li>
+</ul>
+</div>
+</div>
+<div class="p-6 bg-error-container/10 rounded-xl border border-error/10 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-error mb-3">logout</span>
+<h3 class="text-sm font-bold text-on-surface">Danger Zone</h3>
+<p class="text-[11px] text-on-surface-variant mt-2 leading-relaxed">Securely end your current session. All unsaved clinical entries will be cached.</p>
+</div>
+<div class="mt-6">
+<button class="w-full h-12 bg-error text-white font-bold rounded-lg shadow-lg shadow-error/20 hover:bg-red-700 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                        Sign Out
+                        <span class="material-symbols-outlined text-lg">exit_to_app</span>
+</button>
+<p class="text-[10px] text-center mt-3 text-on-error-container/60">Version 2.4.0-Clinical (Stable)</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shadow-[0_-4px_24px_rgba(0,0,0,0.04)] z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1.5 hover:text-[#004ac6]" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold mt-1 uppercase tracking-tighter">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1.5 hover:text-[#004ac6]" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px] font-bold mt-1 uppercase tracking-tighter">Records</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1.5 hover:text-[#004ac6]" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="text-[10px] font-bold mt-1 uppercase tracking-tighter">Services</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#004ac6] dark:text-blue-300 bg-blue-50 dark:bg-blue-900/30 rounded-lg px-3 py-1.5" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[10px] font-bold mt-1 uppercase tracking-tighter">Profile</span>
+</a>
+</nav>
+</body></html>

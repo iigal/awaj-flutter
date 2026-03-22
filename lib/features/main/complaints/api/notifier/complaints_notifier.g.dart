@@ -6,341 +6,246 @@ part of 'complaints_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$complaintsNotifierHash() =>
-    r'53095576d742de80e8a4550a0a2ccc75de38db16';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-abstract class _$ComplaintsNotifier
-    extends BuildlessAutoDisposeAsyncNotifier<List<Complaints>> {
-  late final ComplaintTableState filter;
-
-  FutureOr<List<Complaints>> build({
-    required ComplaintTableState filter,
-  });
-}
-
-/// See also [ComplaintsNotifier].
 @ProviderFor(ComplaintsNotifier)
-const complaintsNotifierProvider = ComplaintsNotifierFamily();
+final complaintsProvider = ComplaintsNotifierFamily._();
 
-/// See also [ComplaintsNotifier].
-class ComplaintsNotifierFamily extends Family<AsyncValue<List<Complaints>>> {
-  /// See also [ComplaintsNotifier].
-  const ComplaintsNotifierFamily();
+final class ComplaintsNotifierProvider
+    extends $AsyncNotifierProvider<ComplaintsNotifier, List<Complaints>> {
+  ComplaintsNotifierProvider._({
+    required ComplaintsNotifierFamily super.from,
+    required ComplaintTableState super.argument,
+  }) : super(
+         retry: null,
+         name: r'complaintsProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
-  /// See also [ComplaintsNotifier].
-  ComplaintsNotifierProvider call({
-    required ComplaintTableState filter,
-  }) {
-    return ComplaintsNotifierProvider(
-      filter: filter,
-    );
+  @override
+  String debugGetCreateSourceHash() => _$complaintsNotifierHash();
+
+  @override
+  String toString() {
+    return r'complaintsProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  ComplaintsNotifierProvider getProviderOverride(
-    covariant ComplaintsNotifierProvider provider,
-  ) {
-    return call(
-      filter: provider.filter,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'complaintsNotifierProvider';
-}
-
-/// See also [ComplaintsNotifier].
-class ComplaintsNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    ComplaintsNotifier, List<Complaints>> {
-  /// See also [ComplaintsNotifier].
-  ComplaintsNotifierProvider({
-    required ComplaintTableState filter,
-  }) : this._internal(
-          () => ComplaintsNotifier()..filter = filter,
-          from: complaintsNotifierProvider,
-          name: r'complaintsNotifierProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$complaintsNotifierHash,
-          dependencies: ComplaintsNotifierFamily._dependencies,
-          allTransitiveDependencies:
-              ComplaintsNotifierFamily._allTransitiveDependencies,
-          filter: filter,
-        );
-
-  ComplaintsNotifierProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.filter,
-  }) : super.internal();
-
-  final ComplaintTableState filter;
-
-  @override
-  FutureOr<List<Complaints>> runNotifierBuild(
-    covariant ComplaintsNotifier notifier,
-  ) {
-    return notifier.build(
-      filter: filter,
-    );
-  }
-
-  @override
-  Override overrideWith(ComplaintsNotifier Function() create) {
-    return ProviderOverride(
-      origin: this,
-      override: ComplaintsNotifierProvider._internal(
-        () => create()..filter = filter,
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        filter: filter,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeAsyncNotifierProviderElement<ComplaintsNotifier, List<Complaints>>
-      createElement() {
-    return _ComplaintsNotifierProviderElement(this);
-  }
+  ComplaintsNotifier create() => ComplaintsNotifier();
 
   @override
   bool operator ==(Object other) {
-    return other is ComplaintsNotifierProvider && other.filter == filter;
+    return other is ComplaintsNotifierProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, filter.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin ComplaintsNotifierRef
-    on AutoDisposeAsyncNotifierProviderRef<List<Complaints>> {
-  /// The parameter `filter` of this provider.
-  ComplaintTableState get filter;
-}
+String _$complaintsNotifierHash() =>
+    r'53095576d742de80e8a4550a0a2ccc75de38db16';
 
-class _ComplaintsNotifierProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<ComplaintsNotifier,
-        List<Complaints>> with ComplaintsNotifierRef {
-  _ComplaintsNotifierProviderElement(super.provider);
+final class ComplaintsNotifierFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          ComplaintsNotifier,
+          AsyncValue<List<Complaints>>,
+          List<Complaints>,
+          FutureOr<List<Complaints>>,
+          ComplaintTableState
+        > {
+  ComplaintsNotifierFamily._()
+    : super(
+        retry: null,
+        name: r'complaintsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  ComplaintsNotifierProvider call({required ComplaintTableState filter}) =>
+      ComplaintsNotifierProvider._(argument: filter, from: this);
 
   @override
-  ComplaintTableState get filter =>
-      (origin as ComplaintsNotifierProvider).filter;
+  String toString() => r'complaintsProvider';
+}
+
+abstract class _$ComplaintsNotifier extends $AsyncNotifier<List<Complaints>> {
+  late final _$args = ref.$arg as ComplaintTableState;
+  ComplaintTableState get filter => _$args;
+
+  FutureOr<List<Complaints>> build({required ComplaintTableState filter});
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref =
+        this.ref as $Ref<AsyncValue<List<Complaints>>, List<Complaints>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<List<Complaints>>, List<Complaints>>,
+              AsyncValue<List<Complaints>>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, () => build(filter: _$args));
+  }
+}
+
+@ProviderFor(ComplaintsCountNotifier)
+final complaintsCountProvider = ComplaintsCountNotifierProvider._();
+
+final class ComplaintsCountNotifierProvider
+    extends $AsyncNotifierProvider<ComplaintsCountNotifier, ComplaintsCount> {
+  ComplaintsCountNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'complaintsCountProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$complaintsCountNotifierHash();
+
+  @$internal
+  @override
+  ComplaintsCountNotifier create() => ComplaintsCountNotifier();
 }
 
 String _$complaintsCountNotifierHash() =>
     r'b7b9d5e4f82bf4baaffcf5f04fdd591ffcc2cc09';
 
-/// See also [ComplaintsCountNotifier].
-@ProviderFor(ComplaintsCountNotifier)
-final complaintsCountNotifierProvider = AutoDisposeAsyncNotifierProvider<
-    ComplaintsCountNotifier, ComplaintsCount>.internal(
-  ComplaintsCountNotifier.new,
-  name: r'complaintsCountNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$complaintsCountNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$ComplaintsCountNotifier = AutoDisposeAsyncNotifier<ComplaintsCount>;
-String _$complaintsCommentNotifierHash() =>
-    r'f4ff132cb769af2e38c6d1010b0614b7a3637a20';
-
-abstract class _$ComplaintsCommentNotifier
-    extends BuildlessAutoDisposeAsyncNotifier<List<ComplaintsComment>> {
-  late final String id;
-
-  FutureOr<List<ComplaintsComment>> build(
-    String id,
-  );
+abstract class _$ComplaintsCountNotifier
+    extends $AsyncNotifier<ComplaintsCount> {
+  FutureOr<ComplaintsCount> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<ComplaintsCount>, ComplaintsCount>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<ComplaintsCount>, ComplaintsCount>,
+              AsyncValue<ComplaintsCount>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
 }
 
-/// See also [ComplaintsCommentNotifier].
 @ProviderFor(ComplaintsCommentNotifier)
-const complaintsCommentNotifierProvider = ComplaintsCommentNotifierFamily();
+final complaintsCommentProvider = ComplaintsCommentNotifierFamily._();
 
-/// See also [ComplaintsCommentNotifier].
-class ComplaintsCommentNotifierFamily
-    extends Family<AsyncValue<List<ComplaintsComment>>> {
-  /// See also [ComplaintsCommentNotifier].
-  const ComplaintsCommentNotifierFamily();
+final class ComplaintsCommentNotifierProvider
+    extends
+        $AsyncNotifierProvider<
+          ComplaintsCommentNotifier,
+          List<ComplaintsComment>
+        > {
+  ComplaintsCommentNotifierProvider._({
+    required ComplaintsCommentNotifierFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'complaintsCommentProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
-  /// See also [ComplaintsCommentNotifier].
-  ComplaintsCommentNotifierProvider call(
-    String id,
-  ) {
-    return ComplaintsCommentNotifierProvider(
-      id,
-    );
+  @override
+  String debugGetCreateSourceHash() => _$complaintsCommentNotifierHash();
+
+  @override
+  String toString() {
+    return r'complaintsCommentProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  ComplaintsCommentNotifierProvider getProviderOverride(
-    covariant ComplaintsCommentNotifierProvider provider,
-  ) {
-    return call(
-      provider.id,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'complaintsCommentNotifierProvider';
-}
-
-/// See also [ComplaintsCommentNotifier].
-class ComplaintsCommentNotifierProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<ComplaintsCommentNotifier,
-        List<ComplaintsComment>> {
-  /// See also [ComplaintsCommentNotifier].
-  ComplaintsCommentNotifierProvider(
-    String id,
-  ) : this._internal(
-          () => ComplaintsCommentNotifier()..id = id,
-          from: complaintsCommentNotifierProvider,
-          name: r'complaintsCommentNotifierProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$complaintsCommentNotifierHash,
-          dependencies: ComplaintsCommentNotifierFamily._dependencies,
-          allTransitiveDependencies:
-              ComplaintsCommentNotifierFamily._allTransitiveDependencies,
-          id: id,
-        );
-
-  ComplaintsCommentNotifierProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.id,
-  }) : super.internal();
-
-  final String id;
-
-  @override
-  FutureOr<List<ComplaintsComment>> runNotifierBuild(
-    covariant ComplaintsCommentNotifier notifier,
-  ) {
-    return notifier.build(
-      id,
-    );
-  }
-
-  @override
-  Override overrideWith(ComplaintsCommentNotifier Function() create) {
-    return ProviderOverride(
-      origin: this,
-      override: ComplaintsCommentNotifierProvider._internal(
-        () => create()..id = id,
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        id: id,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeAsyncNotifierProviderElement<ComplaintsCommentNotifier,
-      List<ComplaintsComment>> createElement() {
-    return _ComplaintsCommentNotifierProviderElement(this);
-  }
+  ComplaintsCommentNotifier create() => ComplaintsCommentNotifier();
 
   @override
   bool operator ==(Object other) {
-    return other is ComplaintsCommentNotifierProvider && other.id == id;
+    return other is ComplaintsCommentNotifierProvider &&
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin ComplaintsCommentNotifierRef
-    on AutoDisposeAsyncNotifierProviderRef<List<ComplaintsComment>> {
-  /// The parameter `id` of this provider.
-  String get id;
-}
+String _$complaintsCommentNotifierHash() =>
+    r'f4ff132cb769af2e38c6d1010b0614b7a3637a20';
 
-class _ComplaintsCommentNotifierProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<ComplaintsCommentNotifier,
-        List<ComplaintsComment>> with ComplaintsCommentNotifierRef {
-  _ComplaintsCommentNotifierProviderElement(super.provider);
+final class ComplaintsCommentNotifierFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          ComplaintsCommentNotifier,
+          AsyncValue<List<ComplaintsComment>>,
+          List<ComplaintsComment>,
+          FutureOr<List<ComplaintsComment>>,
+          String
+        > {
+  ComplaintsCommentNotifierFamily._()
+    : super(
+        retry: null,
+        name: r'complaintsCommentProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  ComplaintsCommentNotifierProvider call(String id) =>
+      ComplaintsCommentNotifierProvider._(argument: id, from: this);
 
   @override
-  String get id => (origin as ComplaintsCommentNotifierProvider).id;
+  String toString() => r'complaintsCommentProvider';
 }
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+
+abstract class _$ComplaintsCommentNotifier
+    extends $AsyncNotifier<List<ComplaintsComment>> {
+  late final _$args = ref.$arg as String;
+  String get id => _$args;
+
+  FutureOr<List<ComplaintsComment>> build(String id);
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref =
+        this.ref
+            as $Ref<
+              AsyncValue<List<ComplaintsComment>>,
+              List<ComplaintsComment>
+            >;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<
+                AsyncValue<List<ComplaintsComment>>,
+                List<ComplaintsComment>
+              >,
+              AsyncValue<List<ComplaintsComment>>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, () => build(_$args));
+  }
+}

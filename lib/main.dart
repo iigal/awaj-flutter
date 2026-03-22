@@ -7,6 +7,7 @@ import 'package:awaj/local_notification.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as rp;
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -50,22 +51,28 @@ Future<void> main() async {
     ),
   );
 
-  HttpOverrides.global = MyHttpOverrides();
+  if (!kIsWeb) {
+    HttpOverrides.global = MyHttpOverrides();
+  }
   usePathUrlStrategy();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  if (!kIsWeb) {
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    LocalNotificationService.initialize();
+  }
   initializeDateFormatting('en_US', null);
-  LocalNotificationService.initialize();
 
   await setupPocketBase();
 
-  await _configurePushNotifications();
+  if (!kIsWeb) {
+    await _configurePushNotifications();
+  }
 
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('np', 'NP'), Locale('en', 'US')],
-      startLocale: const Locale('np', 'NP'),
+      startLocale: const Locale('en', 'US'),
       saveLocale: true,
       path: 'assets/translations',
       fallbackLocale: const Locale('en', 'US'),
@@ -75,6 +82,7 @@ Future<void> main() async {
 }
 
 Future<void> _configurePushNotifications() async {
+  if (kIsWeb) return;
   try {
     if (Platform.isIOS) {
       String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
@@ -109,17 +117,23 @@ class _AwajAppState extends State<AwajApp> {
   @override
   void initState() {
     super.initState();
-    _requestNotificationPermission().then((granted) {
-      if (granted) {
-        print("Notification Permission Granted");
-        _setupInteractedMessage();
-      } else {
-        print("Notification Permission Denied");
-      }
-    }).catchError((e) => print("Permission Error: $e"));
+    if (!kIsWeb) {
+      _requestNotificationPermission().then((granted) {
+        if (granted) {
+          print("Notification Permission Granted");
+          _setupInteractedMessage();
+        } else {
+          print("Notification Permission Denied");
+        }
+      }).catchError((e) {
+        print("Permission Error: $e");
+        return null;
+      });
+    }
   }
 
   Future<bool> _requestNotificationPermission() async {
+    if (kIsWeb) return true;
     final status = await Permission.notification.request();
     return status.isGranted;
   }
@@ -148,12 +162,26 @@ class _AwajAppState extends State<AwajApp> {
     return ShadcnApp.router(
       title: 'Awaj Mobile',
       theme: ThemeData(
-        colorScheme: ColorSchemes.lightBlue(),
-        radius: 0.15,
+        colorScheme: ColorSchemes.slate(ThemeMode.light).copyWith(
+          primary: () => const Color(0xFF004AC6),
+          primaryForeground: () => const Color(0xFFFFFFFF),
+          ring: () => const Color(0xFF004AC6),
+        ),
+        radius: 0.25,
       ),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
+      localeResolutionCallback: (locale, supportedLocales) {
+        // Shadcn/Material don't support np_NP — fall back to en_US
+        // Easy Localization still handles np_NP translations
+        for (final supported in supportedLocales) {
+          if (supported.languageCode == locale?.languageCode) {
+            return supported;
+          }
+        }
+        return const Locale('en', 'US');
+      },
       routerConfig: gorouter,
     );
   }

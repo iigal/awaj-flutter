@@ -4,7 +4,7 @@ part 'health_facility_model.freezed.dart';
 part 'health_facility_model.g.dart';
 
 @freezed
-class HealthFacility with _$HealthFacility {
+abstract class HealthFacility with _$HealthFacility {
   const factory HealthFacility({
     @JsonKey(name: "name") String? name,
     @JsonKey(name: "href") String? href,
@@ -21,7 +21,7 @@ class HealthFacility with _$HealthFacility {
 }
 
 @freezed
-class Coordinates with _$Coordinates {
+abstract class Coordinates with _$Coordinates {
   const factory Coordinates({
     @JsonKey(name: "latitude") String? latitude,
     @JsonKey(name: "longitude") String? longitude,
@@ -31,7 +31,7 @@ class Coordinates with _$Coordinates {
 }
 
 @freezed
-class Identifiers with _$Identifiers {
+abstract class Identifiers with _$Identifiers {
   const factory Identifiers({
     @JsonKey(name: "iid") String? iid,
     @JsonKey(name: "agency") String? agency,
@@ -41,7 +41,7 @@ class Identifiers with _$Identifiers {
 }
 
 @freezed
-class Properties with _$Properties {
+abstract class Properties with _$Properties {
   const factory Properties({
     @JsonKey(name: "hfCode") int? hfCode,
     @JsonKey(name: "type") int? type,
@@ -118,7 +118,7 @@ class Properties with _$Properties {
 }
 
 @freezed
-class District with _$District {
+abstract class District with _$District {
   const factory District({
     @JsonKey(name: "district_id") String? districtId,
     @JsonKey(name: "district_name") String? districtName,
@@ -128,7 +128,7 @@ class District with _$District {
 }
 
 @freezed
-class HealthFacilityLevel with _$HealthFacilityLevel {
+abstract class HealthFacilityLevel with _$HealthFacilityLevel {
   const factory HealthFacilityLevel({
     @JsonKey(name: "facility_level_id") String? facilityLevelId,
     @JsonKey(name: "facility_level_code") String? facilityLevelCode,
@@ -142,7 +142,7 @@ class HealthFacilityLevel with _$HealthFacilityLevel {
 }
 
 @freezed
-class HealthFacilityType with _$HealthFacilityType {
+abstract class HealthFacilityType with _$HealthFacilityType {
   const factory HealthFacilityType({
     @JsonKey(name: "hftype_id") String? hftypeId,
     @JsonKey(name: "hftype_code") String? hftypeCode,
@@ -153,7 +153,7 @@ class HealthFacilityType with _$HealthFacilityType {
 }
 
 @freezed
-class Municipality with _$Municipality {
+abstract class Municipality with _$Municipality {
   const factory Municipality({
     @JsonKey(name: "municipality_id") String? municipalityId,
     @JsonKey(name: "municipality_name") String? municipalityName,
@@ -163,7 +163,7 @@ class Municipality with _$Municipality {
 }
 
 @freezed
-class Ownerships with _$Ownerships {
+abstract class Ownerships with _$Ownerships {
   const factory Ownerships({
     @JsonKey(name: "ownership_id") String? ownershipId,
     @JsonKey(name: "ownership_name") String? ownershipName,
@@ -175,7 +175,7 @@ class Ownerships with _$Ownerships {
 }
 
 @freezed
-class Province with _$Province {
+abstract class Province with _$Province {
   const factory Province({
     @JsonKey(name: "province_id") String? provinceId,
     @JsonKey(name: "province_name") String? provinceName,
@@ -185,7 +185,7 @@ class Province with _$Province {
 }
 
 @freezed
-class ServiceType with _$ServiceType {
+abstract class ServiceType with _$ServiceType {
   const factory ServiceType({
     @JsonKey(name: "ftype_id") String? ftypeId,
     @JsonKey(name: "ftype_code") String? ftypeCode,

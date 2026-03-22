@@ -31,8 +31,9 @@ class HomeScreen extends ConsumerWidget {
 
   HomeScreen({super.key});
 
-  NavigationButton buildButton({required String label, required Icon icon}) {
-    return NavigationButton(
+  NavigationItem buildButton({required String label, required Icon icon, required int index}) {
+    return NavigationItem(
+      key: ValueKey(index),
       style: const ButtonStyle.muted(density: ButtonDensity.icon),
       label: Text(label.toTitleCase),
       child: icon,
@@ -46,11 +47,15 @@ class HomeScreen extends ConsumerWidget {
         footers: [
           const Divider(),
           NavigationBar(
-            index: pages.indexWhere((value) => value.$2 == ref.watch(homePageControllerProvider)),
-            onSelected: (value) => ref.read(homePageControllerProvider.notifier).navigateTo(pages[value].$2),
+            selectedKey: ValueKey(pages.indexWhere((value) => value.$2 == ref.watch(homePageControllerProvider))),
+            onSelected: (key) {
+              if (key is ValueKey<int>) {
+                ref.read(homePageControllerProvider.notifier).navigateTo(pages[key.value].$2);
+              }
+            },
             labelType: NavigationLabelType.all,
             alignment: NavigationBarAlignment.center,
-            children: pages.map((element) => buildButton(label: element.$2.name, icon: element.$4)).toList(),
+            children: pages.asMap().entries.map((entry) => buildButton(label: entry.value.$2.name, icon: entry.value.$4, index: entry.key)).toList(),
           ),
         ],
         child: pages.firstWhere((value) => value.$2 == ref.watch(homePageControllerProvider)).$3);

@@ -20,13 +20,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
-  bool _obscureText = true;
-
-  void _togglePasswordVisibility() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
 
   void _login() async {
     setState(() {
@@ -129,9 +122,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 controller: _emailController,
                 // validator: (String? value) => value != null && value.length < 5 ? "The text should be longer than 5 characters." : null,
                 onTap: () => _emailController.clear(),
-                trailing: GestureDetector(
-                  child: const Icon(Icons.close),
-                ),
+                features: [
+                  InputFeature.trailing(
+                    GestureDetector(
+                      child: const Icon(Icons.close),
+                    ),
+                  )
+                ],
                 keyboardType: TextInputType.emailAddress,
                 placeholder: const Text('Enter your email'),
               ),
@@ -142,11 +139,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 controller: _passwordController,
                 // validator: (String? value) => value != null && value.length < 5 ? "The text should be longer than 5 characters." : null,
                 onTap: () => _passwordController.clear(),
-                obscureText: _obscureText,
-                trailing: GestureDetector(
-                  onTap: _togglePasswordVisibility,
-                  child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
-                ),
+                features: [
+                  InputFeature.passwordToggle(
+                    icon: const Icon(Icons.visibility),
+                    iconShow: const Icon(Icons.visibility_off),
+                  )
+                ],
                 keyboardType: TextInputType.text,
                 placeholder: const Text('Enter your password'),
               ),

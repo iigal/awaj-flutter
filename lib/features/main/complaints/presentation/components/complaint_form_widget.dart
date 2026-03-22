@@ -68,7 +68,7 @@ class _ComplaintFormWidgetState extends ConsumerState<ComplaintFormWidget> {
           images: imageFiles.map((element) => element.mimeType + element.baseData).toList(),
           status: "pending");
       await ref.read(complaintsRepositoryProvider).registerComplaintWithImages(complaintReq);
-      ref.invalidate(complaintsNotifierProvider);
+      ref.invalidate(complaintsProvider);
     } catch (err) {}
     setState(() {
       isSaving = false;

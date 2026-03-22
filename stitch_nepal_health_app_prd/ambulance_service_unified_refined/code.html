@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ambulance Services - The Clinical Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#434655",
+              "inverse-surface": "#2d3133",
+              "on-secondary-container": "#586377",
+              "on-background": "#191c1e",
+              "primary-fixed-dim": "#b4c5ff",
+              "outline-variant": "#c3c6d7",
+              "secondary-fixed": "#d8e3fb",
+              "on-primary-fixed": "#00174b",
+              "primary-container": "#2563eb",
+              "secondary-container": "#d5e0f8",
+              "inverse-on-surface": "#eff1f3",
+              "on-secondary-fixed-variant": "#3c475a",
+              "surface-variant": "#e0e3e5",
+              "on-tertiary-fixed-variant": "#3f465c",
+              "surface-dim": "#d8dadc",
+              "secondary-fixed-dim": "#bcc7de",
+              "primary-fixed": "#dbe1ff",
+              "tertiary-fixed-dim": "#bec6e0",
+              "on-tertiary-container": "#eef0ff",
+              "on-surface": "#191c1e",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed": "#131b2e",
+              "surface-container": "#eceef0",
+              "secondary": "#545f73",
+              "surface-tint": "#0053db",
+              "tertiary": "#4d556b",
+              "surface-container-lowest": "#ffffff",
+              "outline": "#737686",
+              "surface": "#f7f9fb",
+              "on-tertiary": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "on-error": "#ffffff",
+              "error": "#ba1a1a",
+              "background": "#f7f9fb",
+              "primary": "#004ac6",
+              "tertiary-fixed": "#dae2fd",
+              "surface-container-highest": "#e0e3e5",
+              "on-primary-fixed-variant": "#003ea8",
+              "surface-container-low": "#f2f4f6",
+              "surface-bright": "#f7f9fb",
+              "on-primary": "#ffffff",
+              "surface-container-high": "#e6e8ea",
+              "inverse-primary": "#b4c5ff",
+              "on-primary-container": "#eeefff",
+              "on-secondary-fixed": "#111c2d"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {
+                "DEFAULT": "0.25rem", 
+                "sm": "0.125rem",
+                "md": "0.375rem",
+                "lg": "0.5rem", 
+                "xl": "0.75rem", 
+                "2xl": "1rem",
+                "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .clinical-shadow {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.02);
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc] text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-white/80 backdrop-blur-md border-b border-slate-100 docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">medical_services</span>
+</div>
+<h1 class="text-lg font-bold tracking-tighter text-[#004ac6]">The Clinical Curator</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 transition-colors text-primary relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="User profile avatar professionally dressed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz-ayE5vcxhVJBeZYkDcmLWMHI6KPKuMNt7F5PsRnZiKEnXdQcXHlg5IRy8KDqdJny8iWWoLLsoswJL1i13j5cjwA-du5kOHTiVkzcG9kCjbsVo7RB40lCAqaOFHgsBM2nHAw0lZoCVZ6aHtzx2pt62RIIlHSXV368gvQye7MbU2Gv9HoiLvo-_hW_oX5jntNOYKfy5B83x_ubGbTRt_D9vg8dW3KDud5l8s9g5RbjjdfrcKfaWrEBoEJsHQQP8mIzH-gxUfxSg8lJ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-3xl mx-auto px-4 py-4 space-y-4">
+<!-- Urgent Action Section (Unified card style) -->
+<section class="bg-error rounded-lg p-6 relative overflow-hidden flex flex-col justify-between clinical-shadow">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined !text-9xl" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<div class="relative z-10 mb-6">
+<h2 class="text-2xl font-extrabold text-on-error tracking-tight mb-2">Urgent Action Required?</h2>
+<p class="text-on-error/80 text-xs font-medium max-w-md">Immediate medical emergency assistance is available 24/7. Connect directly to the national dispatch center.</p>
+</div>
+<div class="relative z-10 flex gap-3">
+<button class="flex-1 bg-on-error text-error h-11 rounded-md font-bold text-sm flex items-center justify-center gap-2 hover:bg-error-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">call</span>
+                    Call 102
+                </button>
+<button class="flex-1 border border-on-error/30 text-on-error h-11 rounded-md font-bold text-sm flex items-center justify-center gap-2 hover:bg-on-error/10 transition-all">
+                    Guidelines
+                </button>
+</div>
+</section>
+<!-- Response Status (Clinical theme) -->
+<section class="bg-white rounded-lg border border-slate-200 clinical-shadow p-4 border-l-4 border-l-primary flex items-center justify-between">
+<div>
+<span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5 block">Response Status</span>
+<div class="text-base font-bold text-primary tracking-tight">Active Coverage</div>
+</div>
+<div class="text-right space-y-1">
+<div class="flex items-center justify-end gap-2">
+<span class="text-[10px] font-semibold text-slate-600">8-12 mins</span>
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+</div>
+<div class="flex items-center justify-end gap-2">
+<span class="text-[10px] font-semibold text-slate-600">14 Providers</span>
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+</div>
+</section>
+<!-- Your Location Map Section -->
+<section class="bg-white rounded-lg border border-slate-200 clinical-shadow overflow-hidden">
+<div class="p-4 flex items-center justify-between">
+<div>
+<h3 class="text-sm font-bold text-on-surface">Your Location</h3>
+<div class="flex items-center gap-1.5 text-slate-500 mt-0.5">
+<span class="material-symbols-outlined text-primary text-base">location_on</span>
+<span class="text-[11px] font-medium truncate max-w-[200px]">824 Oak Ridge Lane, Medical District</span>
+</div>
+</div>
+<button class="px-3 py-1.5 bg-slate-100 text-primary rounded-md text-[11px] font-bold border border-slate-200 hover:bg-slate-200 transition-colors">
+                    Change
+                </button>
+</div>
+<div class="h-44 bg-slate-100 relative">
+<img class="w-full h-full object-cover grayscale opacity-80" data-alt="Stylized medical district map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpXVOwjtVILHSAj8HziNQ1KmRVFpiPbJvz8V2yH-4xaJY-L57GkGn06rELznnS7olNRDMN4GBvIlgCnTcNBvJBGCRM9cuXmwLcVTV9bnq8m3W3xOrHhiiPBpNNfM7AlnAwms-9eKWZmEG2xXDYsqemrF0GDP8wxHc6tBRdlrhRgPKxkKZHAGNHquE_3fddHt6y_uw64gNkbagXHF8dLZu_1_dewLC2tPRbEADGsVKdrRJOXYeZZTpXT8PfHN4cfvlED_ef4yAvzeuS"/>
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="relative">
+<div class="absolute inset-0 bg-primary rounded-full animate-ping opacity-25"></div>
+<div class="relative w-8 h-8 bg-primary rounded-full flex items-center justify-center border-2 border-on-primary shadow-xl">
+<span class="material-symbols-outlined text-on-primary text-base">person_pin_circle</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Nearby Providers Header -->
+<div class="flex items-end justify-between px-1">
+<div>
+<h3 class="text-lg font-bold tracking-tight text-on-surface">Nearby Providers</h3>
+<p class="text-[11px] text-slate-500 font-medium">Certified emergency response teams</p>
+</div>
+<button class="text-primary font-bold text-[11px] flex items-center gap-1 hover:underline">
+                View Map <span class="material-symbols-outlined text-[11px]">arrow_forward</span>
+</button>
+</div>
+<!-- Provider Cards -->
+<div class="space-y-3">
+<!-- Provider Card 1 -->
+<div class="bg-white rounded-lg border border-slate-200 clinical-shadow p-4 flex flex-col gap-4 group hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start">
+<div class="flex min-w-0 gap-3">
+<div class="w-9 h-9 rounded-md bg-blue-50 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">local_hospital</span>
+</div>
+<div class="min-w-0">
+<h3 class="text-base font-bold text-slate-900 truncate">St. Jude Medical</h3>
+<p class="text-[11px] text-slate-500">Distance: 1.2 km • ETA: 6 mins</p>
+</div>
+</div>
+<span class="text-[9px] font-bold text-emerald-700 uppercase bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-100">Available</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-white h-9 rounded-md text-xs font-bold hover:bg-[#003ea8] transition-colors active:scale-95">Dispatch</button>
+<button class="w-9 h-9 bg-slate-100 text-slate-600 rounded-md hover:bg-slate-200 transition-colors flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">info</span>
+</button>
+</div>
+</div>
+<!-- Provider Card 2 -->
+<div class="bg-white rounded-lg border border-slate-200 clinical-shadow p-4 flex flex-col gap-4 group hover:border-primary/30 transition-all border-l-4 border-l-slate-200">
+<div class="flex justify-between items-start">
+<div class="flex min-w-0 gap-3">
+<div class="w-9 h-9 rounded-md bg-slate-50 text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">minor_crash</span>
+</div>
+<div class="min-w-0">
+<h3 class="text-base font-bold text-slate-900 truncate">City Public Response</h3>
+<p class="text-[11px] text-slate-500">Distance: 3.8 km • ETA: 14 mins</p>
+</div>
+</div>
+<span class="text-[9px] font-bold text-amber-700 uppercase bg-amber-50 px-1.5 py-0.5 rounded border border-amber-100">En Route</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-slate-100 text-slate-400 h-9 rounded-md text-xs font-bold cursor-not-allowed">Waitlist</button>
+<button class="w-9 h-9 bg-slate-100 text-slate-600 rounded-md hover:bg-slate-200 transition-colors flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">info</span>
+</button>
+</div>
+</div>
+<!-- Provider Card 3 -->
+<div class="bg-white rounded-lg border border-slate-200 clinical-shadow p-4 flex flex-col gap-4 group hover:border-primary/30 transition-all">
+<div class="flex justify-between items-start">
+<div class="flex min-w-0 gap-3">
+<div class="w-9 h-9 rounded-md bg-blue-50 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">medical_mask</span>
+</div>
+<div class="min-w-0">
+<h3 class="text-base font-bold text-slate-900 truncate">Elite Heart Center</h3>
+<p class="text-[11px] text-slate-500">Distance: 4.5 km • ETA: 18 mins</p>
+</div>
+</div>
+<span class="text-[9px] font-bold text-emerald-700 uppercase bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-100">Available</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-white h-9 rounded-md text-xs font-bold hover:bg-[#003ea8] transition-colors active:scale-95">Dispatch</button>
+<button class="w-9 h-9 bg-slate-100 text-slate-600 rounded-md hover:bg-slate-200 transition-colors flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">info</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Information Banner (FHIR-aligned style) -->
+<section class="p-5 bg-primary-fixed text-on-primary-fixed rounded-lg border border-primary-fixed-dim/30 flex gap-4 items-start clinical-shadow">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<p class="text-sm font-semibold leading-relaxed">Response Tiers</p>
+<p class="text-xs opacity-90 mt-1 leading-relaxed">AI-assisted screening determines if you need basic (BLS) or advanced cardiac life support (ACLS).</p>
+<a class="text-primary font-bold text-[10px] mt-2 inline-flex items-center gap-1 group" href="#">
+                    Learn about response levels <span class="material-symbols-outlined text-[10px] group-hover:translate-x-0.5 transition-transform">east</span>
+</a>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2 bg-white border-t border-slate-100 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] z-50">
+<a class="flex flex-col items-center justify-center text-slate-400 px-3 py-1.5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold mt-1 uppercase tracking-tighter">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-3 py-1.5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold mt-1 uppercase tracking-tighter">Records</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary px-3 py-1.5" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold mt-1 uppercase tracking-tighter">Services</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-3 py-1.5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-bold mt-1 uppercase tracking-tighter">Profile</span>
+</a>
+</nav>
+</body></html>

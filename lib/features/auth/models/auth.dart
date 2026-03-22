@@ -5,7 +5,7 @@ part 'auth.freezed.dart';
 part 'auth.g.dart';
 
 @freezed
-class AuthUser with _$AuthUser {
+abstract class AuthUser with _$AuthUser {
   factory AuthUser({
     required String token,
     required User user,

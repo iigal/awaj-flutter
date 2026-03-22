@@ -1,4 +1,4 @@
-import 'package:awaj/components/scaffold_wrapper.dart';
+
 import 'package:awaj/core/extensions.dart';
 import 'package:awaj/features/main/complaints/models/complaints_categories_model.dart';
 import 'package:awaj/features/main/complaints/presentation/components/complaint_detail_tab_widget.dart';

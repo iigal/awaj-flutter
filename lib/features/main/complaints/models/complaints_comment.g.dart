@@ -6,9 +6,8 @@ part of 'complaints_comment.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ComplaintsCommentImpl _$$ComplaintsCommentImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ComplaintsCommentImpl(
+_ComplaintsComment _$ComplaintsCommentFromJson(Map<String, dynamic> json) =>
+    _ComplaintsComment(
       id: json['id'] as String,
       complaintId: json['complaintId'] as String,
       commentBy: json['commentBy'] as String?,
@@ -16,15 +15,16 @@ _$ComplaintsCommentImpl _$$ComplaintsCommentImplFromJson(
       message: json['message'] as String,
       created: DateTime.parse(json['created'] as String),
       updated: DateTime.parse(json['updated'] as String),
-      reply: (json['reply'] as List<dynamic>?)
+      reply:
+          (json['reply'] as List<dynamic>?)
               ?.map(
-                  (e) => ComplaintsComment.fromJson(e as Map<String, dynamic>))
+                (e) => ComplaintsComment.fromJson(e as Map<String, dynamic>),
+              )
               .toList() ??
           [],
     );
 
-Map<String, dynamic> _$$ComplaintsCommentImplToJson(
-        _$ComplaintsCommentImpl instance) =>
+Map<String, dynamic> _$ComplaintsCommentToJson(_ComplaintsComment instance) =>
     <String, dynamic>{
       'id': instance.id,
       'complaintId': instance.complaintId,

@@ -3,7 +3,7 @@ part 'response.freezed.dart';
 part 'response.g.dart';
 
 @freezed
-class ApiResponse with _$ApiResponse {
+abstract class ApiResponse with _$ApiResponse {
   factory ApiResponse({
     required bool success,
     String? message,
@@ -14,7 +14,8 @@ class ApiResponse with _$ApiResponse {
 }
 
 @Freezed(genericArgumentFactories: true)
-class PaginatedResponse<T> with _$PaginatedResponse<T> {
+abstract class PaginatedResponse<T> with _$PaginatedResponse<T> {
+  // ignore: invalid_annotation_target
   @JsonSerializable(genericArgumentFactories: true, fieldRename: FieldRename.snake)
   const factory PaginatedResponse({
     int? page,
@@ -23,5 +24,5 @@ class PaginatedResponse<T> with _$PaginatedResponse<T> {
     int? totalItems,
     List<T>? items,
   }) = _PaginatedResponse;
-  // factory Response.fromJson(Map<String, dynamic> json, T Function(Object? json) fromJsonT) => _$ResponseFromJson<T>(json, fromJsonT);
+  factory PaginatedResponse.fromJson(Map<String, dynamic> json, T Function(Object? json) fromJsonT) => _$PaginatedResponseFromJson<T>(json, fromJsonT);
 }

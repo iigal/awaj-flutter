@@ -12,11 +12,15 @@ import 'package:awaj/features/main/main_icons.dart';
 import 'package:awaj/features/main/main_init.dart';
 import 'package:awaj/features/main/main_medical_record.dart';
 import 'package:awaj/features/main/main_menu.dart';
+import 'package:awaj/features/main/add_patient_report/add_patient_report_page.dart';
+import 'package:awaj/features/main/doctor_schedule/doctor_schedule_page.dart';
 import 'package:awaj/features/main/new_routes/pages/login.dart';
 import 'package:awaj/features/main/new_routes/pages/main_otp_verify.dart';
 import 'package:awaj/features/main/new_routes/pages/main_phone.dart';
 import 'package:awaj/features/main/new_routes/pages/main_user_detail.dart';
+import 'package:awaj/features/main/new_routes/pages/practitioner_registration.dart';
 import 'package:awaj/features/main/new_routes/pages/register_identity.dart';
+import 'package:awaj/features/main/patient_management/patient_management_page.dart';
 import 'package:awaj/features/main/settings/settings_menu.dart';
 import 'package:awaj/splash_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -35,8 +39,9 @@ NavigationLabelType labelType = NavigationLabelType.none;
 bool customButtonStyle = true;
 bool expanded = true;
 
-NavigationItem buildButton(String label, IconData icon) {
+NavigationItem buildButton(String label, IconData icon, int index) {
   return NavigationItem(
+    key: ValueKey(index),
     style: customButtonStyle ? const ButtonStyle.muted(density: ButtonDensity.icon) : null,
     selectedStyle: customButtonStyle ? const ButtonStyle.fixed(density: ButtonDensity.icon) : null,
     label: Text(label),
@@ -65,6 +70,7 @@ final List<RouteBase> routes = [
         GoRoute(path: "ambulance", builder: (context, state) => AppWrapper(child: const AmbulanceServicePage()), routes: []),
         GoRoute(path: "main", builder: (context, state) => LoginPage(), routes: [
           GoRoute(path: "register", builder: (context, state) => const RegisterIdentityPage(), routes: []),
+          GoRoute(path: "practitioner-registration", builder: (context, state) => PractitionerRegistrationPage(), routes: []),
           GoRoute(path: "otp-verification", builder: (context, state) => const OTPVerificationScreen(), routes: []),
           GoRoute(path: "phone-verification", builder: (context, state) => const PhoneVerificationScreen(), routes: []),
           GoRoute(path: "user-details", builder: (context, state) => const UserDetailsScreen(), routes: []),
@@ -87,17 +93,18 @@ final List<RouteBase> routes = [
                   alignment: alignment,
                   labelType: labelType,
                   expanded: expanded,
-                  expands: expands,
-                  onSelected: (index) {
-                    navigationShell.goBranch(index);
+                  onSelected: (key) {
+                    if (key is ValueKey<int>) {
+                      navigationShell.goBranch(key.value);
+                    }
                   },
-                  index: navigationShell.currentIndex,
+                  selectedKey: ValueKey(navigationShell.currentIndex),
                   children: [
-                    buildButton('Home', BootstrapIcons.house),
-                    buildButton('Announcements', DHAppStyles.announcementsIcon),
-                    buildButton('Library', BootstrapIcons.info),
-                    buildButton('Profile', BootstrapIcons.menuApp),
-                    buildButton('Settings', Icons.settings),
+                    buildButton('Home', BootstrapIcons.house, 0),
+                    buildButton('Announcements', DHAppStyles.announcementsIcon, 1),
+                    buildButton('Library', BootstrapIcons.info, 2),
+                    buildButton('Profile', BootstrapIcons.menuApp, 3),
+                    buildButton('Settings', Icons.settings, 4),
                   ],
                 ),
               ], child: navigationShell);
@@ -110,6 +117,9 @@ final List<RouteBase> routes = [
                     GoRoute(path: "health-location", builder: (context, state) => AppWrapper(child: const FindHospitalsPage()), routes: []),
                     GoRoute(path: "ambulance", builder: (context, state) => AppWrapper(child: const AmbulanceServicePage()), routes: []),
                     GoRoute(path: "medical-record", builder: (context, state) => AppWrapper(child: const MedicalRecordsPage()), routes: []),
+                    GoRoute(path: "doctor-schedule", builder: (context, state) => AppWrapper(child: const DoctorSchedulePage()), routes: []),
+                    GoRoute(path: "patient-management", builder: (context, state) => AppWrapper(child: const PatientManagementPage()), routes: []),
+                    GoRoute(path: "add-report", builder: (context, state) => AddPatientReportPage(), routes: []),
                   ]),
                 ],
               ),
